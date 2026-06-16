@@ -25,9 +25,9 @@
 		.sec-head h2{font-family:var(--disp);font-weight:700;font-size:clamp(26px,3.4vw,42px);line-height:1.3}
 		.sec-head p{margin-top:14px;color:var(--muted);font-size:clamp(15px,1.5vw,17px)}
 
-		.circuit{position:relative;width:100%;max-width:440px;margin:0 auto;aspect-ratio:240/360}
+		.circuit{position:relative;width:100%;max-width:430px;margin:0 auto;aspect-ratio:240/318}
 		.circuit svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-		.center{position:absolute;left:50%;top:29%;transform:translate(-50%,-50%);width:40%;max-width:188px;text-align:center;pointer-events:none}
+		.center{position:absolute;left:50%;top:35%;transform:translate(-50%,-50%);width:40%;max-width:188px;text-align:center;pointer-events:none}
 		.center .c-ov{font-family:var(--en);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#0c8d83}
 		.center h3{font-family:var(--disp);font-weight:700;font-size:clamp(17px,2.2vw,24px);margin:7px 0 7px;transition:color .3s}
 		.center p{font-size:12.5px;color:var(--muted);line-height:1.55;min-height:56px}
@@ -54,10 +54,10 @@
 			</header>
 
 			<div class="circuit" id="circuit">
-				<svg viewBox="0 0 240 360" id="svg">
-					<path id="trk" d="M 130,46 C 178,48 198,92 192,134 C 188,166 160,178 150,206 C 142,230 148,266 140,294 C 134,318 146,338 122,340 C 100,342 104,320 98,298 C 92,268 102,238 92,210 C 84,186 56,176 52,136 C 48,92 82,46 130,46 Z" fill="none" stroke="#ffffff" stroke-width="40" stroke-linejoin="round" />
-					<path d="M 130,46 C 178,48 198,92 192,134 C 188,166 160,178 150,206 C 142,230 148,266 140,294 C 134,318 146,338 122,340 C 100,342 104,320 98,298 C 92,268 102,238 92,210 C 84,186 56,176 52,136 C 48,92 82,46 130,46 Z" fill="none" stroke="#172a44" stroke-width="32" stroke-linejoin="round" />
-					<path d="M 130,46 C 178,48 198,92 192,134 C 188,166 160,178 150,206 C 142,230 148,266 140,294 C 134,318 146,338 122,340 C 100,342 104,320 98,298 C 92,268 102,238 92,210 C 84,186 56,176 52,136 C 48,92 82,46 130,46 Z" fill="none" stroke="#ffce2e" stroke-width="3.5" stroke-dasharray="2 16" stroke-linecap="round" />
+				<svg viewBox="0 0 240 318" id="svg">
+					<path id="trk" d="M 120,40 C 175,40 204,84 202,138 C 200,178 170,190 153,214 C 145,232 148,254 140,270 C 134,286 142,298 120,298 C 98,298 106,286 100,270 C 92,254 95,232 87,214 C 70,190 40,178 38,138 C 36,84 65,40 120,40 Z" fill="none" stroke="#ffffff" stroke-width="40" stroke-linejoin="round" />
+					<path d="M 120,40 C 175,40 204,84 202,138 C 200,178 170,190 153,214 C 145,232 148,254 140,270 C 134,286 142,298 120,298 C 98,298 106,286 100,270 C 92,254 95,232 87,214 C 70,190 40,178 38,138 C 36,84 65,40 120,40 Z" fill="none" stroke="#172a44" stroke-width="32" stroke-linejoin="round" />
+					<path d="M 120,40 C 175,40 204,84 202,138 C 200,178 170,190 153,214 C 145,232 148,254 140,270 C 134,286 142,298 120,298 C 98,298 106,286 100,270 C 92,254 95,232 87,214 C 70,190 40,178 38,138 C 36,84 65,40 120,40 Z" fill="none" stroke="#ffce2e" stroke-width="3.5" stroke-dasharray="2 16" stroke-linecap="round" />
 					<circle class="car-anim" r="8" fill="#15bdb0" stroke="#fff" stroke-width="3">
 						<animateMotion dur="22s" repeatCount="indefinite" rotate="auto"><mpath href="#trk" /></animateMotion>
 					</circle>
@@ -83,11 +83,11 @@
 			var nodes=document.querySelectorAll('.node');
 			function place(){
 				var len=path.getTotalLength();
-				var fr=[0.06,0.30,0.52,0.78];
+				var fr=[0.10,0.29,0.50,0.71];
 				nodes.forEach(function(n,i){
 					var p=path.getPointAtLength(len*fr[i]);
 					n.style.left=(p.x/240*100)+'%';
-					n.style.top=(p.y/360*100)+'%';
+					n.style.top=(p.y/318*100)+'%';
 				});
 			}
 			place();
