@@ -64,4 +64,19 @@
 		});
 	}, { threshold: 0.5 });
 	document.querySelectorAll('.count[data-count]').forEach(function (el) { cio.observe(el); });
+
+	// 히어로 떠다니는 질문 — 마우스 패럴랙스 (절제된 깊이감)
+	var qf = document.getElementById('qfield');
+	if (qf && !reduced) {
+		var tx = 0, ty = 0, cx = 0, cy = 0;
+		window.addEventListener('mousemove', function (e) {
+			tx = (e.clientX / window.innerWidth - 0.5) * 22;
+			ty = (e.clientY / window.innerHeight - 0.5) * 22;
+		}, { passive: true });
+		(function loop() {
+			cx += (tx - cx) * 0.06; cy += (ty - cy) * 0.06;
+			qf.style.transform = 'translate(' + cx.toFixed(2) + 'px,' + cy.toFixed(2) + 'px)';
+			requestAnimationFrame(loop);
+		})();
+	}
 })();
