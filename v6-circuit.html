@@ -1,0 +1,122 @@
+<!-- 원형 트랙 커리큘럼 시안 v6 (AI 4영역 순환, 확인용 임시 파일) -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>FOX AI 연구소 — 순환 커리큘럼 시안</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+	<style>
+		@font-face { font-family:"GmarketSans"; font-weight:500; font-display:swap; src:url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff") format("woff"); }
+		@font-face { font-family:"GmarketSans"; font-weight:700; font-display:swap; src:url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff") format("woff"); }
+		:root{
+			--mint:#ebfaf5; --road:#172a44; --lane:#ffce2e; --ink:#0e1b33; --muted:#5f6b80;
+			--understand:#15bdb0; --communicate:#3194db; --utilize:#8e5bd4; --create:#e0931a;
+			--disp:"GmarketSans","Pretendard Variable",sans-serif; --body:"Pretendard Variable",Pretendard,sans-serif; --en:"Space Grotesk",sans-serif;
+		}
+		*{margin:0;padding:0;box-sizing:border-box}
+		body{font-family:var(--body);color:var(--ink);line-height:1.7;word-break:keep-all;-webkit-font-smoothing:antialiased;background:#fff}
+		.wrap{max-width:1060px;margin:0 auto;padding:0 32px}
+
+		.intro{position:relative;min-height:56vh;display:flex;align-items:flex-end;color:#fff;overflow:hidden}
+		.intro::before{content:"";position:absolute;inset:0;background:url(images/space-1.jpg) center/cover}
+		.intro::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,16,30,.3),rgba(8,16,30,.8))}
+		.intro .wrap{position:relative;z-index:1;padding-bottom:50px}
+		.intro .tag{font-family:var(--en);font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#7fe9df;display:flex;align-items:center;gap:10px;margin-bottom:16px}
+		.intro .tag::before{content:"";width:26px;height:2px;background:var(--understand)}
+		.intro h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4.2vw,50px);line-height:1.22}
+		.intro p{margin-top:14px;color:rgba(255,255,255,.82);max-width:36em;font-size:clamp(15px,1.5vw,17px)}
+
+		.circuit-sec{background:var(--mint);padding:clamp(60px,8vw,104px) 0}
+		.sec-head{text-align:center;margin-bottom:clamp(34px,5vw,56px)}
+		.sec-head .ov{font-family:var(--en);font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#0c8d83;margin-bottom:14px}
+		.sec-head h2{font-family:var(--disp);font-weight:700;font-size:clamp(26px,3.4vw,42px);line-height:1.3}
+		.sec-head p{margin-top:14px;color:var(--muted);font-size:clamp(15px,1.5vw,17px)}
+
+		.circuit{position:relative;width:100%;max-width:720px;margin:0 auto;aspect-ratio:800/600}
+		.circuit svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+		.center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:42%;max-width:280px;text-align:center}
+		.center .c-ov{font-family:var(--en);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#0c8d83}
+		.center h3{font-family:var(--disp);font-weight:700;font-size:clamp(20px,2.6vw,30px);margin:8px 0 8px;transition:color .3s}
+		.center p{font-size:14px;color:var(--muted);line-height:1.65;min-height:60px}
+		.node{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:9px;cursor:pointer;z-index:2}
+		.node .dot{width:clamp(54px,8vw,70px);height:clamp(54px,8vw,70px);border-radius:50%;background:#fff;border:3px solid var(--c);display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:700;font-size:clamp(15px,1.8vw,18px);color:var(--c);box-shadow:0 10px 24px rgba(14,40,33,.14);transition:transform .3s,background .3s,color .3s}
+		.node .lab{font-family:var(--en);font-size:11.5px;font-weight:700;letter-spacing:.1em;color:var(--c)}
+		.node:hover .dot,.node.act .dot{background:var(--c);color:#fff;transform:scale(1.1)}
+		.node.n1{--c:var(--understand)} .node.n2{--c:var(--communicate)} .node.n3{--c:var(--utilize)} .node.n4{--c:var(--create)}
+
+		@media (max-width:680px){
+			.wrap{padding:0 20px}
+			.circuit{max-width:380px}
+			.center{width:46%}
+			.center p{font-size:13px}
+		}
+		@media (prefers-reduced-motion:reduce){ .car-anim{display:none} }
+	</style>
+</head>
+<body>
+	<section class="intro">
+		<div class="wrap">
+			<p class="tag">Our Space · AI Lab</p>
+			<h1>트랙 위에서 직접 만들며<br />배우는 AI 연구소</h1>
+			<p>블록 코딩, 스크래치, 마인크래프트 에듀케이션까지 — 우리 연구소의 트랙 공간에서 손으로 만들고 머리로 익힙니다.</p>
+		</div>
+	</section>
+
+	<section class="circuit-sec">
+		<div class="wrap">
+			<header class="sec-head">
+				<p class="ov">Curriculum</p>
+				<h2>한 바퀴를 도는 AI 네 가지 영역</h2>
+				<p>이해 · 소통 · 활용 · 창작을 순환하며 한 단계씩 깊어지는 커리큘럼입니다.</p>
+			</header>
+
+			<div class="circuit">
+				<svg viewBox="0 0 800 600" aria-hidden="true">
+					<path id="trk" d="M 230,80 L 570,80 Q 720,80 720,230 L 720,370 Q 720,520 570,520 L 230,520 Q 80,520 80,370 L 80,230 Q 80,80 230,80 Z" fill="none" stroke="#fff" stroke-width="42" />
+					<path d="M 230,80 L 570,80 Q 720,80 720,230 L 720,370 Q 720,520 570,520 L 230,520 Q 80,520 80,370 L 80,230 Q 80,80 230,80 Z" fill="none" stroke="#172a44" stroke-width="34" />
+					<path d="M 230,80 L 570,80 Q 720,80 720,230 L 720,370 Q 720,520 570,520 L 230,520 Q 80,520 80,370 L 80,230 Q 80,80 230,80 Z" fill="none" stroke="#ffce2e" stroke-width="4" stroke-dasharray="2 20" stroke-linecap="round" />
+					<circle class="car-anim" r="10" fill="#15bdb0" stroke="#fff" stroke-width="3">
+						<animateMotion dur="26s" repeatCount="indefinite" rotate="auto"><mpath href="#trk" /></animateMotion>
+					</circle>
+				</svg>
+
+				<div class="center">
+					<p class="c-ov">FOX AI Lab</p>
+					<h3 id="cTitle">AI 네 가지 영역</h3>
+					<p id="cDesc">트랙 위 네 지점에 마우스를 올려 살펴보세요.</p>
+				</div>
+
+				<div class="node n1" style="left:50%;top:13.3%" data-k="understand"><span class="dot">이해</span><span class="lab">UNDERSTAND</span></div>
+				<div class="node n2" style="left:90%;top:50%" data-k="communicate"><span class="dot">소통</span><span class="lab">COMMUNICATE</span></div>
+				<div class="node n3" style="left:50%;top:86.6%" data-k="utilize"><span class="dot">활용</span><span class="lab">UTILIZE</span></div>
+				<div class="node n4" style="left:10%;top:50%" data-k="create"><span class="dot">창작</span><span class="lab">CREATE</span></div>
+			</div>
+		</div>
+	</section>
+
+	<script>
+		(function(){
+			var data={
+				understand:{t:'AI 이해',c:'#0c8d83',d:'AI와 디지털 도구의 원리를 이해하고 올바르게 판단합니다. 비버챌린지, 생성형 AI 활용, COS.'},
+				communicate:{t:'AI 소통',c:'#185fa5',d:'코딩 언어와 디지털 표현으로 원하는 결과를 전달합니다. 스크래치, 파이썬 기초.'},
+				utilize:{t:'AI 활용',c:'#5b3a9c',d:'AI와 다양한 도구로 문제를 해결합니다. 레고, 마인크래프트 에듀케이션, NASA Kids.'},
+				create:{t:'AI 창작',c:'#a8690a',d:'나만의 아이디어를 결과물로 완성합니다. AI 포스터·애니메이션·음악, 게임 제작.'}
+			};
+			var title=document.getElementById('cTitle');
+			var desc=document.getElementById('cDesc');
+			var base={t:'AI 네 가지 영역',c:'#0e1b33',d:'트랙 위 네 지점에 마우스를 올려 살펴보세요.'};
+			var nodes=document.querySelectorAll('.node');
+			function set(o){ title.textContent=o.t; title.style.color=o.c; desc.textContent=o.d; }
+			nodes.forEach(function(n){
+				var k=n.getAttribute('data-k');
+				n.addEventListener('mouseenter',function(){ set(data[k]); nodes.forEach(function(x){x.classList.remove('act')}); n.classList.add('act'); });
+				n.addEventListener('click',function(){ set(data[k]); nodes.forEach(function(x){x.classList.remove('act')}); n.classList.add('act'); });
+			});
+			var circuit=document.querySelector('.circuit');
+			circuit.addEventListener('mouseleave',function(){ set(base); nodes.forEach(function(x){x.classList.remove('act')}); });
+		})();
+	</script>
+</body>
+</html>
