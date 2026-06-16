@@ -109,7 +109,8 @@ address { font-style: normal; }
 	justify-content: space-between;
 	gap: 20px;
 }
-.logo a { display: flex; align-items: baseline; gap: 9px; }
+.logo a { display: flex; align-items: center; gap: 9px; }
+.logo a img.logo-img { height: clamp(30px, 3.6vw, 38px); width: auto; display: block; }
 .logo-fox, .logo-ai {
 	font-family: var(--font-en);
 	font-size: 27px;
