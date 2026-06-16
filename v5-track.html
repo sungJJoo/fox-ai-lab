@@ -1,0 +1,142 @@
+<!-- 학습 주행 경로 시안 v5 (DeepRacer 트랙 모티프 + 스크롤 주행, 확인용 임시 파일) -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>FOX AI 연구소 — 학습 주행 경로 시안</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+	<style>
+		@font-face { font-family:"GmarketSans"; font-weight:500; font-display:swap; src:url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff") format("woff"); }
+		@font-face { font-family:"GmarketSans"; font-weight:700; font-display:swap; src:url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff") format("woff"); }
+		:root{
+			--mint:#ebfaf5; --road:#172a44; --lane:#ffce2e; --spot:#15bdb0; --spot-d:#0c8d83; --ink:#0e1b33; --muted:#5f6b80; --line:#dcebe6;
+			--disp:"GmarketSans","Pretendard Variable",sans-serif; --body:"Pretendard Variable",Pretendard,sans-serif; --en:"Space Grotesk",sans-serif;
+		}
+		*{margin:0;padding:0;box-sizing:border-box}
+		body{font-family:var(--body);color:var(--ink);line-height:1.7;word-break:keep-all;-webkit-font-smoothing:antialiased;background:#fff}
+		.wrap{max-width:1060px;margin:0 auto;padding:0 32px}
+
+		/* 인트로: 실제 공간 사진 */
+		.intro{position:relative;min-height:62vh;display:flex;align-items:flex-end;color:#fff;overflow:hidden}
+		.intro::before{content:"";position:absolute;inset:0;background:url(images/space-2.jpg) center/cover;transform:scale(1.03)}
+		.intro::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,16,30,.35) 0%,rgba(8,16,30,.82) 100%)}
+		.intro .wrap{position:relative;z-index:1;padding-bottom:54px}
+		.intro .tag{font-family:var(--en);font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#7fe9df;display:flex;align-items:center;gap:10px;margin-bottom:18px}
+		.intro .tag::before{content:"";width:26px;height:2px;background:var(--spot)}
+		.intro h1{font-family:var(--disp);font-weight:700;font-size:clamp(30px,4.4vw,52px);line-height:1.2}
+		.intro p{margin-top:14px;color:rgba(255,255,255,.8);max-width:34em;font-size:clamp(15px,1.5vw,17px)}
+
+		/* 트랙 섹션 */
+		.track-sec{background:var(--mint);padding:clamp(64px,8vw,110px) 0}
+		.sec-head{text-align:center;margin-bottom:clamp(40px,6vw,70px)}
+		.sec-head .ov{font-family:var(--en);font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--spot-d);margin-bottom:14px}
+		.sec-head h2{font-family:var(--disp);font-weight:700;font-size:clamp(27px,3.4vw,42px);line-height:1.3}
+		.sec-head p{margin-top:16px;color:var(--muted);font-size:clamp(15px,1.5vw,17px)}
+
+		.flow{position:relative;max-width:920px;margin:0 auto}
+		.rail{position:absolute;left:50%;top:14px;bottom:14px;transform:translateX(-50%);width:40px;z-index:0}
+		.rail .road{position:absolute;inset:0;background:var(--road);border-left:3px solid #fff;border-right:3px solid #fff;border-radius:6px}
+		.rail .lane{position:absolute;left:50%;top:8px;bottom:8px;transform:translateX(-50%);width:4px;background:repeating-linear-gradient(180deg,var(--lane) 0 13px,transparent 13px 30px)}
+		.car{position:absolute;left:50%;top:0;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:var(--spot);border:3px solid #fff;box-shadow:0 0 0 6px rgba(21,189,176,.22),0 6px 16px rgba(0,0,0,.25);z-index:4}
+
+		.stations{position:relative;z-index:1}
+		.station{position:relative;min-height:208px;display:flex;align-items:center}
+		.station:nth-child(odd){justify-content:flex-start}
+		.station:nth-child(even){justify-content:flex-end}
+		.dot{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:50%;background:#fff;border:3px solid var(--road);display:flex;align-items:center;justify-content:center;font-family:var(--en);font-weight:700;font-size:16px;color:var(--road);z-index:3;transition:background .35s,border-color .35s,color .35s,transform .35s}
+		.station.on .dot{background:var(--spot);border-color:var(--spot);color:#fff;transform:translate(-50%,-50%) scale(1.12)}
+		.card{width:43%;background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px 28px;box-shadow:0 16px 36px rgba(14,40,33,.08);opacity:.45;transform:translateY(14px);transition:opacity .45s,transform .45s,box-shadow .35s}
+		.station.on .card{opacity:1;transform:none}
+		.card .no{font-family:var(--en);font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--spot-d)}
+		.card h3{font-family:var(--disp);font-weight:700;font-size:clamp(19px,2vw,23px);margin:8px 0 6px}
+		.card h3 small{font-family:var(--body);font-weight:500;font-size:14.5px;color:var(--muted);margin-left:6px}
+		.card p{font-size:15px;color:#46505f;margin-bottom:14px}
+		.tag2{display:inline-block;font-size:13px;font-weight:700;color:var(--spot-d);background:rgba(21,189,176,.1);border:1px solid rgba(21,189,176,.25);border-radius:8px;padding:5px 13px}
+
+		@media (max-width:760px){
+			.wrap{padding:0 20px}
+			.rail{left:24px;transform:none}
+			.car{left:24px}
+			.station{min-height:auto;margin-bottom:22px}
+			.station:nth-child(odd),.station:nth-child(even){justify-content:flex-end}
+			.dot{left:24px}
+			.card{width:calc(100% - 64px)}
+		}
+		@media (prefers-reduced-motion:reduce){ .car{display:none} .card{opacity:1;transform:none} }
+	</style>
+</head>
+<body>
+	<section class="intro">
+		<div class="wrap">
+			<p class="tag">Our Space · AI Lab</p>
+			<h1>스스로 길을 찾는 아이,<br />트랙 위에서 배웁니다</h1>
+			<p>AWS DeepRacer 자율주행 트랙이 있는 우리 연구소처럼, 아이도 정해진 답이 아니라 스스로 길을 찾아 한 단계씩 주행합니다.</p>
+		</div>
+	</section>
+
+	<section class="track-sec">
+		<div class="wrap">
+			<header class="sec-head">
+				<p class="ov">Learning Track</p>
+				<h2>다섯 단계의 학습 주행</h2>
+				<p>스크롤을 내리면, 노란 주행선을 따라 한 단계씩 나아갑니다.</p>
+			</header>
+
+			<div class="flow" id="flow">
+				<div class="rail"><div class="road"></div><div class="lane"></div></div>
+				<span class="car" id="car"></span>
+
+				<ol class="stations">
+					<li class="station">
+						<span class="dot">1</span>
+						<div class="card"><div class="no">01 START</div><h3>시작하기 <small>주제 이해</small></h3><p>주제를 이해하고 문제를 발견하며, 팀을 이뤄 역할을 나눕니다.</p><span class="tag2">SEL · 협력 · 공감</span></div>
+					</li>
+					<li class="station">
+						<span class="dot">2</span>
+						<div class="card"><div class="no">02 PLAN</div><h3>계획하기 <small>아이디어 탐색</small></h3><p>브레인스토밍으로 해결 방법을 탐색하고 디지털 도구를 고릅니다.</p><span class="tag2">AI · 기초 코딩</span></div>
+					</li>
+					<li class="station">
+						<span class="dot">3</span>
+						<div class="card"><div class="no">03 BUILD</div><h3>조사 및 구조 만들기</h3><p>코딩 구조와 레고 모델, 게임 설계로 해결의 뼈대를 세웁니다.</p><span class="tag2">STEAM</span></div>
+					</li>
+					<li class="station">
+						<span class="dot">4</span>
+						<div class="card"><div class="no">04 MAKE</div><h3>모델 제작 <small>실행하기</small></h3><p>파이썬·로봇 제어·AI 창작·마인크래프트로 직접 만들어냅니다.</p><span class="tag2">PBL · 문제 해결</span></div>
+					</li>
+					<li class="station">
+						<span class="dot">5</span>
+						<div class="card"><div class="no">05 FINISH</div><h3>발표 및 성장 <small>공유와 성장</small></h3><p>결과를 발표하고 피드백을 나누며, 스스로를 돌아보며 자랍니다.</p><span class="tag2">성장 · 자신감</span></div>
+					</li>
+				</ol>
+			</div>
+		</div>
+	</section>
+
+	<script>
+		(function(){
+			var flow=document.getElementById('flow');
+			var car=document.getElementById('car');
+			var stations=document.querySelectorAll('.station');
+			var reduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+			function onScroll(){
+				var r=flow.getBoundingClientRect();
+				var mid=window.innerHeight*0.5;
+				if(!reduced){
+					var p=(mid-r.top)/r.height;
+					p=Math.min(Math.max(p,0),1);
+					car.style.top=(p*100)+'%';
+				}
+				stations.forEach(function(st){
+					var sr=st.getBoundingClientRect();
+					st.classList.toggle('on',(sr.top+sr.height/2)<=mid+30);
+				});
+			}
+			window.addEventListener('scroll',onScroll,{passive:true});
+			window.addEventListener('resize',onScroll,{passive:true});
+			onScroll();
+		})();
+	</script>
+</body>
+</html>
