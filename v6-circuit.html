@@ -1,4 +1,4 @@
-<!-- 원형 트랙 커리큘럼 시안 v6 (실제 연구소 평면도 서킷 + AI 4영역, 확인용 임시 파일) -->
+<!-- 원형 트랙 커리큘럼 시안 v6 (연구소 평면도 트랙 정밀 트레이스 + AI 4영역, 확인용 임시 파일) -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -25,9 +25,9 @@
 		.sec-head h2{font-family:var(--disp);font-weight:700;font-size:clamp(26px,3.4vw,42px);line-height:1.3}
 		.sec-head p{margin-top:14px;color:var(--muted);font-size:clamp(15px,1.5vw,17px)}
 
-		.circuit{position:relative;width:100%;max-width:430px;margin:0 auto;aspect-ratio:240/318}
+		.circuit{position:relative;width:100%;max-width:410px;margin:0 auto;aspect-ratio:360/490}
 		.circuit svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-		.center{position:absolute;left:50%;top:35%;transform:translate(-50%,-50%);width:40%;max-width:188px;text-align:center;pointer-events:none}
+		.center{position:absolute;left:49%;top:53%;transform:translate(-50%,-50%);width:42%;max-width:196px;text-align:center;pointer-events:none}
 		.center .c-ov{font-family:var(--en);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#0c8d83}
 		.center h3{font-family:var(--disp);font-weight:700;font-size:clamp(17px,2.2vw,24px);margin:7px 0 7px;transition:color .3s}
 		.center p{font-size:12.5px;color:var(--muted);line-height:1.55;min-height:56px}
@@ -38,8 +38,8 @@
 
 		@media (max-width:680px){
 			.wrap{padding:0 18px}
-			.circuit{max-width:330px}
-			.center{width:42%}
+			.circuit{max-width:320px}
+			.center{width:44%}
 		}
 		@media (prefers-reduced-motion:reduce){ .car-anim{display:none} }
 	</style>
@@ -54,12 +54,12 @@
 			</header>
 
 			<div class="circuit" id="circuit">
-				<svg viewBox="0 0 240 318" id="svg">
-					<path id="trk" d="M 120,40 C 175,40 204,84 202,138 C 200,178 170,190 153,214 C 145,232 148,254 140,270 C 134,286 142,298 120,298 C 98,298 106,286 100,270 C 92,254 95,232 87,214 C 70,190 40,178 38,138 C 36,84 65,40 120,40 Z" fill="none" stroke="#ffffff" stroke-width="40" stroke-linejoin="round" />
-					<path d="M 120,40 C 175,40 204,84 202,138 C 200,178 170,190 153,214 C 145,232 148,254 140,270 C 134,286 142,298 120,298 C 98,298 106,286 100,270 C 92,254 95,232 87,214 C 70,190 40,178 38,138 C 36,84 65,40 120,40 Z" fill="none" stroke="#172a44" stroke-width="32" stroke-linejoin="round" />
-					<path d="M 120,40 C 175,40 204,84 202,138 C 200,178 170,190 153,214 C 145,232 148,254 140,270 C 134,286 142,298 120,298 C 98,298 106,286 100,270 C 92,254 95,232 87,214 C 70,190 40,178 38,138 C 36,84 65,40 120,40 Z" fill="none" stroke="#ffce2e" stroke-width="3.5" stroke-dasharray="2 16" stroke-linecap="round" />
+				<svg viewBox="0 0 360 490" id="svg">
+					<path id="trk" d="M 248,66 C 272,62 292,84 293,114 L 295,358 C 296,392 282,416 250,419 C 216,422 190,430 162,431 C 128,433 96,420 77,391 C 62,368 64,344 62,316 C 60,292 51,283 51,262 C 51,236 77,227 83,198 C 89,168 85,139 96,110 C 105,89 122,80 140,89 C 157,97 162,127 177,137 C 191,146 199,139 209,120 C 221,95 224,70 248,66 Z" fill="none" stroke="#ffffff" stroke-width="52" stroke-linejoin="round" />
+					<path d="M 248,66 C 272,62 292,84 293,114 L 295,358 C 296,392 282,416 250,419 C 216,422 190,430 162,431 C 128,433 96,420 77,391 C 62,368 64,344 62,316 C 60,292 51,283 51,262 C 51,236 77,227 83,198 C 89,168 85,139 96,110 C 105,89 122,80 140,89 C 157,97 162,127 177,137 C 191,146 199,139 209,120 C 221,95 224,70 248,66 Z" fill="none" stroke="#172a44" stroke-width="44" stroke-linejoin="round" />
+					<path d="M 248,66 C 272,62 292,84 293,114 L 295,358 C 296,392 282,416 250,419 C 216,422 190,430 162,431 C 128,433 96,420 77,391 C 62,368 64,344 62,316 C 60,292 51,283 51,262 C 51,236 77,227 83,198 C 89,168 85,139 96,110 C 105,89 122,80 140,89 C 157,97 162,127 177,137 C 191,146 199,139 209,120 C 221,95 224,70 248,66 Z" fill="none" stroke="#ffce2e" stroke-width="4" stroke-dasharray="2 18" stroke-linecap="round" />
 					<circle class="car-anim" r="8" fill="#15bdb0" stroke="#fff" stroke-width="3">
-						<animateMotion dur="22s" repeatCount="indefinite" rotate="auto"><mpath href="#trk" /></animateMotion>
+						<animateMotion dur="24s" repeatCount="indefinite" rotate="auto"><mpath href="#trk" /></animateMotion>
 					</circle>
 				</svg>
 
@@ -83,11 +83,11 @@
 			var nodes=document.querySelectorAll('.node');
 			function place(){
 				var len=path.getTotalLength();
-				var fr=[0.10,0.29,0.50,0.71];
+				var fr=[0.05,0.29,0.42,0.63];
 				nodes.forEach(function(n,i){
 					var p=path.getPointAtLength(len*fr[i]);
-					n.style.left=(p.x/240*100)+'%';
-					n.style.top=(p.y/318*100)+'%';
+					n.style.left=(p.x/360*100)+'%';
+					n.style.top=(p.y/490*100)+'%';
 				});
 			}
 			place();
