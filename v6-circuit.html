@@ -27,7 +27,7 @@
 
 		.circuit{position:relative;width:100%;max-width:430px;margin:0 auto;aspect-ratio:780/900}
 		.circuit svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-		.center{position:absolute;left:46%;top:56%;transform:translate(-50%,-50%);width:44%;max-width:200px;text-align:center;pointer-events:none}
+		.center{position:absolute;left:52%;top:62%;transform:translate(-50%,-50%);width:40%;max-width:184px;text-align:center;pointer-events:none}
 		.center .c-ov{font-family:var(--en);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#0c8d83}
 		.center h3{font-family:var(--disp);font-weight:700;font-size:clamp(17px,2.2vw,24px);margin:7px 0 7px;transition:color .3s}
 		.center p{font-size:12.5px;color:var(--muted);line-height:1.55;min-height:56px}
@@ -66,7 +66,7 @@
 				<div class="center">
 					<p class="c-ov">FOX AI Lab</p>
 					<h3 id="cTitle">AI 네 가지 영역</h3>
-					<p id="cDesc">트랙 위 네 지점에 마우스를 올려 보세요.</p>
+					<p id="cDesc">이해 · 소통 · 활용 · 창작</p>
 				</div>
 
 				<div class="node n1" data-k="understand"><span class="dot">이해</span></div>
@@ -102,7 +102,7 @@
 			};
 			var title=document.getElementById('cTitle');
 			var desc=document.getElementById('cDesc');
-			var base={t:'AI 네 가지 영역',c:'#0e1b33',d:'트랙 위 네 지점에 마우스를 올려 보세요.'};
+			var base={t:'AI 네 가지 영역',c:'#0e1b33',d:'이해 · 소통 · 활용 · 창작'};
 			function set(o){ title.textContent=o.t; title.style.color=o.c; desc.textContent=o.d; }
 			nodes.forEach(function(n){
 				var k=n.getAttribute('data-k');
