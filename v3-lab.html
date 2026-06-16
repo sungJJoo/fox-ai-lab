@@ -1,0 +1,134 @@
+<!-- 디지털 랩 히어로 시안 v3 (모던·테크 방향 확인용, 임시 미리보기 파일) -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>FOX AI 연구소 — 디지털 랩 시안</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+	<style>
+		:root {
+			--bg: #ffffff;
+			--ink: #0c0d10;
+			--muted: #6a6f78;
+			--line: #e7e8ec;
+			--grid: #f3f4f6;
+			--spot: #12cdb0;
+			--spot-ink: #0a8c76;
+			--sans: "Pretendard Variable", Pretendard, system-ui, sans-serif;
+			--mono: "IBM Plex Mono", ui-monospace, monospace;
+		}
+		* { margin: 0; padding: 0; box-sizing: border-box; }
+		html { -webkit-font-smoothing: antialiased; }
+		body { background: var(--bg); color: var(--ink); font-family: var(--sans); line-height: 1.7; word-break: keep-all; }
+		.wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+		a { color: inherit; text-decoration: none; }
+		.mono { font-family: var(--mono); }
+
+		.head { border-bottom: 1px solid var(--line); position: relative; z-index: 2; background: var(--bg); }
+		.head .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+		.brand { font-weight: 800; font-size: 21px; letter-spacing: -0.01em; display: flex; align-items: center; gap: 7px; }
+		.brand .dot { width: 7px; height: 7px; background: var(--spot); border-radius: 50%; }
+		.brand em { font-style: normal; color: var(--spot-ink); }
+		.gnb { display: flex; gap: 30px; }
+		.gnb a { font-size: 14.5px; color: var(--muted); }
+		.gnb a:hover { color: var(--ink); }
+		.head .cta-s { font-family: var(--mono); font-size: 13px; border: 1px solid var(--ink); padding: 8px 16px; border-radius: 4px; }
+
+		.hero { position: relative; overflow: hidden; }
+		.hero::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 100px 100px; opacity: .8; pointer-events: none; }
+		.hero .wrap { position: relative; z-index: 1; padding: 30px 40px 60px; }
+
+		.metabar { font-family: var(--mono); font-size: 13px; color: var(--muted); letter-spacing: 0.02em; padding: 14px 0 56px; display: flex; gap: 14px; align-items: center; }
+		.metabar .sep { color: var(--line); }
+		.cur { display: inline-block; width: 8px; height: 15px; background: var(--spot); margin-left: 2px; transform: translateY(2px); animation: blink 1.1s steps(1) infinite; }
+		@keyframes blink { 50% { opacity: 0; } }
+
+		.htitle { font-weight: 800; font-size: clamp(46px, 7vw, 92px); line-height: 1.05; letter-spacing: -0.035em; }
+		.htitle .hl { color: var(--spot-ink); }
+
+		.body-row { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: end; margin-top: 44px; }
+		.lead { font-size: 17px; line-height: 1.85; color: #3f444c; max-width: 30em; }
+		.actions { display: flex; align-items: center; gap: 22px; margin-top: 30px; }
+		.btn { font-family: var(--mono); font-size: 14.5px; font-weight: 500; background: var(--ink); color: #fff; padding: 14px 24px; border-radius: 5px; transition: background .2s; }
+		.btn:hover { background: var(--spot-ink); }
+		.tlink { font-family: var(--mono); font-size: 14px; color: var(--ink); border-bottom: 1px solid var(--spot); padding-bottom: 3px; }
+
+		.panel { border: 1px solid var(--ink); border-radius: 8px; padding: 22px 24px; background: #fff; }
+		.panel .ph { font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em; color: var(--muted); text-transform: uppercase; padding-bottom: 14px; margin-bottom: 8px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; }
+		.panel .ph b { color: var(--spot-ink); font-weight: 600; }
+		.drow { display: flex; align-items: baseline; font-family: var(--mono); padding: 11px 0; }
+		.drow .k { font-size: 14px; color: #43474e; }
+		.drow .fill { flex: 1; border-bottom: 1px dotted var(--line); margin: 0 10px; transform: translateY(-3px); }
+		.drow .v { font-size: 22px; font-weight: 600; color: var(--ink); }
+		.drow .v em { font-style: normal; color: var(--spot-ink); font-size: 14px; margin-left: 3px; }
+
+		.index { border-top: 1px solid var(--ink); margin-top: 60px; display: grid; grid-template-columns: repeat(4, 1fr); }
+		.index .it { padding: 22px 24px 6px 0; }
+		.index .no { font-family: var(--mono); font-size: 13px; color: var(--spot-ink); letter-spacing: 0.1em; }
+		.index .ko { font-size: 21px; font-weight: 700; margin: 8px 0 7px; letter-spacing: -0.01em; }
+		.index .ds { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+
+		@media (max-width: 860px) {
+			.wrap { padding: 0 22px; }
+			.hero .wrap { padding: 24px 22px 48px; }
+			.gnb, .head .cta-s { display: none; }
+			.body-row { grid-template-columns: 1fr; gap: 36px; align-items: start; }
+			.index { grid-template-columns: repeat(2, 1fr); gap: 4px 0; }
+			.hero::before { background-size: 60px 60px; }
+		}
+	</style>
+</head>
+<body>
+	<header class="head">
+		<div class="wrap">
+			<div class="brand"><span class="dot"></span>FOX<em>AI</em></div>
+			<nav class="gnb">
+				<a href="#">연구소 소개</a>
+				<a href="#">배우는 방법</a>
+				<a href="#">프로그램</a>
+				<a href="#">대회 활동</a>
+			</nav>
+			<a href="#" class="cta-s">상담 문의</a>
+		</div>
+	</header>
+
+	<main class="hero">
+		<div class="wrap">
+			<div class="metabar">
+				<span>FOX_AI_LAB</span><span class="sep">/</span><span>대전 · 유성구</span><span class="sep">/</span><span>EST.2026</span><span class="cur"></span>
+			</div>
+
+			<h1 class="htitle">AI에게 문제를<br />내는 <span class="hl">아이</span></h1>
+
+			<div class="body-row">
+				<div>
+					<p class="lead">AI를 이해하고, 소통하고, 활용하고, 창작하는 네 가지 힘을 프로젝트 수업으로 키웁니다. 질문하는 법부터 직접 만들어내는 경험까지, 한 걸음씩 함께합니다.</p>
+					<div class="actions">
+						<a href="#" class="btn">상담 신청 →</a>
+						<a href="#" class="tlink">view_programs</a>
+					</div>
+				</div>
+
+				<aside class="panel">
+					<div class="ph"><span>Research Index</span><b>2026</b></div>
+					<div class="drow"><span class="k">학습 영역</span><span class="fill"></span><span class="v">04<em>areas</em></span></div>
+					<div class="drow"><span class="k">활동 프로그램</span><span class="fill"></span><span class="v">14<em>+</em></span></div>
+					<div class="drow"><span class="k">PBL 단계</span><span class="fill"></span><span class="v">05<em>step</em></span></div>
+					<div class="drow"><span class="k">대회 수상</span><span class="fill"></span><span class="v">07<em>회</em></span></div>
+				</aside>
+			</div>
+
+			<div class="index">
+				<div class="it"><div class="no">01 / UNDERSTAND</div><div class="ko">이해</div><div class="ds">AI와 디지털 도구의 원리를 이해하고 판단하기</div></div>
+				<div class="it"><div class="no">02 / COMMUNICATE</div><div class="ko">소통</div><div class="ds">원하는 결과를 정확히 전달하며 소통하기</div></div>
+				<div class="it"><div class="no">03 / UTILIZE</div><div class="ko">활용</div><div class="ds">문제 해결을 위해 AI와 도구를 활용하기</div></div>
+				<div class="it"><div class="no">04 / CREATE</div><div class="ko">창작</div><div class="ds">나만의 아이디어를 결과물로 완성하기</div></div>
+			</div>
+		</div>
+	</main>
+</body>
+</html>
