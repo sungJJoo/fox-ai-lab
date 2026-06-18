@@ -1,4 +1,4 @@
-<!-- 성장 곡선 섹션 시안 v7 (codeit 4번 참고, 메인 추가용 임시 파일) -->
+<!-- 성장 곡선 섹션 시안 v7 (정제: Pretendard·깊이·절제, 메인 추가용 임시 파일) -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -8,39 +8,42 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
 	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
 	<style>
-		@font-face { font-family:"GmarketSans"; font-weight:500; font-display:swap; src:url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff") format("woff"); }
-		@font-face { font-family:"GmarketSans"; font-weight:700; font-display:swap; src:url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff") format("woff"); }
 		:root{
-			--bg:#140f2a; --bg2:#1d1640; --spot:#27d3c4; --purple:#8b6cf2; --ink:#0e1b33;
-			--disp:"GmarketSans","Pretendard Variable",sans-serif; --body:"Pretendard Variable",Pretendard,sans-serif; --en:"Space Grotesk",sans-serif;
+			--bg:#0b0a16; --spot:#2dd4bf; --spot-soft:#5eead4; --purple:#7c5cf0; --purple-soft:#a892f7;
+			--sans:"Pretendard Variable",Pretendard,system-ui,sans-serif; --en:"Space Grotesk",sans-serif;
 		}
 		*{margin:0;padding:0;box-sizing:border-box}
-		body{font-family:var(--body);line-height:1.7;word-break:keep-all;-webkit-font-smoothing:antialiased;background:#0b0a18}
-		.wrap{max-width:1200px;margin:0 auto;padding:0 40px}
+		body{font-family:var(--sans);line-height:1.7;word-break:keep-all;-webkit-font-smoothing:antialiased;background:#07060f}
+		.wrap{max-width:1200px;margin:0 auto;padding:0 clamp(24px,5vw,64px)}
 
-		.curve-sec{position:relative;background:radial-gradient(120% 120% at 80% 10%, #251a52 0%, var(--bg) 55%);color:#fff;padding:clamp(70px,9vw,130px) 0;overflow:hidden}
-		.curve-sec .wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(36px,5vw,72px);align-items:center}
-		.label{font-family:var(--en);font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#8ff0e7;display:flex;align-items:center;gap:10px;margin-bottom:22px}
-		.label::before{content:"";width:26px;height:2px;background:var(--spot)}
-		.tit{font-family:var(--disp);font-weight:700;font-size:clamp(30px,3.8vw,50px);line-height:1.28;letter-spacing:-.01em}
-		.tit .hl{color:var(--spot)}
-		.desc{margin-top:22px;font-size:clamp(15px,1.5vw,17.5px);color:rgba(255,255,255,.72);line-height:1.85;max-width:30em}
-		.legend{display:flex;gap:24px;margin-top:32px;flex-wrap:wrap}
-		.legend li{list-style:none;display:flex;align-items:center;gap:9px;font-size:14.5px;font-weight:600;color:rgba(255,255,255,.85)}
-		.legend li::before{content:"";width:13px;height:13px;border-radius:4px}
-		.legend .l-pbl::before{background:linear-gradient(90deg,var(--purple),var(--spot))}
-		.legend .l-vid::before{background:#5b5775}
+		.curve-sec{position:relative;background:var(--bg);color:#fff;padding:clamp(84px,11vw,160px) 0;overflow:hidden}
+		.curve-sec::before{content:"";position:absolute;width:680px;height:680px;right:-120px;top:-220px;background:radial-gradient(circle, rgba(124,92,240,.30) 0%, transparent 62%);pointer-events:none}
+		.curve-sec::after{content:"";position:absolute;width:520px;height:520px;left:-160px;bottom:-200px;background:radial-gradient(circle, rgba(45,212,191,.16) 0%, transparent 62%);pointer-events:none}
+		.curve-sec .wrap{position:relative;display:grid;grid-template-columns:1fr 1.08fr;gap:clamp(40px,6vw,90px);align-items:center}
 
-		.graph{position:relative}
-		.graph svg{width:100%;height:auto;overflow:visible}
-		.nd{position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;gap:8px;background:rgba(20,15,42,.82);border:1px solid rgba(139,108,242,.5);border-radius:10px;padding:7px 13px;font-family:var(--disp);font-weight:700;font-size:14px;color:#fff;white-space:nowrap;backdrop-filter:blur(3px)}
-		.nd i{width:8px;height:8px;border-radius:50%;background:var(--spot)}
+		.label{font-family:var(--en);font-size:12.5px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--spot-soft);display:flex;align-items:center;gap:11px;margin-bottom:28px}
+		.label::before{content:"";width:28px;height:1.5px;background:var(--spot)}
+		.tit{font-family:var(--sans);font-weight:800;font-size:clamp(31px,4vw,52px);line-height:1.26;letter-spacing:-.028em;color:#fff}
+		.tit .hl{position:relative;color:var(--spot)}
+		.desc{margin-top:26px;font-size:clamp(15px,1.45vw,17px);color:rgba(255,255,255,.62);line-height:1.9;max-width:29em;font-weight:400}
+		.legend{display:flex;gap:28px;margin-top:38px;flex-wrap:wrap}
+		.legend li{list-style:none;display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;color:rgba(255,255,255,.78);letter-spacing:-.01em}
+		.legend li::before{content:"";width:14px;height:14px;border-radius:5px}
+		.legend .l-pbl::before{background:linear-gradient(120deg,var(--purple),var(--spot))}
+		.legend .l-vid::before{background:#403c55}
 
-		@media (max-width:860px){
+		.graph{position:relative;filter:drop-shadow(0 30px 60px rgba(0,0,0,.5))}
+		.graph svg{width:100%;height:auto;overflow:visible;display:block}
+		.nd{position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;gap:9px;background:rgba(15,13,30,.7);border:1px solid rgba(168,146,247,.32);border-radius:13px;padding:9px 16px;font-family:var(--sans);font-weight:700;font-size:14px;letter-spacing:-.01em;color:#fff;white-space:nowrap;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 12px 30px rgba(0,0,0,.4)}
+		.nd i{width:7px;height:7px;border-radius:50%;background:var(--spot);box-shadow:0 0 10px var(--spot)}
+		.nd.hi{border-color:rgba(45,212,191,.6)}
+
+		@media (max-width:880px){
 			.curve-sec .wrap{grid-template-columns:1fr;gap:30px}
 			.graph{order:2}
+			.nd{font-size:13px;padding:7px 12px}
 		}
-		@media (prefers-reduced-motion:reduce){ .draw{stroke-dashoffset:0 !important;animation:none !important} }
+		@media (prefers-reduced-motion:reduce){ .draw{stroke-dashoffset:0 !important;transition:none !important} }
 	</style>
 </head>
 <body>
@@ -57,39 +60,42 @@
 			</div>
 
 			<div class="graph" id="graph">
-				<svg viewBox="0 0 600 420" id="svg">
+				<svg viewBox="0 0 600 430" id="svg">
 					<defs>
 						<linearGradient id="gline" x1="0" y1="1" x2="1" y2="0">
-							<stop offset="0" stop-color="#8b6cf2" /><stop offset="1" stop-color="#27d3c4" />
+							<stop offset="0" stop-color="#7c5cf0" /><stop offset="0.55" stop-color="#9f7ff0" /><stop offset="1" stop-color="#2dd4bf" />
 						</linearGradient>
 						<linearGradient id="gfill" x1="0" y1="0" x2="0" y2="1">
-							<stop offset="0" stop-color="#8b6cf2" stop-opacity=".34" /><stop offset="1" stop-color="#8b6cf2" stop-opacity="0" />
+							<stop offset="0" stop-color="#7c5cf0" stop-opacity=".26" /><stop offset="1" stop-color="#7c5cf0" stop-opacity="0" />
 						</linearGradient>
+						<filter id="glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="6" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
 					</defs>
-					<g stroke="rgba(255,255,255,.07)" stroke-width="1">
-						<line x1="20" y1="80" x2="580" y2="80" /><line x1="20" y1="180" x2="580" y2="180" /><line x1="20" y1="280" x2="580" y2="280" /><line x1="20" y1="380" x2="580" y2="380" />
+					<g stroke="rgba(255,255,255,.05)" stroke-width="1">
+						<line x1="24" y1="96" x2="576" y2="96" /><line x1="24" y1="192" x2="576" y2="192" /><line x1="24" y1="288" x2="576" y2="288" /><line x1="24" y1="384" x2="576" y2="384" />
 					</g>
-					<path d="M 20,388 C 200,382 360,360 580,322 L 580,400 L 20,400 Z" fill="none" />
-					<path class="draw vline" d="M 20,388 C 200,382 360,360 580,322" fill="none" stroke="#5b5775" stroke-width="3" stroke-dasharray="3 9" stroke-linecap="round" />
-					<path d="M 20,394 C 220,388 330,300 420,210 C 488,142 536,108 580,66 L 580,400 L 20,400 Z" fill="url(#gfill)" />
-					<path class="draw pline" d="M 20,394 C 220,388 330,300 420,210 C 488,142 536,108 580,66" fill="none" stroke="url(#gline)" stroke-width="5" stroke-linecap="round" />
-					<circle cx="220" cy="388" r="6" fill="#140f2a" stroke="#8b6cf2" stroke-width="3" />
-					<circle cx="420" cy="210" r="6" fill="#140f2a" stroke="#9f7ff0" stroke-width="3" />
-					<circle cx="565" cy="78" r="8" fill="#27d3c4" stroke="#fff" stroke-width="3" />
+					<path class="draw vline" d="M 24,392 C 210,386 370,364 576,326" fill="none" stroke="#403c55" stroke-width="2.5" stroke-dasharray="2 10" stroke-linecap="round" />
+					<path d="M 24,398 C 228,392 332,300 424,206 C 492,138 540,104 576,62 L 576,406 L 24,406 Z" fill="url(#gfill)" />
+					<path class="draw pline" d="M 24,398 C 228,392 332,300 424,206 C 492,138 540,104 576,62" fill="none" stroke="url(#gline)" stroke-width="5" stroke-linecap="round" filter="url(#glow)" />
+					<circle cx="228" cy="392" r="5.5" fill="#0b0a16" stroke="#7c5cf0" stroke-width="3" />
+					<circle cx="424" cy="206" r="5.5" fill="#0b0a16" stroke="#9f7ff0" stroke-width="3" />
+					<circle cx="566" cy="70" r="9" fill="#2dd4bf" stroke="#0b0a16" stroke-width="3" filter="url(#glow)" />
 				</svg>
-				<div class="nd" style="left:38%;top:90%"><i></i>이해</div>
-				<div class="nd" style="left:70%;top:50%"><i></i>제작</div>
-				<div class="nd" style="left:94%;top:16%"><i></i>발표 · 성장</div>
+				<div class="nd" style="left:39%;top:91%"><i></i>이해</div>
+				<div class="nd" style="left:71%;top:48%"><i></i>제작</div>
+				<div class="nd hi" style="left:93%;top:16%"><i></i>발표 · 성장</div>
 			</div>
 		</div>
 	</section>
 
 	<script>
 		(function(){
-			var p=document.querySelector('.pline'), v=document.querySelector('.vline');
-			[p,v].forEach(function(el){ if(!el)return; var L=el.getTotalLength(); el.style.strokeDasharray=(el.classList.contains('vline')?'3 9':L); el.style.strokeDashoffset=el.classList.contains('vline')?0:L; });
-			if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
-			var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting && p){ var L=p.getTotalLength(); p.style.transition='stroke-dashoffset 1.6s cubic-bezier(.16,1,.3,1)'; p.style.strokeDashoffset=0; io.disconnect(); } });},{threshold:.4});
+			var p=document.querySelector('.pline');
+			if(!p)return;
+			var reduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+			var L=p.getTotalLength();
+			p.style.strokeDasharray=L; p.style.strokeDashoffset=reduced?0:L;
+			if(reduced)return;
+			var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ p.style.transition='stroke-dashoffset 1.8s cubic-bezier(.22,1,.36,1)'; p.style.strokeDashoffset=0; io.disconnect(); } });},{threshold:.45});
 			io.observe(document.getElementById('graph'));
 		})();
 	</script>
