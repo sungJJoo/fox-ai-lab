@@ -1,0 +1,97 @@
+<!-- 성장 곡선 섹션 시안 v7 (codeit 4번 참고, 메인 추가용 임시 파일) -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>FOX AI 연구소 — 성장 곡선 시안</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+	<style>
+		@font-face { font-family:"GmarketSans"; font-weight:500; font-display:swap; src:url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff") format("woff"); }
+		@font-face { font-family:"GmarketSans"; font-weight:700; font-display:swap; src:url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff") format("woff"); }
+		:root{
+			--bg:#140f2a; --bg2:#1d1640; --spot:#27d3c4; --purple:#8b6cf2; --ink:#0e1b33;
+			--disp:"GmarketSans","Pretendard Variable",sans-serif; --body:"Pretendard Variable",Pretendard,sans-serif; --en:"Space Grotesk",sans-serif;
+		}
+		*{margin:0;padding:0;box-sizing:border-box}
+		body{font-family:var(--body);line-height:1.7;word-break:keep-all;-webkit-font-smoothing:antialiased;background:#0b0a18}
+		.wrap{max-width:1200px;margin:0 auto;padding:0 40px}
+
+		.curve-sec{position:relative;background:radial-gradient(120% 120% at 80% 10%, #251a52 0%, var(--bg) 55%);color:#fff;padding:clamp(70px,9vw,130px) 0;overflow:hidden}
+		.curve-sec .wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(36px,5vw,72px);align-items:center}
+		.label{font-family:var(--en);font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#8ff0e7;display:flex;align-items:center;gap:10px;margin-bottom:22px}
+		.label::before{content:"";width:26px;height:2px;background:var(--spot)}
+		.tit{font-family:var(--disp);font-weight:700;font-size:clamp(30px,3.8vw,50px);line-height:1.28;letter-spacing:-.01em}
+		.tit .hl{color:var(--spot)}
+		.desc{margin-top:22px;font-size:clamp(15px,1.5vw,17.5px);color:rgba(255,255,255,.72);line-height:1.85;max-width:30em}
+		.legend{display:flex;gap:24px;margin-top:32px;flex-wrap:wrap}
+		.legend li{list-style:none;display:flex;align-items:center;gap:9px;font-size:14.5px;font-weight:600;color:rgba(255,255,255,.85)}
+		.legend li::before{content:"";width:13px;height:13px;border-radius:4px}
+		.legend .l-pbl::before{background:linear-gradient(90deg,var(--purple),var(--spot))}
+		.legend .l-vid::before{background:#5b5775}
+
+		.graph{position:relative}
+		.graph svg{width:100%;height:auto;overflow:visible}
+		.nd{position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;gap:8px;background:rgba(20,15,42,.82);border:1px solid rgba(139,108,242,.5);border-radius:10px;padding:7px 13px;font-family:var(--disp);font-weight:700;font-size:14px;color:#fff;white-space:nowrap;backdrop-filter:blur(3px)}
+		.nd i{width:8px;height:8px;border-radius:50%;background:var(--spot)}
+
+		@media (max-width:860px){
+			.curve-sec .wrap{grid-template-columns:1fr;gap:30px}
+			.graph{order:2}
+		}
+		@media (prefers-reduced-motion:reduce){ .draw{stroke-dashoffset:0 !important;animation:none !important} }
+	</style>
+</head>
+<body>
+	<section class="curve-sec">
+		<div class="wrap">
+			<div class="tx">
+				<p class="label">Why FOX</p>
+				<h2 class="tit">영상만 보는 수업은 그만,<br />이제 <span class="hl">직접 만들며</span> 자랍니다</h2>
+				<p class="desc">보기만 한 학습은 금방 잊힙니다. 질문하고, 직접 만들고, 발표하는 프로젝트 학습(PBL)으로 배운 것이 진짜 실력으로 남습니다.</p>
+				<ul class="legend">
+					<li class="l-pbl">프로젝트 학습 (PBL)</li>
+					<li class="l-vid">영상만 보는 학습</li>
+				</ul>
+			</div>
+
+			<div class="graph" id="graph">
+				<svg viewBox="0 0 600 420" id="svg">
+					<defs>
+						<linearGradient id="gline" x1="0" y1="1" x2="1" y2="0">
+							<stop offset="0" stop-color="#8b6cf2" /><stop offset="1" stop-color="#27d3c4" />
+						</linearGradient>
+						<linearGradient id="gfill" x1="0" y1="0" x2="0" y2="1">
+							<stop offset="0" stop-color="#8b6cf2" stop-opacity=".34" /><stop offset="1" stop-color="#8b6cf2" stop-opacity="0" />
+						</linearGradient>
+					</defs>
+					<g stroke="rgba(255,255,255,.07)" stroke-width="1">
+						<line x1="20" y1="80" x2="580" y2="80" /><line x1="20" y1="180" x2="580" y2="180" /><line x1="20" y1="280" x2="580" y2="280" /><line x1="20" y1="380" x2="580" y2="380" />
+					</g>
+					<path d="M 20,388 C 200,382 360,360 580,322 L 580,400 L 20,400 Z" fill="none" />
+					<path class="draw vline" d="M 20,388 C 200,382 360,360 580,322" fill="none" stroke="#5b5775" stroke-width="3" stroke-dasharray="3 9" stroke-linecap="round" />
+					<path d="M 20,394 C 220,388 330,300 420,210 C 488,142 536,108 580,66 L 580,400 L 20,400 Z" fill="url(#gfill)" />
+					<path class="draw pline" d="M 20,394 C 220,388 330,300 420,210 C 488,142 536,108 580,66" fill="none" stroke="url(#gline)" stroke-width="5" stroke-linecap="round" />
+					<circle cx="220" cy="388" r="6" fill="#140f2a" stroke="#8b6cf2" stroke-width="3" />
+					<circle cx="420" cy="210" r="6" fill="#140f2a" stroke="#9f7ff0" stroke-width="3" />
+					<circle cx="565" cy="78" r="8" fill="#27d3c4" stroke="#fff" stroke-width="3" />
+				</svg>
+				<div class="nd" style="left:38%;top:90%"><i></i>이해</div>
+				<div class="nd" style="left:70%;top:50%"><i></i>제작</div>
+				<div class="nd" style="left:94%;top:16%"><i></i>발표 · 성장</div>
+			</div>
+		</div>
+	</section>
+
+	<script>
+		(function(){
+			var p=document.querySelector('.pline'), v=document.querySelector('.vline');
+			[p,v].forEach(function(el){ if(!el)return; var L=el.getTotalLength(); el.style.strokeDasharray=(el.classList.contains('vline')?'3 9':L); el.style.strokeDashoffset=el.classList.contains('vline')?0:L; });
+			if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+			var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting && p){ var L=p.getTotalLength(); p.style.transition='stroke-dashoffset 1.6s cubic-bezier(.16,1,.3,1)'; p.style.strokeDashoffset=0; io.disconnect(); } });},{threshold:.4});
+			io.observe(document.getElementById('graph'));
+		})();
+	</script>
+</body>
+</html>
