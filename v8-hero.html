@@ -1,0 +1,125 @@
+<!-- 메인 히어로 시안 v8 (A+B: 검증된 기업 골격 + FOX 고유 시그니처, 확인용 임시 파일) -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>FOX AI 연구소 — 메인 히어로 시안</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+	<style>
+		:root{
+			--bg:#ffffff; --bg-soft:#f4f8f7; --ink:#0f1719; --muted:#5d6b71; --line:#e8edee;
+			--spot:#13b3a6; --spot-deep:#0a8d83; --spot-bg:#e6f7f4; --spot-soft:#5fd6cb;
+			--sans:"Pretendard Variable",Pretendard,system-ui,sans-serif; --en:"Space Grotesk",sans-serif;
+		}
+		*{margin:0;padding:0;box-sizing:border-box}
+		body{font-family:var(--sans);color:var(--ink);line-height:1.7;word-break:keep-all;-webkit-font-smoothing:antialiased;background:var(--bg)}
+		.wrap{max-width:1200px;margin:0 auto;padding:0 clamp(24px,5vw,48px)}
+		a{color:inherit;text-decoration:none}
+
+		.head{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+		.head .wrap{display:flex;align-items:center;justify-content:space-between;height:74px}
+		.head .logo img{height:34px;width:auto;display:block}
+		.gnb{display:flex;align-items:center;gap:6px}
+		.gnb a{font-size:15px;font-weight:500;color:#3f4b50;padding:9px 16px;border-radius:9px;transition:background .18s,color .18s}
+		.gnb a:hover{background:var(--bg-soft);color:var(--ink)}
+		.gnb .cta{margin-left:10px;background:var(--ink);color:#fff;padding:10px 20px;font-weight:600}
+		.gnb .cta:hover{background:var(--spot-deep)}
+
+		.hero{position:relative;overflow:hidden}
+		.hero::before{content:"";position:absolute;width:900px;height:900px;right:-200px;top:-360px;background:radial-gradient(circle, rgba(19,179,166,.13) 0%, transparent 60%);pointer-events:none}
+		.hero .wrap{position:relative;display:grid;grid-template-columns:1.02fr 0.98fr;gap:clamp(36px,5vw,72px);align-items:center;padding:clamp(56px,8vw,104px) 0 clamp(64px,9vw,118px)}
+
+		.badge{display:inline-flex;align-items:center;gap:8px;background:var(--spot-bg);color:var(--spot-deep);font-size:13.5px;font-weight:600;padding:8px 16px;border-radius:999px;margin-bottom:26px}
+		.badge i{width:7px;height:7px;border-radius:50%;background:var(--spot)}
+		.h-tit{font-weight:800;font-size:clamp(38px,5.4vw,68px);line-height:1.14;letter-spacing:-.035em;color:var(--ink)}
+		.h-tit .hl{color:var(--spot-deep)}
+		.h-desc{margin-top:26px;font-size:clamp(16px,1.6vw,19px);color:var(--muted);line-height:1.85;max-width:25em}
+		.h-meta{display:flex;flex-wrap:wrap;gap:8px 10px;margin-top:28px}
+		.h-meta span{font-size:13.5px;font-weight:500;color:#46535a;background:var(--bg-soft);border:1px solid var(--line);border-radius:8px;padding:7px 13px}
+		.h-btns{display:flex;gap:12px;margin-top:38px;flex-wrap:wrap}
+		.btn{display:inline-flex;align-items:center;gap:9px;font-size:16.5px;font-weight:600;padding:15px 28px;border-radius:14px;transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .2s,background .2s}
+		.btn-fill{background:var(--spot);color:#fff;box-shadow:0 10px 26px rgba(19,179,166,.32)}
+		.btn-fill:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(19,179,166,.4)}
+		.btn-line{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:0 4px 14px rgba(15,23,25,.05)}
+		.btn-line:hover{transform:translateY(-2px);border-color:#d4dcde}
+		.btn .arr{font-family:var(--en)}
+
+		.h-visual{position:relative}
+		.h-visual figure{border-radius:24px;overflow:hidden;box-shadow:0 30px 70px rgba(15,23,25,.16);border:1px solid rgba(255,255,255,.6)}
+		.h-visual img{width:100%;aspect-ratio:4/3.2;object-fit:cover;display:block}
+		.float-card{position:absolute;display:flex;align-items:center;gap:11px;background:#fff;border-radius:16px;padding:13px 18px;box-shadow:0 18px 44px rgba(15,23,25,.16)}
+		.float-card .ic{width:38px;height:38px;border-radius:11px;background:var(--spot-bg);color:var(--spot-deep);display:flex;align-items:center;justify-content:center}
+		.float-card .ic svg{width:21px;height:21px}
+		.float-card .tx b{display:block;font-size:14.5px;font-weight:700;letter-spacing:-.01em}
+		.float-card .tx small{font-size:12.5px;color:var(--muted)}
+		.fc-1{left:-26px;top:42px;animation:fl 6s ease-in-out infinite}
+		.fc-2{right:-22px;bottom:54px;animation:fl 6s ease-in-out infinite;animation-delay:-3s}
+		@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+		.trust{border-top:1px solid var(--line);background:var(--bg-soft)}
+		.trust .wrap{display:flex;align-items:center;justify-content:center;gap:clamp(20px,4vw,56px);flex-wrap:wrap;padding:26px 0}
+		.trust .t-lab{font-size:14px;color:var(--muted);font-weight:500}
+		.trust ul{display:flex;flex-wrap:wrap;gap:14px 30px;list-style:none}
+		.trust li{font-family:var(--en);font-size:15px;font-weight:700;color:#3f4b50;opacity:.72}
+
+		@media (max-width:880px){
+			.gnb a:not(.cta){display:none}
+			.hero .wrap{grid-template-columns:1fr;gap:36px}
+			.h-visual{order:2;max-width:520px}
+			.float-card{display:none}
+		}
+		@media (prefers-reduced-motion:reduce){ .float-card{animation:none} }
+	</style>
+</head>
+<body>
+	<header class="head">
+		<div class="wrap">
+			<h1 class="logo"><a href="#"><img src="images/logo-fox-ai.png" alt="FOX AI 폭스러닝센터 AI 연구소" /></a></h1>
+			<nav class="gnb">
+				<a href="#">연구소 소개</a><a href="#">배우는 방법</a><a href="#">프로그램</a><a href="#">대회 활동</a>
+				<a href="#" class="cta">상담 문의</a>
+			</nav>
+		</div>
+	</header>
+
+	<section class="hero">
+		<div class="wrap">
+			<div class="h-tx">
+				<span class="badge"><i></i>폭스러닝센터 AI 연구소</span>
+				<h2 class="h-tit">AI에게 문제를<br />내는 <span class="hl">아이</span></h2>
+				<p class="h-desc">보는 교육은 그만. 질문하고 직접 만들고 발표하는 <b>프로젝트 학습(PBL)</b>으로, AI를 이해·소통·활용·창작하는 네 가지 힘을 키웁니다.</p>
+				<div class="h-meta">
+					<span>유아 6세 · 초등 · 중등 · 고등</span><span>성인 · 기관 · 단체</span><span>대전 유성구</span>
+				</div>
+				<div class="h-btns">
+					<a href="#" class="btn btn-fill">무료 상담 신청 <span class="arr">→</span></a>
+					<a href="#" class="btn btn-line">프로그램 보기</a>
+				</div>
+			</div>
+
+			<div class="h-visual">
+				<figure><img src="images/space-1.jpg" alt="AI 연구소 트랙장 활동 공간" /></figure>
+				<div class="float-card fc-1">
+					<span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 2v10l6 3"/></svg></span>
+					<span class="tx"><b>4영역 · 14 프로그램</b><small>이해 · 소통 · 활용 · 창작</small></span>
+				</div>
+				<div class="float-card fc-2">
+					<span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18a3 3 0 0 1-3-3v-2a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v2a3 3 0 0 1-3 3"/><path d="M8 22h8M12 18v4"/></svg></span>
+					<span class="tx"><b>FLL 4년 연속 수상</b><small>2023 → 2026</small></span>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div class="trust">
+		<div class="wrap">
+			<p class="t-lab">검증된 공식 교육 도구로 배웁니다</p>
+			<ul>
+				<li>LEGO Education</li><li>Minecraft Education</li><li>Python</li><li>Scratch</li><li>COS</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
