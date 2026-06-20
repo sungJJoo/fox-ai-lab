@@ -1,4 +1,4 @@
-<!-- 성장 곡선 섹션 시안 v7 (돋보기 렌즈 + 올라가는 마커, FOX 틸, 메인 추가용 임시 파일) -->
+<!-- 성장 곡선 섹션 시안 v7 (고정 렌즈 + 안에서 흐르는 곡선/노드, FOX 틸, 메인 추가용 임시 파일) -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -35,17 +35,14 @@
 
 		.graph{position:relative;filter:drop-shadow(0 40px 70px rgba(0,0,0,.5))}
 		.graph svg{width:100%;height:auto;overflow:visible;display:block}
-		.nd{position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;gap:8px;background:rgba(10,24,36,.66);border:1px solid rgba(124,193,240,.26);border-radius:13px;padding:9px 16px;font-weight:700;font-size:13.5px;letter-spacing:-.01em;color:#fff;white-space:nowrap;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 18px 42px rgba(0,0,0,.5)}
-		.nd i{width:7px;height:7px;border-radius:50%;background:var(--blue-soft)}
-		.nd.hi{border-color:rgba(32,197,188,.5)}
-		.nd.hi i{background:var(--spot);box-shadow:0 0 12px var(--spot)}
+		.lbl{font-family:var(--sans);font-weight:700;font-size:14px;fill:#fff}
+		.lbl-bg{fill:rgba(10,24,36,.72);stroke:rgba(124,193,240,.26);stroke-width:1}
 
 		@media (max-width:900px){
 			.curve-sec .wrap{grid-template-columns:1fr;gap:26px}
 			.graph{order:2}
-			.nd{font-size:12.5px;padding:7px 12px}
 		}
-		@media (prefers-reduced-motion:reduce){ .draw{stroke-dashoffset:0 !important;transition:none !important} #mk{display:none} }
+		@media (prefers-reduced-motion:reduce){ #lensG{transform:none !important} }
 	</style>
 </head>
 <body>
@@ -71,60 +68,71 @@
 							<stop offset="0" stop-color="#3194db" /><stop offset="0.55" stop-color="#23bcc4" /><stop offset="1" stop-color="#5eead4" />
 						</linearGradient>
 						<linearGradient id="gfill" x1="0" y1="0" x2="0" y2="1">
-							<stop offset="0" stop-color="#20c5bc" stop-opacity=".24" /><stop offset="1" stop-color="#20c5bc" stop-opacity="0" />
+							<stop offset="0" stop-color="#20c5bc" stop-opacity=".22" /><stop offset="1" stop-color="#20c5bc" stop-opacity="0" />
 						</linearGradient>
-						<filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
-						<clipPath id="lens"><circle cx="520" cy="150" r="118" /></clipPath>
+						<filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="6" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
+						<clipPath id="lens"><circle cx="476" cy="232" r="132" /></clipPath>
+						<path id="curve" d="M 30,438 C 250,432 350,330 452,212 C 534,116 590,86 642,44" />
 					</defs>
 
-					<path class="draw vline" d="M 30,432 C 250,426 440,404 642,362" fill="none" stroke="#2f3b46" stroke-width="2.5" stroke-dasharray="1 11" stroke-linecap="round" />
+					<path class="vline" d="M 30,432 C 250,426 440,404 642,362" fill="none" stroke="#2f3b46" stroke-width="2.5" stroke-dasharray="1 11" stroke-linecap="round" />
 					<path d="M 30,438 C 250,432 350,330 452,212 C 534,116 590,86 642,44 L 642,456 L 30,456 Z" fill="url(#gfill)" />
-					<path id="pline" class="draw" d="M 30,438 C 250,432 350,330 452,212 C 534,116 590,86 642,44" fill="none" stroke="url(#gline)" stroke-width="5.5" stroke-linecap="round" filter="url(#glow)" />
+					<use href="#curve" fill="none" stroke="url(#gline)" stroke-width="5.5" stroke-linecap="round" filter="url(#glow)" />
+					<circle cx="250" cy="432" r="5" fill="#091824" stroke="#3194db" stroke-width="3" />
+					<circle cx="452" cy="212" r="5" fill="#091824" stroke="#23bcc4" stroke-width="3" />
+					<circle cx="630" cy="52" r="7" fill="#20c5bc" stroke="#091824" stroke-width="3" />
 
-					<!-- 돋보기 렌즈: 끝 구간 확대 -->
-					<circle cx="520" cy="150" r="118" fill="rgba(32,197,188,.05)" stroke="rgba(124,193,240,.18)" stroke-width="1.5" />
+					<!-- 고정 렌즈: 안에서 곡선·노드가 흐름 -->
+					<circle cx="476" cy="232" r="132" fill="rgba(32,197,188,.04)" stroke="rgba(124,193,240,.16)" stroke-width="1.5" />
 					<g clip-path="url(#lens)">
-						<g transform="translate(520,150) scale(1.7) translate(-520,-150)">
-							<path d="M 30,438 C 250,432 350,330 452,212 C 534,116 590,86 642,44 L 642,456 L 30,456 Z" fill="url(#gfill)" />
-							<path d="M 30,438 C 250,432 350,330 452,212 C 534,116 590,86 642,44" fill="none" stroke="url(#gline)" stroke-width="3.4" stroke-linecap="round" />
-							<circle cx="452" cy="212" r="4" fill="#091824" stroke="#2dd4bf" stroke-width="2.4" />
+						<g id="lensG">
+							<use href="#curve" fill="none" stroke="url(#gline)" stroke-width="3.4" stroke-linecap="round" />
+							<g id="lensNodes"></g>
 						</g>
 					</g>
-					<circle cx="520" cy="150" r="118" fill="none" stroke="rgba(32,197,188,.35)" stroke-width="1.5" />
-
-					<circle cx="250" cy="432" r="5" fill="#091824" stroke="#3194db" stroke-width="3" />
-					<circle cx="630" cy="52" r="8.5" fill="#20c5bc" stroke="#091824" stroke-width="3.5" filter="url(#glow)" />
-					<!-- 올라가는 마커 -->
-					<circle id="mk" r="7" fill="#fff" stroke="#20c5bc" stroke-width="3" filter="url(#glow)" cx="30" cy="438" />
+					<circle cx="476" cy="232" r="132" fill="none" stroke="rgba(32,197,188,.4)" stroke-width="1.6" />
+					<!-- 렌즈 중심 고정 마커 -->
+					<circle cx="476" cy="232" r="9" fill="#fff" stroke="#20c5bc" stroke-width="3.5" filter="url(#glow)" />
 				</svg>
-				<div class="nd" style="left:38%;top:96.5%"><i></i>이해</div>
-				<div class="nd hi" style="left:78.7%;top:33%"><i></i>발표 · 성장</div>
+				<div style="position:absolute;left:38%;top:96%;transform:translate(-50%,-50%);background:rgba(10,24,36,.66);border:1px solid rgba(124,193,240,.26);border-radius:12px;padding:8px 14px;font-weight:700;font-size:13px;backdrop-filter:blur(10px)">이해</div>
+				<div style="position:absolute;left:96%;top:9%;transform:translate(-50%,-50%);background:rgba(10,24,36,.66);border:1px solid rgba(32,197,188,.5);border-radius:12px;padding:8px 14px;font-weight:700;font-size:13px;backdrop-filter:blur(10px)">발표 · 성장</div>
 			</div>
 		</div>
 	</section>
 
 	<script>
 		(function(){
-			var p=document.getElementById('pline'), mk=document.getElementById('mk');
-			if(!p)return;
-			var L=p.getTotalLength();
-			p.style.strokeDasharray=L; p.style.strokeDashoffset=L;
+			var curve=document.getElementById('curve');
+			var lensG=document.getElementById('lensG');
+			var lensNodes=document.getElementById('lensNodes');
+			if(!curve||!lensG)return;
+			var L=curve.getTotalLength();
+			var CX=476, CY=232, S=1.85;
+
+			var stops=[ {f:0.18,t:'이해'},{f:0.5,t:'제작'},{f:0.84,t:'발표·성장'} ];
+			stops.forEach(function(s){
+				var pt=curve.getPointAtLength(L*s.f);
+				var g=document.createElementNS('http://www.w3.org/2000/svg','g');
+				g.innerHTML='<circle cx="'+pt.x+'" cy="'+pt.y+'" r="4.5" fill="#091824" stroke="#2dd4bf" stroke-width="2.4"/>'
+					+'<rect x="'+(pt.x+9)+'" y="'+(pt.y-13)+'" rx="6" width="'+(s.t.length*10+18)+'" height="26" class="lbl-bg"/>'
+					+'<text x="'+(pt.x+18)+'" y="'+(pt.y+5)+'" class="lbl">'+s.t+'</text>';
+				lensNodes.appendChild(g);
+			});
+
 			var reduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-			if(reduced){ p.style.strokeDashoffset=0; if(mk){var e=p.getPointAtLength(L);mk.setAttribute('cx',e.x);mk.setAttribute('cy',e.y);} return; }
-			function run(){
-				var dur=2000, t0=null;
-				function step(t){
-					if(!t0)t0=t;
-					var k=Math.min((t-t0)/dur,1);
-					var e=1-Math.pow(1-k,3);
-					p.style.strokeDashoffset=L*(1-e);
-					var pt=p.getPointAtLength(L*e);
-					if(mk){ mk.setAttribute('cx',pt.x); mk.setAttribute('cy',pt.y); }
-					if(k<1)requestAnimationFrame(step);
-				}
-				requestAnimationFrame(step);
+			function setPan(k){
+				var pt=curve.getPointAtLength(L*k);
+				lensG.setAttribute('transform','translate('+(CX-pt.x*S)+','+(CY-pt.y*S)+') scale('+S+')');
 			}
-			var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ run(); io.disconnect(); } });},{threshold:.4});
+			if(reduced){ setPan(0.5); return; }
+			var DUR=5200, t0=null;
+			function loop(t){
+				if(!t0)t0=t;
+				var k=((t-t0)%DUR)/DUR;
+				setPan(k);
+				requestAnimationFrame(loop);
+			}
+			var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ requestAnimationFrame(loop); io.disconnect(); } });},{threshold:.35});
 			io.observe(document.getElementById('graph'));
 		})();
 	</script>
