@@ -125,10 +125,11 @@
 				lensG.setAttribute('transform','translate('+(CX-pt.x*S)+','+(CY-pt.y*S)+') scale('+S+')');
 			}
 			if(reduced){ setPan(0.5); return; }
-			var DUR=5200, t0=null;
+			var DUR=7000, t0=null;
 			function loop(t){
 				if(!t0)t0=t;
-				var k=((t-t0)%DUR)/DUR;
+				var phase=((t-t0)%DUR)/DUR;
+				var k=0.16+0.68*(0.5-0.5*Math.cos(phase*2*Math.PI));
 				setPan(k);
 				requestAnimationFrame(loop);
 			}
