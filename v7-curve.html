@@ -1,4 +1,4 @@
-<!-- 성장 곡선 섹션 시안 v7 (A안: FOX 틸 + codeit 폰트·그림자·여백 기법, 메인 추가용 임시 파일) -->
+<!-- 성장 곡선 섹션 시안 v7 (돋보기 렌즈 + 올라가는 마커, FOX 틸, 메인 추가용 임시 파일) -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,34 +9,33 @@
 	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
 	<style>
 		:root{
-			--bg:#091824; --bg-deep:#06121b; --spot:#20c5bc; --spot-soft:#5eead4; --blue:#3194db; --blue-soft:#7cc1f0;
+			--bg:#091824; --spot:#20c5bc; --spot-soft:#5eead4; --blue:#3194db; --blue-soft:#7cc1f0;
 			--sans:"Pretendard Variable",Pretendard,system-ui,sans-serif; --en:"Space Grotesk",sans-serif;
 		}
 		*{margin:0;padding:0;box-sizing:border-box}
 		body{font-family:var(--sans);line-height:1.7;word-break:keep-all;-webkit-font-smoothing:antialiased;background:#040b11}
 		.wrap{max-width:1280px;margin:0 auto;padding:0 clamp(28px,5vw,72px)}
 
-		.curve-sec{position:relative;background:var(--bg);color:#fff;padding:clamp(96px,12vw,176px) 0;overflow:hidden}
-		.curve-sec::before{content:"";position:absolute;width:880px;height:880px;right:-180px;top:-300px;background:radial-gradient(circle, rgba(32,197,188,.22) 0%, transparent 60%);pointer-events:none}
-		.curve-sec::after{content:"";position:absolute;width:680px;height:680px;left:-220px;bottom:-260px;background:radial-gradient(circle, rgba(49,148,219,.18) 0%, transparent 62%);pointer-events:none}
-		.curve-sec .wrap{position:relative;display:grid;grid-template-columns:0.84fr 1.16fr;gap:clamp(36px,5vw,80px);align-items:center}
+		.curve-sec{position:relative;background:var(--bg);color:#fff;padding:clamp(90px,11vw,164px) 0;overflow:hidden}
+		.curve-sec::before{content:"";position:absolute;width:880px;height:880px;right:-180px;top:-300px;background:radial-gradient(circle, rgba(32,197,188,.20) 0%, transparent 60%);pointer-events:none}
+		.curve-sec::after{content:"";position:absolute;width:680px;height:680px;left:-220px;bottom:-260px;background:radial-gradient(circle, rgba(49,148,219,.16) 0%, transparent 62%);pointer-events:none}
+		.curve-sec .wrap{position:relative;display:grid;grid-template-columns:0.82fr 1.18fr;gap:clamp(36px,5vw,76px);align-items:center}
 
 		.label{font-family:var(--en);font-size:12.5px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--spot-soft);display:flex;align-items:center;gap:12px;margin-bottom:30px}
 		.label::before{content:"";width:30px;height:1.5px;background:var(--spot)}
-		.tit{display:block}
 		.t-sub{display:block;font-size:clamp(17px,2vw,23px);font-weight:600;color:rgba(255,255,255,.42);letter-spacing:-.01em;margin-bottom:18px}
 		.t-main{display:block;font-weight:800;font-size:clamp(35px,4.8vw,60px);line-height:1.16;letter-spacing:-.035em;color:#fff}
 		.t-main .hl{font-style:normal;color:var(--spot)}
-		.desc{margin-top:30px;font-size:clamp(15px,1.45vw,17px);color:rgba(255,255,255,.56);line-height:1.95;max-width:26em;font-weight:400}
+		.desc{margin-top:30px;font-size:clamp(15px,1.45vw,17px);color:rgba(255,255,255,.56);line-height:1.95;max-width:26em}
 		.legend{display:flex;gap:28px;margin-top:40px;flex-wrap:wrap}
 		.legend li{list-style:none;display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:500;color:rgba(255,255,255,.7);letter-spacing:-.01em}
 		.legend li::before{content:"";width:13px;height:13px;border-radius:5px}
 		.legend .l-pbl::before{background:linear-gradient(120deg,var(--blue),var(--spot))}
 		.legend .l-vid::before{background:#2f3b46}
 
-		.graph{position:relative;filter:drop-shadow(0 40px 70px rgba(0,0,0,.55))}
+		.graph{position:relative;filter:drop-shadow(0 40px 70px rgba(0,0,0,.5))}
 		.graph svg{width:100%;height:auto;overflow:visible;display:block}
-		.nd{position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;gap:8px;background:rgba(10,24,36,.62);border:1px solid rgba(124,193,240,.26);border-radius:13px;padding:9px 16px;font-weight:700;font-size:13.5px;letter-spacing:-.01em;color:#fff;white-space:nowrap;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 18px 42px rgba(0,0,0,.5)}
+		.nd{position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;gap:8px;background:rgba(10,24,36,.66);border:1px solid rgba(124,193,240,.26);border-radius:13px;padding:9px 16px;font-weight:700;font-size:13.5px;letter-spacing:-.01em;color:#fff;white-space:nowrap;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 18px 42px rgba(0,0,0,.5)}
 		.nd i{width:7px;height:7px;border-radius:50%;background:var(--blue-soft)}
 		.nd.hi{border-color:rgba(32,197,188,.5)}
 		.nd.hi i{background:var(--spot);box-shadow:0 0 12px var(--spot)}
@@ -46,7 +45,7 @@
 			.graph{order:2}
 			.nd{font-size:12.5px;padding:7px 12px}
 		}
-		@media (prefers-reduced-motion:reduce){ .draw{stroke-dashoffset:0 !important;transition:none !important} }
+		@media (prefers-reduced-motion:reduce){ .draw{stroke-dashoffset:0 !important;transition:none !important} #mk{display:none} }
 	</style>
 </head>
 <body>
@@ -66,39 +65,66 @@
 			</div>
 
 			<div class="graph" id="graph">
-				<svg viewBox="0 0 640 440" id="svg">
+				<svg viewBox="0 0 660 460" id="svg">
 					<defs>
 						<linearGradient id="gline" x1="0" y1="1" x2="1" y2="0">
 							<stop offset="0" stop-color="#3194db" /><stop offset="0.55" stop-color="#23bcc4" /><stop offset="1" stop-color="#5eead4" />
 						</linearGradient>
 						<linearGradient id="gfill" x1="0" y1="0" x2="0" y2="1">
-							<stop offset="0" stop-color="#20c5bc" stop-opacity=".26" /><stop offset="1" stop-color="#20c5bc" stop-opacity="0" />
+							<stop offset="0" stop-color="#20c5bc" stop-opacity=".24" /><stop offset="1" stop-color="#20c5bc" stop-opacity="0" />
 						</linearGradient>
-						<filter id="glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="8" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
+						<filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
+						<clipPath id="lens"><circle cx="520" cy="150" r="118" /></clipPath>
 					</defs>
-					<path class="draw vline" d="M 28,416 C 250,410 430,388 624,350" fill="none" stroke="#2f3b46" stroke-width="2.5" stroke-dasharray="1 11" stroke-linecap="round" />
-					<path d="M 28,422 C 250,416 350,318 452,202 C 532,110 588,76 624,40 L 624,438 L 28,438 Z" fill="url(#gfill)" />
-					<path class="draw pline" d="M 28,422 C 250,416 350,318 452,202 C 532,110 588,76 624,40" fill="none" stroke="url(#gline)" stroke-width="6" stroke-linecap="round" filter="url(#glow)" />
-					<circle cx="250" cy="416" r="5.5" fill="#091824" stroke="#3194db" stroke-width="3" />
-					<circle cx="452" cy="202" r="5.5" fill="#091824" stroke="#23bcc4" stroke-width="3" />
-					<circle cx="612" cy="48" r="9" fill="#20c5bc" stroke="#091824" stroke-width="3.5" filter="url(#glow)" />
+
+					<path class="draw vline" d="M 30,432 C 250,426 440,404 642,362" fill="none" stroke="#2f3b46" stroke-width="2.5" stroke-dasharray="1 11" stroke-linecap="round" />
+					<path d="M 30,438 C 250,432 350,330 452,212 C 534,116 590,86 642,44 L 642,456 L 30,456 Z" fill="url(#gfill)" />
+					<path id="pline" class="draw" d="M 30,438 C 250,432 350,330 452,212 C 534,116 590,86 642,44" fill="none" stroke="url(#gline)" stroke-width="5.5" stroke-linecap="round" filter="url(#glow)" />
+
+					<!-- 돋보기 렌즈: 끝 구간 확대 -->
+					<circle cx="520" cy="150" r="118" fill="rgba(32,197,188,.05)" stroke="rgba(124,193,240,.18)" stroke-width="1.5" />
+					<g clip-path="url(#lens)">
+						<g transform="translate(520,150) scale(1.7) translate(-520,-150)">
+							<path d="M 30,438 C 250,432 350,330 452,212 C 534,116 590,86 642,44 L 642,456 L 30,456 Z" fill="url(#gfill)" />
+							<path d="M 30,438 C 250,432 350,330 452,212 C 534,116 590,86 642,44" fill="none" stroke="url(#gline)" stroke-width="3.4" stroke-linecap="round" />
+							<circle cx="452" cy="212" r="4" fill="#091824" stroke="#2dd4bf" stroke-width="2.4" />
+						</g>
+					</g>
+					<circle cx="520" cy="150" r="118" fill="none" stroke="rgba(32,197,188,.35)" stroke-width="1.5" />
+
+					<circle cx="250" cy="432" r="5" fill="#091824" stroke="#3194db" stroke-width="3" />
+					<circle cx="630" cy="52" r="8.5" fill="#20c5bc" stroke="#091824" stroke-width="3.5" filter="url(#glow)" />
+					<!-- 올라가는 마커 -->
+					<circle id="mk" r="7" fill="#fff" stroke="#20c5bc" stroke-width="3" filter="url(#glow)" cx="30" cy="438" />
 				</svg>
-				<div class="nd" style="left:39%;top:95%"><i></i>이해</div>
-				<div class="nd" style="left:70.5%;top:46%"><i></i>제작</div>
-				<div class="nd hi" style="left:95%;top:11%"><i></i>발표 · 성장</div>
+				<div class="nd" style="left:38%;top:96.5%"><i></i>이해</div>
+				<div class="nd hi" style="left:78.7%;top:33%"><i></i>발표 · 성장</div>
 			</div>
 		</div>
 	</section>
 
 	<script>
 		(function(){
-			var p=document.querySelector('.pline');
+			var p=document.getElementById('pline'), mk=document.getElementById('mk');
 			if(!p)return;
-			var reduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 			var L=p.getTotalLength();
-			p.style.strokeDasharray=L; p.style.strokeDashoffset=reduced?0:L;
-			if(reduced)return;
-			var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ p.style.transition='stroke-dashoffset 1.9s cubic-bezier(.22,1,.36,1)'; p.style.strokeDashoffset=0; io.disconnect(); } });},{threshold:.4});
+			p.style.strokeDasharray=L; p.style.strokeDashoffset=L;
+			var reduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+			if(reduced){ p.style.strokeDashoffset=0; if(mk){var e=p.getPointAtLength(L);mk.setAttribute('cx',e.x);mk.setAttribute('cy',e.y);} return; }
+			function run(){
+				var dur=2000, t0=null;
+				function step(t){
+					if(!t0)t0=t;
+					var k=Math.min((t-t0)/dur,1);
+					var e=1-Math.pow(1-k,3);
+					p.style.strokeDashoffset=L*(1-e);
+					var pt=p.getPointAtLength(L*e);
+					if(mk){ mk.setAttribute('cx',pt.x); mk.setAttribute('cy',pt.y); }
+					if(k<1)requestAnimationFrame(step);
+				}
+				requestAnimationFrame(step);
+			}
+			var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ run(); io.disconnect(); } });},{threshold:.4});
 			io.observe(document.getElementById('graph'));
 		})();
 	</script>
