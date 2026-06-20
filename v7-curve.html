@@ -1,4 +1,4 @@
-<!-- 성장 곡선 섹션 시안 v7 (정제: Pretendard·깊이·절제, 메인 추가용 임시 파일) -->
+<!-- 성장 곡선 섹션 시안 v7 (재정제: 헤드라인 2단·그래프 확대·그리드 제거, 메인 추가용 임시 파일) -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -14,34 +14,37 @@
 		}
 		*{margin:0;padding:0;box-sizing:border-box}
 		body{font-family:var(--sans);line-height:1.7;word-break:keep-all;-webkit-font-smoothing:antialiased;background:#07060f}
-		.wrap{max-width:1200px;margin:0 auto;padding:0 clamp(24px,5vw,64px)}
+		.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(24px,5vw,64px)}
 
-		.curve-sec{position:relative;background:var(--bg);color:#fff;padding:clamp(84px,11vw,160px) 0;overflow:hidden}
-		.curve-sec::before{content:"";position:absolute;width:680px;height:680px;right:-120px;top:-220px;background:radial-gradient(circle, rgba(124,92,240,.30) 0%, transparent 62%);pointer-events:none}
-		.curve-sec::after{content:"";position:absolute;width:520px;height:520px;left:-160px;bottom:-200px;background:radial-gradient(circle, rgba(45,212,191,.16) 0%, transparent 62%);pointer-events:none}
-		.curve-sec .wrap{position:relative;display:grid;grid-template-columns:1fr 1.08fr;gap:clamp(40px,6vw,90px);align-items:center}
+		.curve-sec{position:relative;background:var(--bg);color:#fff;padding:clamp(80px,10vw,150px) 0;overflow:hidden}
+		.curve-sec::before{content:"";position:absolute;width:820px;height:820px;right:-160px;top:-280px;background:radial-gradient(circle, rgba(124,92,240,.34) 0%, transparent 60%);pointer-events:none}
+		.curve-sec::after{content:"";position:absolute;width:600px;height:600px;left:-200px;bottom:-240px;background:radial-gradient(circle, rgba(45,212,191,.18) 0%, transparent 60%);pointer-events:none}
+		.curve-sec .wrap{position:relative;display:grid;grid-template-columns:0.86fr 1.14fr;gap:clamp(30px,4vw,64px);align-items:center}
 
-		.label{font-family:var(--en);font-size:12.5px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--spot-soft);display:flex;align-items:center;gap:11px;margin-bottom:28px}
+		.label{font-family:var(--en);font-size:12.5px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--spot-soft);display:flex;align-items:center;gap:11px;margin-bottom:26px}
 		.label::before{content:"";width:28px;height:1.5px;background:var(--spot)}
-		.tit{font-family:var(--sans);font-weight:800;font-size:clamp(31px,4vw,52px);line-height:1.26;letter-spacing:-.028em;color:#fff}
-		.tit .hl{position:relative;color:var(--spot)}
-		.desc{margin-top:26px;font-size:clamp(15px,1.45vw,17px);color:rgba(255,255,255,.62);line-height:1.9;max-width:29em;font-weight:400}
-		.legend{display:flex;gap:28px;margin-top:38px;flex-wrap:wrap}
-		.legend li{list-style:none;display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;color:rgba(255,255,255,.78);letter-spacing:-.01em}
-		.legend li::before{content:"";width:14px;height:14px;border-radius:5px}
+		.tit{display:block}
+		.t-sub{display:block;font-size:clamp(17px,2vw,23px);font-weight:600;color:rgba(255,255,255,.46);letter-spacing:-.01em;margin-bottom:16px}
+		.t-main{display:block;font-family:var(--sans);font-weight:800;font-size:clamp(34px,4.6vw,58px);line-height:1.18;letter-spacing:-.032em;color:#fff}
+		.t-main .hl{font-style:normal;color:var(--spot)}
+		.desc{margin-top:28px;font-size:clamp(15px,1.45vw,17px);color:rgba(255,255,255,.6);line-height:1.9;max-width:27em;font-weight:400}
+		.legend{display:flex;gap:26px;margin-top:36px;flex-wrap:wrap}
+		.legend li{list-style:none;display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:500;color:rgba(255,255,255,.74);letter-spacing:-.01em}
+		.legend li::before{content:"";width:13px;height:13px;border-radius:5px}
 		.legend .l-pbl::before{background:linear-gradient(120deg,var(--purple),var(--spot))}
-		.legend .l-vid::before{background:#403c55}
+		.legend .l-vid::before{background:#3a3650}
 
-		.graph{position:relative;filter:drop-shadow(0 30px 60px rgba(0,0,0,.5))}
+		.graph{position:relative}
 		.graph svg{width:100%;height:auto;overflow:visible;display:block}
-		.nd{position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;gap:9px;background:rgba(15,13,30,.7);border:1px solid rgba(168,146,247,.32);border-radius:13px;padding:9px 16px;font-family:var(--sans);font-weight:700;font-size:14px;letter-spacing:-.01em;color:#fff;white-space:nowrap;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 12px 30px rgba(0,0,0,.4)}
-		.nd i{width:7px;height:7px;border-radius:50%;background:var(--spot);box-shadow:0 0 10px var(--spot)}
-		.nd.hi{border-color:rgba(45,212,191,.6)}
+		.nd{position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;gap:8px;background:rgba(17,14,34,.66);border:1px solid rgba(168,146,247,.3);border-radius:12px;padding:8px 15px;font-family:var(--sans);font-weight:700;font-size:13.5px;letter-spacing:-.01em;color:#fff;white-space:nowrap;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 14px 34px rgba(0,0,0,.45)}
+		.nd i{width:7px;height:7px;border-radius:50%;background:var(--purple-soft)}
+		.nd.hi{border-color:rgba(45,212,191,.55)}
+		.nd.hi i{background:var(--spot);box-shadow:0 0 12px var(--spot)}
 
-		@media (max-width:880px){
-			.curve-sec .wrap{grid-template-columns:1fr;gap:30px}
+		@media (max-width:900px){
+			.curve-sec .wrap{grid-template-columns:1fr;gap:24px}
 			.graph{order:2}
-			.nd{font-size:13px;padding:7px 12px}
+			.nd{font-size:12.5px;padding:7px 12px}
 		}
 		@media (prefers-reduced-motion:reduce){ .draw{stroke-dashoffset:0 !important;transition:none !important} }
 	</style>
@@ -51,7 +54,10 @@
 		<div class="wrap">
 			<div class="tx">
 				<p class="label">Why FOX</p>
-				<h2 class="tit">영상만 보는 수업은 그만,<br />이제 <span class="hl">직접 만들며</span> 자랍니다</h2>
+				<h2 class="tit">
+					<span class="t-sub">영상만 보는 수업은 그만,</span>
+					<span class="t-main">이제 <em class="hl">직접 만들며</em><br />자라는 실력</span>
+				</h2>
 				<p class="desc">보기만 한 학습은 금방 잊힙니다. 질문하고, 직접 만들고, 발표하는 프로젝트 학습(PBL)으로 배운 것이 진짜 실력으로 남습니다.</p>
 				<ul class="legend">
 					<li class="l-pbl">프로젝트 학습 (PBL)</li>
@@ -60,29 +66,26 @@
 			</div>
 
 			<div class="graph" id="graph">
-				<svg viewBox="0 0 600 430" id="svg">
+				<svg viewBox="0 0 640 440" id="svg">
 					<defs>
 						<linearGradient id="gline" x1="0" y1="1" x2="1" y2="0">
-							<stop offset="0" stop-color="#7c5cf0" /><stop offset="0.55" stop-color="#9f7ff0" /><stop offset="1" stop-color="#2dd4bf" />
+							<stop offset="0" stop-color="#7c5cf0" /><stop offset="0.5" stop-color="#a47cf3" /><stop offset="1" stop-color="#2dd4bf" />
 						</linearGradient>
 						<linearGradient id="gfill" x1="0" y1="0" x2="0" y2="1">
-							<stop offset="0" stop-color="#7c5cf0" stop-opacity=".26" /><stop offset="1" stop-color="#7c5cf0" stop-opacity="0" />
+							<stop offset="0" stop-color="#7c5cf0" stop-opacity=".30" /><stop offset="1" stop-color="#7c5cf0" stop-opacity="0" />
 						</linearGradient>
-						<filter id="glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="6" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
+						<filter id="glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="8" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
 					</defs>
-					<g stroke="rgba(255,255,255,.05)" stroke-width="1">
-						<line x1="24" y1="96" x2="576" y2="96" /><line x1="24" y1="192" x2="576" y2="192" /><line x1="24" y1="288" x2="576" y2="288" /><line x1="24" y1="384" x2="576" y2="384" />
-					</g>
-					<path class="draw vline" d="M 24,392 C 210,386 370,364 576,326" fill="none" stroke="#403c55" stroke-width="2.5" stroke-dasharray="2 10" stroke-linecap="round" />
-					<path d="M 24,398 C 228,392 332,300 424,206 C 492,138 540,104 576,62 L 576,406 L 24,406 Z" fill="url(#gfill)" />
-					<path class="draw pline" d="M 24,398 C 228,392 332,300 424,206 C 492,138 540,104 576,62" fill="none" stroke="url(#gline)" stroke-width="5" stroke-linecap="round" filter="url(#glow)" />
-					<circle cx="228" cy="392" r="5.5" fill="#0b0a16" stroke="#7c5cf0" stroke-width="3" />
-					<circle cx="424" cy="206" r="5.5" fill="#0b0a16" stroke="#9f7ff0" stroke-width="3" />
-					<circle cx="566" cy="70" r="9" fill="#2dd4bf" stroke="#0b0a16" stroke-width="3" filter="url(#glow)" />
+					<path class="draw vline" d="M 28,416 C 250,410 430,388 624,350" fill="none" stroke="#3a3650" stroke-width="2.5" stroke-dasharray="1 11" stroke-linecap="round" />
+					<path d="M 28,422 C 250,416 350,318 452,202 C 532,110 588,76 624,40 L 624,438 L 28,438 Z" fill="url(#gfill)" />
+					<path class="draw pline" d="M 28,422 C 250,416 350,318 452,202 C 532,110 588,76 624,40" fill="none" stroke="url(#gline)" stroke-width="6" stroke-linecap="round" filter="url(#glow)" />
+					<circle cx="250" cy="416" r="5.5" fill="#0b0a16" stroke="#7c5cf0" stroke-width="3" />
+					<circle cx="452" cy="202" r="5.5" fill="#0b0a16" stroke="#a47cf3" stroke-width="3" />
+					<circle cx="612" cy="48" r="9" fill="#2dd4bf" stroke="#0b0a16" stroke-width="3.5" filter="url(#glow)" />
 				</svg>
-				<div class="nd" style="left:39%;top:91%"><i></i>이해</div>
-				<div class="nd" style="left:71%;top:48%"><i></i>제작</div>
-				<div class="nd hi" style="left:93%;top:16%"><i></i>발표 · 성장</div>
+				<div class="nd" style="left:39%;top:95%"><i></i>이해</div>
+				<div class="nd" style="left:70.5%;top:46%"><i></i>제작</div>
+				<div class="nd hi" style="left:95%;top:11%"><i></i>발표 · 성장</div>
 			</div>
 		</div>
 	</section>
@@ -95,7 +98,7 @@
 			var L=p.getTotalLength();
 			p.style.strokeDasharray=L; p.style.strokeDashoffset=reduced?0:L;
 			if(reduced)return;
-			var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ p.style.transition='stroke-dashoffset 1.8s cubic-bezier(.22,1,.36,1)'; p.style.strokeDashoffset=0; io.disconnect(); } });},{threshold:.45});
+			var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ p.style.transition='stroke-dashoffset 1.9s cubic-bezier(.22,1,.36,1)'; p.style.strokeDashoffset=0; io.disconnect(); } });},{threshold:.4});
 			io.observe(document.getElementById('graph'));
 		})();
 	</script>
