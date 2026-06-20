@@ -34,7 +34,7 @@
 		.cloud .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(14px,2vw,30px);padding:clamp(36px,5vw,60px) 24px}
 		.cloud .chip{display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 18px;box-shadow:0 8px 22px rgba(15,23,25,.05);transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s}
 		.cloud .chip:hover{transform:translateY(-5px);box-shadow:0 16px 34px rgba(15,23,25,.1)}
-		.cloud .chip img{width:26px;height:26px;display:block}
+		.cloud .chip .ic{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;letter-spacing:-.03em;flex-shrink:0}
 		.cloud .chip span{font-size:14.5px;font-weight:600;letter-spacing:-.01em;color:#33424a}
 
 		@media (max-width:860px){
@@ -64,13 +64,13 @@
 
 		<div class="cloud">
 			<div class="wrap">
-				<span class="chip"><img src="https://cdn.simpleicons.org/lego/D01012" alt="" onerror="this.style.display='none'" /><span>LEGO Education</span></span>
-				<span class="chip"><img src="https://cdn.simpleicons.org/minecraft/62B47A" alt="" onerror="this.style.display='none'" /><span>Minecraft Education</span></span>
-				<span class="chip"><img src="https://cdn.simpleicons.org/scratch/4D97FF" alt="" onerror="this.style.display='none'" /><span>Scratch</span></span>
-				<span class="chip"><img src="https://cdn.simpleicons.org/python/3776AB" alt="" onerror="this.style.display='none'" /><span>Python</span></span>
-				<span class="chip"><img src="https://cdn.simpleicons.org/openai/412991" alt="" onerror="this.style.display='none'" /><span>생성형 AI</span></span>
-				<span class="chip"><img src="https://cdn.simpleicons.org/amazonwebservices/FF9900" alt="" onerror="this.style.display='none'" /><span>AWS DeepRacer</span></span>
-				<span class="chip"><img src="https://cdn.simpleicons.org/canva/00C4CC" alt="" onerror="this.style.display='none'" /><span>Canva</span></span>
+				<span class="chip"><span class="ic" style="background:#D01012">L</span><span>LEGO Education</span></span>
+				<span class="chip"><span class="ic" style="background:#5FA63E">M</span><span>Minecraft Education</span></span>
+				<span class="chip"><span class="ic" style="background:#F2900D">S</span><span>Scratch</span></span>
+				<span class="chip"><span class="ic" style="background:#3776AB">Py</span><span>Python</span></span>
+				<span class="chip"><span class="ic" style="background:#7c5cf0">AI</span><span>생성형 AI</span></span>
+				<span class="chip"><span class="ic" style="background:#232F3E">aws</span><span>AWS DeepRacer</span></span>
+				<span class="chip"><span class="ic" style="background:#00C4CC">C</span><span>Canva</span></span>
 			</div>
 		</div>
 	</section>
@@ -96,7 +96,7 @@
 				});
 			}
 			if(reduced){ track.style.transform='translateY('+ (center()-ROW/2 -ROW) +'px)'; paint(0); return; }
-			var speed=0.026, t0=null, base=0;
+			var speed=0.058, t0=null, base=0;
 			function loop(t){
 				if(!t0)t0=t;
 				var off=((t-t0)*speed) % total;
