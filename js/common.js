@@ -79,4 +79,29 @@
 			requestAnimationFrame(loop);
 		})();
 	}
+
+	// 포스터 라이트박스 (클릭 확대 / 닫기)
+	var lb = document.getElementById('posterLightbox');
+	if (lb) {
+		var lbImg = lb.querySelector('.lb-img');
+		var lbClose = lb.querySelector('.lb-close');
+		function openLb(src, alt) {
+			lbImg.src = src; lbImg.alt = alt || '';
+			lb.classList.add('is-open');
+			lb.setAttribute('aria-hidden', 'false');
+			document.body.style.overflow = 'hidden';
+		}
+		function closeLb() {
+			lb.classList.remove('is-open');
+			lb.setAttribute('aria-hidden', 'true');
+			document.body.style.overflow = '';
+			setTimeout(function () { lbImg.src = ''; }, 320);
+		}
+		document.querySelectorAll('.poster-list figure img').forEach(function (im) {
+			im.addEventListener('click', function () { openLb(im.src, im.alt); });
+		});
+		lbClose.addEventListener('click', closeLb);
+		lb.addEventListener('click', function (e) { if (e.target === lb) closeLb(); });
+		document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLb(); });
+	}
 })();
