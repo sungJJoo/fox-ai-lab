@@ -412,42 +412,6 @@ main { padding-top: var(--header-h); }
 	letter-spacing: .02em;
 }
 
-/* ── 키워드 마르키 (기울어진 무한 스크롤) ───── */
-.marquee-wrap { overflow: hidden; background: var(--ink); }
-.marquee {
-	background: var(--ink);
-	padding: 18px 0;
-	overflow: hidden;
-	width: 112%;
-	margin-left: -6%;
-	transform: rotate(-1.2deg);
-	border-top: 1px solid rgba(255, 255, 255, .08);
-	border-bottom: 1px solid rgba(255, 255, 255, .08);
-}
-.marquee-track {
-	display: flex;
-	gap: 56px;
-	width: max-content;
-	animation: marquee 30s linear infinite;
-}
-@keyframes marquee { to { transform: translateX(-50%); } }
-.marquee span {
-	font-family: var(--font-en);
-	font-size: 15.5px;
-	font-weight: 700;
-	letter-spacing: .14em;
-	text-transform: uppercase;
-	color: rgba(255, 255, 255, .8);
-	white-space: nowrap;
-	display: inline-flex;
-	align-items: center;
-	gap: 56px;
-}
-.marquee span::after {
-	content: "✳";
-	color: var(--spot1);
-	font-size: 13px;
-}
 
 /* ── 활동 방향 4 (형광 하이라이트 + 인덱스) ───── */
 .direction-list {
