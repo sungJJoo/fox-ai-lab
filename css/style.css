@@ -413,7 +413,7 @@ main { padding-top: var(--header-h); }
 }
 
 /* ── 키워드 마르키 (기울어진 무한 스크롤) ───── */
-.marquee-wrap { overflow: hidden; }
+.marquee-wrap { overflow: hidden; background: var(--ink); }
 .marquee {
 	background: var(--ink);
 	padding: 18px 0;
@@ -789,15 +789,24 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 }
 .step-card > p { color: var(--txt-soft); font-size: 15.5px; margin-bottom: 14px; }
 .step-tag {
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
 	font-size: 13.5px;
 	font-weight: 700;
-	color: var(--step-c, var(--spot1-dark));
-	background: color-mix(in srgb, var(--step-c, var(--spot1)) 10%, #fff);
-	border: 1px solid color-mix(in srgb, var(--step-c, var(--spot1)) 25%, transparent);
-	border-radius: 8px;
-	padding: 6px 14px;
-	letter-spacing: .01em;
+	color: #fff;
+	background: var(--step-c, var(--spot1));
+	border-radius: 10px;
+	padding: 9px 16px;
+	letter-spacing: -.01em;
+	box-shadow: 0 6px 16px color-mix(in srgb, var(--step-c, var(--spot1)) 32%, transparent);
+}
+.step-tag::before {
+	content: "";
+	width: 6px; height: 6px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, .92);
+	flex-shrink: 0;
 }
 
 /* ── 4영역 카드 ─────────────────────────────── */
