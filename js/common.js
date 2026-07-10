@@ -95,7 +95,7 @@
 			if (!qLeftover.length) qLeftover = qPool.slice();
 			return qLeftover.splice(Math.floor(Math.random() * qLeftover.length), 1)[0];
 		}
-		Array.prototype.forEach.call(qf.querySelectorAll('.q'), function (el, i) {
+		Array.prototype.forEach.call(qf.querySelectorAll('.q:not(.qbig)'), function (el, i) {
 			(function schedule() {
 				var wait = 11000 + Math.random() * 8000 + i * 900;
 				setTimeout(function () {
