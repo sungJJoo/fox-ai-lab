@@ -426,7 +426,6 @@ main { padding-top: var(--header-h); }
 	border-radius: 20px;
 	padding: 34px 28px 30px;
 	overflow: hidden;
-	transition: transform .4s var(--ease-out), box-shadow .4s, border-color .4s;
 }
 .direction-list li::before { content: ""; position: absolute; inset: 0; background: radial-gradient(150px 130px at 54px 68px, color-mix(in srgb, var(--card-c, var(--spot1)) 14%, transparent), transparent 72%); opacity: 0; transition: opacity .45s var(--ease-out); pointer-events: none; }
 .direction-list li:hover::before { opacity: 1; }
@@ -473,11 +472,6 @@ main { padding-top: var(--header-h); }
 }
 .direction-list li:hover h3 { background-size: 100% 94%; }
 .direction-list p { font-size: 15.5px; color: var(--txt-soft); line-height: 1.72; }
-.direction-list li:hover {
-	transform: translateY(-8px);
-	border-color: color-mix(in srgb, var(--card-c) 40%, var(--line));
-	box-shadow: 0 22px 46px rgba(14, 27, 51, .12);
-}
 .direction-list li.c-teal { --card-c: var(--spot1); }
 .direction-list li.c-blue { --card-c: var(--c-blue); }
 .direction-list li.c-purple { --card-c: var(--c-purple); }
@@ -500,11 +494,6 @@ main { padding-top: var(--header-h); }
 	border-radius: var(--radius);
 	padding: 26px 34px;
 	margin-bottom: 14px;
-	transition: transform .3s var(--ease-out), box-shadow .3s;
-}
-.feature-list li:hover {
-	transform: translateX(8px);
-	box-shadow: 0 14px 34px rgba(14, 27, 51, .09);
 }
 .feature-list .num {
 	font-family: var(--font-en);
@@ -758,23 +747,13 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 	border: 1px solid var(--line);
 	display: flex;
 	flex-direction: column;
-	transition: transform .35s var(--ease-out), box-shadow .35s;
-}
-.area-card:hover {
-	transform: translateY(-8px);
-	box-shadow: 0 24px 50px rgba(14, 27, 51, .13);
 }
 .area-card.c-teal { --card-c: var(--spot1); }
 .area-card.c-blue { --card-c: var(--c-blue); }
 .area-card.c-purple { --card-c: var(--c-purple); }
 .area-card.c-yellow { --card-c: var(--c-yellow); }
 .area-card figure { aspect-ratio: 4 / 3; overflow: hidden; }
-.area-card figure img {
-	width: 100%; height: 100%;
-	object-fit: cover;
-	transition: transform .5s var(--ease-out);
-}
-.area-card:hover figure img { transform: scale(1.06); }
+.area-card figure img { width: 100%; height: 100%; object-fit: cover; }
 .area-cont { padding: 26px 26px 30px; flex: 1; }
 .area-cont h3 {
 	font-family: var(--font-display);
