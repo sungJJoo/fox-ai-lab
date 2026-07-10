@@ -1333,14 +1333,24 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 .step-photo .ph-mark { font-size: 12px; font-weight: 600; color: var(--txt-soft); padding: 0 10px; line-height: 1.5; }
 /* ── 미래 비전 흐름 ───────────────────────────── */
 .vision-sec { background: var(--grad-vision); padding: var(--mn-p) 0; overflow: hidden; }
-.vision-sec .overline { color: #7ce4dd; }
-.vision-sec .overline::before { background: var(--spot1); }
-.vision-sec .sec-tit { color: #fff; }
-.vision-flow { position: relative; max-width: 720px; margin: 0 auto; height: clamp(280px, 34vw, 360px); overflow: hidden; }
-.vision-flow::before, .vision-flow::after { content: ""; position: absolute; left: 0; right: 0; height: 34%; z-index: 2; pointer-events: none; }
-.vision-flow::before { top: 0; background: linear-gradient(#155f78, transparent); }
-.vision-flow::after { bottom: 0; background: linear-gradient(transparent, #5d4a92); }
-.vision-hl { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(94%, 580px); height: 78px; border: 1.5px solid rgba(255, 255, 255, .55); border-radius: 18px; pointer-events: none; z-index: 1; }
+.vision-grid { display: grid; grid-template-columns: 0.82fr 1.18fr; gap: clamp(36px, 5vw, 80px); align-items: center; }
+.vision-head { text-align: left; }
+.vision-head .overline { color: #c3f7ef; justify-content: flex-start; }
+.vision-head .overline::before { background: rgba(255, 255, 255, .7); }
+.vision-head .sec-tit { color: #fff; }
+.vision-desc { margin-top: 22px; font-size: var(--fs-lead); color: rgba(255, 255, 255, .75); line-height: 1.85; }
+.vision-flow { position: relative; width: 100%; height: clamp(320px, 40vw, 420px); overflow: hidden; }
+.vision-flow::before, .vision-flow::after { content: ""; position: absolute; left: 0; right: 0; height: 32%; z-index: 2; pointer-events: none; }
+.vision-flow::before { top: 0; background: linear-gradient(#1a6aa2, transparent); }
+.vision-flow::after { bottom: 0; background: linear-gradient(transparent, #7a55c9); }
+.vision-hl { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 100%; height: 78px; border: 1.5px solid rgba(255, 255, 255, .6); border-radius: 16px; pointer-events: none; z-index: 1; }
 .vision-track { position: absolute; left: 0; right: 0; top: 0; will-change: transform; }
-.vision-track li { list-style: none; height: 78px; display: flex; align-items: center; justify-content: center; text-align: center; font-family: var(--font-display); font-weight: 500; font-size: clamp(19px, 2.4vw, 27px); color: rgba(255, 255, 255, .55); padding: 0 24px; }
+.vision-track li { list-style: none; height: 78px; display: flex; align-items: center; justify-content: center; text-align: center; font-family: var(--font-display); font-weight: 500; font-size: clamp(18px, 2.1vw, 26px); color: rgba(255, 255, 255, .55); padding: 0 20px; }
 @media (prefers-reduced-motion: reduce) { .vision-track { transition: none; } }
+@media (max-width: 860px) {
+	.vision-grid { grid-template-columns: 1fr; gap: 28px; }
+	.vision-head { text-align: center; }
+	.vision-head .overline { justify-content: center; }
+	.vision-flow { height: clamp(300px, 62vw, 360px); }
+	.vision-hl { width: min(96%, 520px); }
+}
