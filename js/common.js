@@ -127,7 +127,7 @@
 				var d = Math.abs(y - c);
 				var k = Math.max(0, 1 - d / (vRow * 1.6));
 				li.style.opacity = (0.32 + 0.68 * k).toFixed(2);
-				li.style.color = k > 0.75 ? '#fff' : 'rgba(255,255,255,.4)';
+				li.style.color = k > 0.75 ? '#fff' : 'rgba(255,255,255,.6)';
 				li.style.fontWeight = k > 0.75 ? '700' : '500';
 			});
 		}

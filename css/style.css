@@ -32,6 +32,7 @@
 	--txt-soft: #5f6b80;
 	--grad-hero: linear-gradient(180deg, #15366D 0%, #1F1753 70.25%, #3B2057 100%);
 	--grad-accent: linear-gradient(92deg, #20c5bc 0%, #3194db 100%);
+	--grad-vision: linear-gradient(125deg, #0e5a68 0%, #146b8c 30%, #1f6fb0 55%, #5b5ec7 78%, #8e5bd4 100%);
 
 	/* 타이포 3단 체계 */
 	--font-display: "GmarketSans", "Pretendard Variable", sans-serif;   /* 제목 */
@@ -1331,15 +1332,15 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 .step-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .step-photo .ph-mark { font-size: 12px; font-weight: 600; color: var(--txt-soft); padding: 0 10px; line-height: 1.5; }
 /* ── 미래 비전 흐름 ───────────────────────────── */
-.vision-sec { background: var(--grad-hero); padding: var(--mn-p) 0; overflow: hidden; }
+.vision-sec { background: var(--grad-vision); padding: var(--mn-p) 0; overflow: hidden; }
 .vision-sec .overline { color: #7ce4dd; }
 .vision-sec .overline::before { background: var(--spot1); }
 .vision-sec .sec-tit { color: #fff; }
 .vision-flow { position: relative; max-width: 720px; margin: 0 auto; height: clamp(280px, 34vw, 360px); overflow: hidden; }
 .vision-flow::before, .vision-flow::after { content: ""; position: absolute; left: 0; right: 0; height: 34%; z-index: 2; pointer-events: none; }
-.vision-flow::before { top: 0; background: linear-gradient(#18316b, transparent); }
-.vision-flow::after { bottom: 0; background: linear-gradient(transparent, #2d1f52); }
-.vision-hl { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(94%, 580px); height: 78px; border: 1.5px solid rgba(94, 234, 212, .5); border-radius: 18px; background: rgba(32, 197, 188, .09); box-shadow: 0 0 44px rgba(32, 197, 188, .16); pointer-events: none; z-index: 1; }
+.vision-flow::before { top: 0; background: linear-gradient(#155f78, transparent); }
+.vision-flow::after { bottom: 0; background: linear-gradient(transparent, #5d4a92); }
+.vision-hl { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(94%, 580px); height: 78px; border: 1.5px solid rgba(255, 255, 255, .55); border-radius: 18px; pointer-events: none; z-index: 1; }
 .vision-track { position: absolute; left: 0; right: 0; top: 0; will-change: transform; }
-.vision-track li { list-style: none; height: 78px; display: flex; align-items: center; justify-content: center; text-align: center; font-family: var(--font-display); font-weight: 500; font-size: clamp(19px, 2.4vw, 27px); color: rgba(255, 255, 255, .32); padding: 0 24px; }
+.vision-track li { list-style: none; height: 78px; display: flex; align-items: center; justify-content: center; text-align: center; font-family: var(--font-display); font-weight: 500; font-size: clamp(19px, 2.4vw, 27px); color: rgba(255, 255, 255, .55); padding: 0 24px; }
 @media (prefers-reduced-motion: reduce) { .vision-track { transition: none; } }
