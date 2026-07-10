@@ -737,6 +737,7 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 	transform: translateX(6px);
 	box-shadow: 0 16px 38px rgba(14, 27, 51, .1);
 }
+.step-eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .03em; color: var(--step-c, var(--spot1)); margin-bottom: 8px; }
 .step-card h3 {
 	font-family: var(--font-display);
 	font-size: clamp(19px, 2vw, 24px);
@@ -744,34 +745,9 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 	color: var(--ink);
 	margin-bottom: 6px;
 }
-.step-card h3 small {
-	font-family: var(--font-body);
-	font-size: 15px;
-	font-weight: 500;
-	color: var(--txt-soft);
-	margin-left: 8px;
-}
 .step-card > p { color: var(--txt-soft); font-size: 15.5px; margin-bottom: 14px; }
-.step-tag {
-	display: inline-flex;
-	align-items: center;
-	gap: 8px;
-	font-size: 13.5px;
-	font-weight: 700;
-	color: #fff;
-	background: var(--step-c, var(--spot1));
-	border-radius: 10px;
-	padding: 9px 16px;
-	letter-spacing: -.01em;
-	box-shadow: 0 6px 16px color-mix(in srgb, var(--step-c, var(--spot1)) 32%, transparent);
-}
-.step-tag::before {
-	content: "";
-	width: 6px; height: 6px;
-	border-radius: 50%;
-	background: rgba(255, 255, 255, .92);
-	flex-shrink: 0;
-}
+.step-tag { display: inline-flex; align-items: center; gap: 9px; flex-shrink: 0; font-family: var(--font-en); font-size: 12.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--step-c, var(--spot1)); }
+.step-tag::before { content: ""; width: 14px; height: 2px; background: var(--step-c, var(--spot1)); flex-shrink: 0; }
 
 /* ── 4영역 카드 ─────────────────────────────── */
 .sec-area { background: var(--bg-soft); }
@@ -1281,6 +1257,8 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 	.step-list li { padding-left: 70px; }
 	.step-dot { left: 4px; width: 40px; height: 40px; font-size: 14px; }
 	.step-card { padding: 22px 24px; }
+	.step-card.has-photo { flex-direction: column; gap: 16px; }
+	.step-photo { flex: none; width: 100%; aspect-ratio: 16 / 9; }
 
 	.area-grid { grid-template-columns: 1fr; }
 	.area-cont > p { min-height: auto; }
@@ -1359,3 +1337,18 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 .future-area.c-create { color: #c98a12; background: rgba(245, 176, 39, .15); }
 .future-card h3 { font-family: var(--font-display); font-size: 17.5px; font-weight: 700; color: var(--ink); line-height: 1.35; margin-bottom: 9px; }
 .future-card p { font-size: 14px; color: var(--txt-soft); line-height: 1.65; }
+
+/* ── PBL 단계 역량 블록 (라벨 + 설명) ─────────── */
+.step-skill { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 16px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); }
+.step-skill .step-tag { display: inline-flex; align-items: center; gap: 9px; flex-shrink: 0; font-family: var(--font-en); font-size: 12.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--step-c, var(--spot1)); }
+.step-tag::before { content: ""; width: 14px; height: 2px; background: var(--step-c, var(--spot1)); flex-shrink: 0; }
+.step-skill > p { font-size: 13.5px; color: var(--txt-soft); line-height: 1.6; margin: 0; }
+/* ── 강조: PBL 도입 + 단계 본문 형광밑줄 ─────── */
+.page-hero .hl-pbl { color: #8ff0e6; font-weight: 800; }
+.step-card p .hl { font-weight: 700; color: var(--ink); background: linear-gradient(transparent 56%, color-mix(in srgb, var(--step-c, var(--spot1)) 32%, transparent) 56%); padding: 0 2px; border-radius: 2px; }
+/* ── PBL 단계 사진 슬롯 (계획·조사·모델제작) ──── */
+.step-card.has-photo { display: flex; align-items: center; gap: clamp(22px, 3.5vw, 40px); }
+.step-card.has-photo .step-body { flex: 1; min-width: 0; }
+.step-photo { flex: 0 0 clamp(140px, 20vw, 210px); aspect-ratio: 4 / 3; border-radius: 14px; overflow: hidden; background: var(--bg-soft); border: 1.5px dashed var(--line); display: flex; align-items: center; justify-content: center; text-align: center; }
+.step-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.step-photo .ph-mark { font-size: 12px; font-weight: 600; color: var(--txt-soft); padding: 0 10px; line-height: 1.5; }
