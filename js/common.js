@@ -80,6 +80,36 @@
 		})();
 	}
 
+	// 떠다니는 질문 — 큰 이동 없이, 가끔 다른 문구로 은은하게 교체 (다양성은 시간차 크로스페이드로)
+	if (qf && !reduced) {
+		var qPool = [
+			'이건 왜 이렇게 생겼을까?',
+			'다르게 만들면 어떻게 될까?',
+			'내가 이 문제를 풀 수 있을까?',
+			'더 좋은 방법은 없을까?',
+			'이걸 로봇이 대신 할 수 있을까?',
+			'궁금한 게 너무 많아!'
+		];
+		var qLeftover = qPool.slice();
+		function qNext() {
+			if (!qLeftover.length) qLeftover = qPool.slice();
+			return qLeftover.splice(Math.floor(Math.random() * qLeftover.length), 1)[0];
+		}
+		Array.prototype.forEach.call(qf.querySelectorAll('.q'), function (el, i) {
+			(function schedule() {
+				var wait = 11000 + Math.random() * 8000 + i * 900;
+				setTimeout(function () {
+					el.style.opacity = '0';
+					setTimeout(function () {
+						el.textContent = qNext();
+						el.style.opacity = '';
+						schedule();
+					}, 800);
+				}, wait);
+			})();
+		});
+	}
+
 	// 포스터 라이트박스 (클릭 확대 / 닫기)
 	var lb = document.getElementById('posterLightbox');
 	if (lb) {
