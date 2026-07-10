@@ -110,6 +110,46 @@
 		});
 	}
 
+	// 미래 비전 흐름 — 세로로 흐르며 중앙 문구를 강조
+	var visionFlow = document.getElementById('visionFlow');
+	var visionTrack = document.getElementById('visionTrack');
+	if (visionFlow && visionTrack) {
+		var vRow = 78;
+		var vItems = Array.prototype.slice.call(visionTrack.children);
+		var vTotal = vRow * vItems.length;
+		vItems.forEach(function (li) { visionTrack.appendChild(li.cloneNode(true)); });
+		var vAll = Array.prototype.slice.call(visionTrack.children);
+		function vCenter() { return visionFlow.clientHeight / 2; }
+		function vPaint(off) {
+			var c = vCenter();
+			vAll.forEach(function (li, i) {
+				var y = i * vRow - off + vRow / 2;
+				var d = Math.abs(y - c);
+				var k = Math.max(0, 1 - d / (vRow * 1.6));
+				li.style.opacity = (0.32 + 0.68 * k).toFixed(2);
+				li.style.color = k > 0.75 ? '#fff' : 'rgba(255,255,255,.4)';
+				li.style.fontWeight = k > 0.75 ? '700' : '500';
+			});
+		}
+		if (reduced) {
+			visionTrack.style.transform = 'translateY(' + (vCenter() - vRow / 2) + 'px)';
+			vPaint(0);
+		} else {
+			var vSpeed = 0.02, vt0 = null;
+			function vLoop(t) {
+				if (!vt0) vt0 = t;
+				var off = ((t - vt0) * vSpeed) % vTotal;
+				visionTrack.style.transform = 'translateY(' + ((vCenter() - vRow / 2) - off) + 'px)';
+				vPaint(off - (vCenter() - vRow / 2));
+				requestAnimationFrame(vLoop);
+			}
+			var vio = new IntersectionObserver(function (es) {
+				es.forEach(function (e) { if (e.isIntersecting) { requestAnimationFrame(vLoop); vio.disconnect(); } });
+			}, { threshold: .3 });
+			vio.observe(visionFlow);
+		}
+	}
+
 	// 포스터 라이트박스 (클릭 확대 / 닫기)
 	var lb = document.getElementById('posterLightbox');
 	if (lb) {
