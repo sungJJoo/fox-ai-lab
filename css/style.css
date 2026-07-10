@@ -244,18 +244,24 @@ main { padding-top: var(--header-h); }
 .hero > .wrap, .hero-stats { position: relative; z-index: 2; }
 .qfield .q {
 	position: absolute;
+	left: 0;
 	font-family: var(--font-display);
 	font-weight: 500;
 	white-space: nowrap;
 	color: rgba(255, 255, 255, .14);
-	animation: q-drift 16s ease-in-out infinite;
+	animation-name: q-flow;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
 }
 .qfield .q.qt { color: rgba(32, 197, 188, .24); }
 .qfield .q.qb { color: rgba(124, 198, 255, .2); }
 .qfield .q.qbig { font-size: clamp(56px, 9vw, 140px); font-weight: 700; }
-@keyframes q-drift {
-	0%, 100% { transform: translateY(0); }
-	50% { transform: translateY(-26px); }
+@keyframes q-flow {
+	0%   { transform: translate(-42vw, 0); opacity: 0; }
+	9%   { opacity: 1; }
+	50%  { transform: translate(58vw, -22px); }
+	91%  { opacity: 1; }
+	100% { transform: translate(158vw, 0); opacity: 0; }
 }
 .hero-cont {
 	position: relative;
