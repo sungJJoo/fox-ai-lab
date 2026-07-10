@@ -1332,20 +1332,20 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 .step-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .step-photo .ph-mark { font-size: 12px; font-weight: 600; color: var(--txt-soft); padding: 0 10px; line-height: 1.5; }
 /* ── 미래 비전 흐름 ───────────────────────────── */
-.vision-sec { background: var(--grad-vision); padding: var(--mn-p) 0; overflow: hidden; }
+.vision-sec { background: #fff; padding: var(--mn-p) 0; overflow: hidden; }
 .vision-grid { display: grid; grid-template-columns: 0.82fr 1.18fr; gap: clamp(36px, 5vw, 80px); align-items: center; }
 .vision-head { text-align: left; }
-.vision-head .overline { color: #c3f7ef; justify-content: flex-start; }
-.vision-head .overline::before { background: rgba(255, 255, 255, .7); }
-.vision-head .sec-tit { color: #fff; }
-.vision-desc { margin-top: 22px; font-size: var(--fs-lead); color: rgba(255, 255, 255, .75); line-height: 1.85; }
+.vision-head .overline { color: var(--spot1-dark); justify-content: flex-start; }
+.vision-head .overline::before { background: var(--grad-accent); }
+.vision-head .sec-tit { color: var(--ink); }
+.vision-desc { margin-top: 22px; font-size: var(--fs-lead); color: var(--txt-soft); line-height: 1.85; }
 .vision-flow { position: relative; width: 100%; height: clamp(320px, 40vw, 420px); overflow: hidden; }
-.vision-flow::before, .vision-flow::after { content: ""; position: absolute; left: 0; right: 0; height: 32%; z-index: 2; pointer-events: none; }
-.vision-flow::before { top: 0; background: linear-gradient(#1a6aa2, transparent); }
-.vision-flow::after { bottom: 0; background: linear-gradient(transparent, #7a55c9); }
-.vision-hl { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 100%; height: 78px; border: 1.5px solid rgba(255, 255, 255, .6); border-radius: 16px; pointer-events: none; z-index: 1; }
+.vision-flow::before, .vision-flow::after { content: ""; position: absolute; left: 0; right: 0; height: 34%; z-index: 2; pointer-events: none; }
+.vision-flow::before { top: 0; background: linear-gradient(#fff, transparent); }
+.vision-flow::after { bottom: 0; background: linear-gradient(transparent, #fff); }
+.vision-hl { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 100%; height: 78px; border: 1.5px solid var(--spot1); border-radius: 16px; pointer-events: none; z-index: 1; }
 .vision-track { position: absolute; left: 0; right: 0; top: 0; will-change: transform; }
-.vision-track li { list-style: none; height: 78px; display: flex; align-items: center; justify-content: center; text-align: center; font-family: var(--font-display); font-weight: 500; font-size: clamp(18px, 2.1vw, 26px); color: rgba(255, 255, 255, .55); padding: 0 20px; }
+.vision-track li { list-style: none; height: 78px; display: flex; align-items: center; justify-content: center; text-align: center; font-family: var(--font-display); font-weight: 500; font-size: clamp(18px, 2.1vw, 26px); color: rgba(14, 27, 51, .3); padding: 0 20px; }
 @media (prefers-reduced-motion: reduce) { .vision-track { transition: none; } }
 @media (max-width: 860px) {
 	.vision-grid { grid-template-columns: 1fr; gap: 28px; }
