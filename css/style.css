@@ -731,11 +731,6 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 	border: 1px solid var(--line);
 	border-radius: var(--radius);
 	padding: 30px 36px;
-	transition: transform .3s var(--ease-out), box-shadow .3s;
-}
-.step-card:hover {
-	transform: translateX(6px);
-	box-shadow: 0 16px 38px rgba(14, 27, 51, .1);
 }
 .step-eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .03em; color: var(--step-c, var(--spot1)); margin-bottom: 8px; }
 .step-card h3 {
