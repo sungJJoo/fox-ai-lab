@@ -424,8 +424,8 @@ main { padding-top: var(--header-h); }
 }
 .direction-list li {
 	position: relative;
-	background: #fff;
-	border: 1px solid var(--line);
+	background: color-mix(in srgb, var(--card-c, var(--spot1)) 8%, #fff);
+	border: 1px solid color-mix(in srgb, var(--card-c, var(--spot1)) 18%, var(--line));
 	border-radius: 20px;
 	padding: 34px 28px 30px;
 	overflow: hidden;
