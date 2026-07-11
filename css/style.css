@@ -1345,7 +1345,7 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 .vision-flow::after { bottom: 0; background: linear-gradient(transparent, #fff); }
 .vision-hl { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 100%; height: 78px; border: 1.5px solid var(--spot1); border-radius: 16px; pointer-events: none; z-index: 1; }
 .vision-track { position: absolute; left: 0; right: 0; top: 0; will-change: transform; }
-.vision-track li { list-style: none; height: 78px; display: flex; align-items: center; justify-content: center; text-align: center; font-family: var(--font-display); font-weight: 500; font-size: clamp(18px, 2.1vw, 26px); color: rgba(14, 27, 51, .3); padding: 0 20px; }
+.vision-track li { list-style: none; height: 78px; display: flex; align-items: center; justify-content: center; text-align: center; font-family: var(--font-display); font-weight: 500; font-size: clamp(18px, 2.1vw, 26px); color: var(--ink); opacity: .3; padding: 0 20px; }
 @media (prefers-reduced-motion: reduce) { .vision-track { transition: none; } }
 @media (max-width: 860px) {
 	.vision-grid { grid-template-columns: 1fr; gap: 28px; }

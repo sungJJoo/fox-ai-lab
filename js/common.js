@@ -125,10 +125,9 @@
 			vAll.forEach(function (li, i) {
 				var y = i * vRow - off + vRow / 2;
 				var d = Math.abs(y - c);
-				var k = Math.max(0, 1 - d / (vRow * 1.6));
-				li.style.opacity = (0.32 + 0.68 * k).toFixed(2);
-				li.style.color = k > 0.75 ? '#0e1b33' : 'rgba(14,27,51,.28)';
-				li.style.fontWeight = k > 0.75 ? '700' : '500';
+				var k = Math.max(0, 1 - d / (vRow * 2.3));
+				li.style.opacity = (0.16 + 0.84 * Math.pow(k, 1.4)).toFixed(2);
+				li.style.fontWeight = k > 0.55 ? '700' : '500';
 			});
 		}
 		if (reduced) {
