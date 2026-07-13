@@ -29,7 +29,7 @@
 	--bg-soft: #f6f8fb;
 	--line: #e3e8f0;
 	--txt: #2b3445;
-	--txt-soft: #5f6b80;
+	--txt-soft: #414d5c;
 	--grad-hero: linear-gradient(180deg, #15366D 0%, #1F1753 70.25%, #3B2057 100%);
 	--grad-accent: linear-gradient(92deg, #20c5bc 0%, #3194db 100%);
 	--grad-vision: linear-gradient(125deg, #0e5a68 0%, #146b8c 30%, #1f6fb0 55%, #5b5ec7 78%, #8e5bd4 100%);
@@ -211,7 +211,8 @@ main { padding-top: var(--header-h); }
 }
 .sec-desc {
 	margin-top: 20px;
-	font-size: var(--fs-lead);
+	font-size: clamp(17px, 1.6vw, 20px);
+	font-weight: 500;
 	color: var(--txt-soft);
 	line-height: 1.8;
 }
@@ -313,9 +314,9 @@ main { padding-top: var(--header-h); }
 }
 @keyframes hero-rise { to { opacity: 1; transform: none; } }
 .hero-desc {
-	font-size: clamp(16px, 1.6vw, 20px);
-	font-weight: 400;
-	color: rgba(255, 255, 255, .76);
+	font-size: clamp(17px, 1.8vw, 22px);
+	font-weight: 500;
+	color: rgba(255, 255, 255, .92);
 	line-height: 1.85;
 	margin-bottom: 24px;
 }
@@ -494,7 +495,7 @@ main { padding-top: var(--header-h); }
 	transition: background-size .5s var(--ease-out);
 }
 .direction-list li:hover h3 { background-size: 100% 94%; }
-.direction-list p { font-size: 15.5px; color: var(--txt-soft); line-height: 1.72; }
+.direction-list p { font-size: 16px; font-weight: 500; color: var(--txt-soft); line-height: 1.72; }
 .direction-list li.c-teal { --card-c: var(--spot1); }
 .direction-list li.c-blue { --card-c: var(--c-blue); }
 .direction-list li.c-purple { --card-c: var(--c-purple); }
