@@ -341,7 +341,27 @@ main { padding-top: var(--header-h); }
 	background: var(--spot1);
 	transform: translateY(-50%);
 }
-.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero-btns { display: flex; align-items: center; gap: 30px; flex-wrap: wrap; }
+.hero-btns .btn-fill { border-radius: 12px; box-shadow: none; }
+.hero-btns .btn-fill:hover { box-shadow: none; }
+.hero-link {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 16px;
+	font-weight: 700;
+	color: #fff;
+	padding-bottom: 3px;
+	background-image: linear-gradient(rgba(32, 197, 188, .5), rgba(32, 197, 188, .5));
+	background-size: 0% 2px;
+	background-position: 0 100%;
+	background-repeat: no-repeat;
+	transition: background-size .35s var(--ease-out);
+}
+.hero-link:hover { background-size: 100% 2px; }
+.hero-link .arr { transition: transform .25s var(--ease-out); font-family: var(--font-en); }
+.hero-link:hover .arr { transform: translateX(4px); }
 
 .hero-img {
 	flex: 1;
