@@ -64,14 +64,15 @@
 					<h2 class="sec-tit">대회 활동 <span class="grad-txt">프로그램</span></h2>
 				</header>
 				<div class="comp-grid" data-stagger>
-					<article class="comp-card">
+					<button type="button" class="comp-card comp-card-btn" data-slideshow="fll">
 						<figure><img src="images/comp-fll.jpg" alt="FLL 도전반 레고 모델 제작 활동" loading="lazy" /></figure>
 						<div class="comp-cont">
 							<span class="comp-target">8 ~ 12세</span>
 							<h3>FLL 도전반</h3>
 							<p>FLL 대회를 준비하기 위한 팀 활동<br />(엔지니어링 노트북 활동지 대체)</p>
+							<span class="comp-view">준비 과정 사진으로 보기 <span class="arr">→</span></span>
 						</div>
-					</article>
+					</button>
 					<article class="comp-card">
 						<figure><img src="images/comp-sci.jpg" alt="무한상상 과학탐구대회 참가 모습" loading="lazy" /></figure>
 						<div class="comp-cont">
@@ -197,6 +198,18 @@
 				</div>
 			</div>
 		</section>
+
+		<!-- 준비 과정 슬라이드쇼 -->
+		<div class="slideshow" id="slideshowFll" aria-hidden="true" role="dialog" aria-modal="true">
+			<button type="button" class="ss-close" aria-label="닫기">&times;</button>
+			<button type="button" class="ss-nav ss-prev" aria-label="이전 사진">&#8249;</button>
+			<div class="ss-stage">
+				<img class="ss-img" src="" alt="" />
+				<p class="ss-caption"></p>
+				<div class="ss-dots"></div>
+			</div>
+			<button type="button" class="ss-nav ss-next" aria-label="다음 사진">&#8250;</button>
+		</div>
 	</main>
 
 	<footer class="foxsite-footer">

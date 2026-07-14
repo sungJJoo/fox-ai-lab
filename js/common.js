@@ -173,4 +173,85 @@
 		lb.addEventListener('click', function (e) { if (e.target === lb) closeLb(); });
 		document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLb(); });
 	}
+
+	// 대회 준비 과정 슬라이드쇼 (실제 활동 사진 + 설명)
+	var ssData = {
+		fll: {
+			images: ['images/fll/fll-01.jpg', 'images/fll/fll-02.jpg', 'images/fll/fll-03.jpg', 'images/fll/fll-04.jpg', 'images/fll/fll-05.jpg', 'images/fll/fll-06.jpg', 'images/fll/fll-07.jpg', 'images/fll/fll-08.jpg'],
+			captions: [
+				'레고 부품을 하나하나 분류하며 미션 준비를 시작합니다.',
+				'팀원들과 머리를 맞대고 미션 노트에 아이디어를 정리합니다.',
+				'구상한 아이디어를 레고 모델로 직접 조립해봅니다.',
+				'완성해가는 모델 앞에서 팀워크가 자랍니다.',
+				'그날의 활동을 기록하며 다음 단계를 준비합니다.',
+				'손끝으로 하나하나, 디테일을 채워갑니다.',
+				'여러 시간의 몰입 끝에 완성한 미션 모델.',
+				'완성된 미션 필드 위, 팀의 결과물이 한눈에 펼쳐집니다.'
+			]
+		}
+	};
+	var ssEl = document.getElementById('slideshowFll');
+	if (ssEl) {
+		var ssImg = ssEl.querySelector('.ss-img');
+		var ssCap = ssEl.querySelector('.ss-caption');
+		var ssDots = ssEl.querySelector('.ss-dots');
+		var ssCur = null, ssIdx = 0, ssTimer = null;
+
+		function ssRender() {
+			var d = ssData[ssCur];
+			ssImg.src = d.images[ssIdx];
+			ssImg.alt = d.captions[ssIdx];
+			ssCap.textContent = d.captions[ssIdx];
+			Array.prototype.forEach.call(ssDots.children, function (dot, i) {
+				dot.classList.toggle('is-active', i === ssIdx);
+			});
+		}
+		function ssResetTimer() {
+			if (ssTimer) clearInterval(ssTimer);
+			if (!reduced) ssTimer = setInterval(function () { ssGoto(ssIdx + 1); }, 4500);
+		}
+		function ssGoto(i) {
+			var d = ssData[ssCur];
+			ssIdx = (i + d.images.length) % d.images.length;
+			ssRender();
+			ssResetTimer();
+		}
+		function ssOpen(key) {
+			ssCur = key;
+			ssIdx = 0;
+			var d = ssData[key];
+			ssDots.innerHTML = '';
+			d.images.forEach(function (_, i) {
+				var b = document.createElement('button');
+				b.type = 'button';
+				b.setAttribute('aria-label', (i + 1) + '번째 사진');
+				b.addEventListener('click', function () { ssGoto(i); });
+				ssDots.appendChild(b);
+			});
+			ssRender();
+			ssEl.classList.add('is-open');
+			ssEl.setAttribute('aria-hidden', 'false');
+			document.body.style.overflow = 'hidden';
+			ssResetTimer();
+		}
+		function ssCloseFn() {
+			ssEl.classList.remove('is-open');
+			ssEl.setAttribute('aria-hidden', 'true');
+			document.body.style.overflow = '';
+			if (ssTimer) clearInterval(ssTimer);
+		}
+		document.querySelectorAll('[data-slideshow]').forEach(function (btn) {
+			btn.addEventListener('click', function () { ssOpen(btn.getAttribute('data-slideshow')); });
+		});
+		ssEl.querySelector('.ss-prev').addEventListener('click', function () { ssGoto(ssIdx - 1); });
+		ssEl.querySelector('.ss-next').addEventListener('click', function () { ssGoto(ssIdx + 1); });
+		ssEl.querySelector('.ss-close').addEventListener('click', ssCloseFn);
+		ssEl.addEventListener('click', function (e) { if (e.target === ssEl) ssCloseFn(); });
+		document.addEventListener('keydown', function (e) {
+			if (!ssEl.classList.contains('is-open')) return;
+			if (e.key === 'Escape') ssCloseFn();
+			if (e.key === 'ArrowLeft') ssGoto(ssIdx - 1);
+			if (e.key === 'ArrowRight') ssGoto(ssIdx + 1);
+		});
+	}
 })();
