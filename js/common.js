@@ -177,7 +177,7 @@
 	// 대회 준비 과정 슬라이드쇼 (실제 활동 사진 + 설명)
 	var ssData = {
 		fll: {
-			images: ['images/fll/fll-01.jpg', 'images/fll/fll-02.jpg', 'images/fll/fll-03.jpg', 'images/fll/fll-04.jpg', 'images/fll/fll-05.jpg', 'images/fll/fll-06.jpg', 'images/fll/fll-07.jpg', 'images/fll/fll-08.jpg'],
+			images: ['images/fll-photos/fll-01.jpg', 'images/fll-photos/fll-02.jpg', 'images/fll-photos/fll-03.jpg', 'images/fll-photos/fll-04.jpg', 'images/fll-photos/fll-05.jpg', 'images/fll-photos/fll-06.jpg', 'images/fll-photos/fll-07.jpg', 'images/fll-photos/fll-08.jpg'],
 			captions: [
 				'레고 부품을 하나하나 분류하며 미션 준비를 시작합니다.',
 				'팀원들과 머리를 맞대고 미션 노트에 아이디어를 정리합니다.',
