@@ -374,11 +374,6 @@ main { padding-top: var(--header-h); }
 	overflow: hidden;
 	box-shadow: 0 34px 80px rgba(0, 0, 0, .45);
 	border: 1px solid rgba(255, 255, 255, .18);
-	animation: img-float 7s ease-in-out infinite;
-}
-@keyframes img-float {
-	0%, 100% { transform: translateY(0); }
-	50% { transform: translateY(-12px); }
 }
 .hero-chip {
 	position: absolute;
