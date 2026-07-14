@@ -177,7 +177,7 @@
 	// 대회 준비 과정 슬라이드쇼 (실제 활동 사진 + 설명)
 	var ssData = {
 		fll: {
-			images: ['images/fll-photos/fll-01.jpg', 'images/fll-photos/fll-02.jpg', 'images/fll-photos/fll-03.jpg', 'images/fll-photos/fll-04.jpg', 'images/fll-photos/fll-05.jpg', 'images/fll-photos/fll-06.jpg', 'images/fll-photos/fll-07.jpg', 'images/fll-photos/fll-08.jpg'],
+			images: ['images/fll-photos/fll-01.jpg', 'images/fll-photos/fll-02.jpg', 'images/fll-photos/fll-03.jpg', 'images/fll-photos/fll-04.jpg', 'images/fll-photos/fll-05.jpg', 'images/fll-photos/fll-06.jpg', 'images/fll-photos/fll-07.jpg', 'images/fll-photos/fll-08.jpg', 'images/fll-photos/fll-09.jpg', 'images/fll-photos/fll-10.jpg', 'images/fll-photos/fll-11.jpg', 'images/fll-photos/fll-12.jpg'],
 			captions: [
 				'레고 부품을 하나하나 분류하며 미션 준비를 시작합니다.',
 				'팀원들과 머리를 맞대고 미션 노트에 아이디어를 정리합니다.',
@@ -186,7 +186,11 @@
 				'그날의 활동을 기록하며 다음 단계를 준비합니다.',
 				'손끝으로 하나하나, 디테일을 채워갑니다.',
 				'여러 시간의 몰입 끝에 완성한 미션 모델.',
-				'완성된 미션 필드 위, 팀의 결과물이 한눈에 펼쳐집니다.'
+				'완성된 미션 필드 위, 팀의 결과물이 한눈에 펼쳐집니다.',
+				'드디어 대회장에 도착해, 팀을 소개할 차례를 기다립니다.',
+				'그동안 준비한 내용을 자신 있게 발표합니다.',
+				'함께 만든 트로피를 손에 들고, 서로를 바라봅니다.',
+				'긴 여정 끝에, 두 팀 모두가 함께 웃습니다.'
 			]
 		}
 	};
