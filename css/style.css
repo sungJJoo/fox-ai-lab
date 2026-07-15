@@ -446,8 +446,6 @@ main { padding-top: var(--header-h); }
 	padding: 34px 28px 30px;
 	overflow: hidden;
 }
-.direction-list li::before { content: ""; position: absolute; inset: 0; background: radial-gradient(150px 130px at 54px 68px, color-mix(in srgb, var(--card-c, var(--spot1)) 14%, transparent), transparent 72%); opacity: 0; transition: opacity .45s var(--ease-out); pointer-events: none; }
-.direction-list li:hover::before { opacity: 1; }
 .direction-list .dir-no {
 	position: absolute;
 	top: 4px; right: 16px;
@@ -460,9 +458,7 @@ main { padding-top: var(--header-h); }
 	-webkit-text-stroke: 1.5px color-mix(in srgb, var(--card-c, var(--spot1)) 26%, transparent);
 	margin: 0;
 	pointer-events: none;
-	transition: -webkit-text-stroke-color .4s;
 }
-.direction-list li:hover .dir-no { -webkit-text-stroke-color: color-mix(in srgb, var(--card-c) 52%, transparent); }
 .dir-ico {
 	position: relative;
 	display: inline-flex;
@@ -487,9 +483,7 @@ main { padding-top: var(--header-h); }
 	background-size: 100% .3em;
 	background-position: 0 84%;
 	background-repeat: no-repeat;
-	transition: background-size .5s var(--ease-out);
 }
-.direction-list li:hover h3 { background-size: 100% 94%; }
 .direction-list p { font-size: 16px; font-weight: 500; color: var(--txt-soft); line-height: 1.72; }
 .direction-list li.c-teal { --card-c: var(--spot1); }
 .direction-list li.c-blue { --card-c: var(--c-blue); }
@@ -1321,8 +1315,7 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 .lb-close:hover { background: rgba(255, 255, 255, .18); transform: rotate(90deg); }
 /* ── 향후 도전 대회 카드 ───────────────────────── */
 .future-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(228px, 1fr)); gap: 18px; }
-.future-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 26px 24px; transition: transform .35s var(--ease-out), box-shadow .35s; }
-.future-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(14, 27, 51, .1); }
+.future-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 26px 24px; }
 .future-area { display: inline-block; font-size: 12.5px; font-weight: 700; color: var(--spot1); background: rgba(32, 197, 188, .12); padding: 5px 12px; border-radius: 99px; margin-bottom: 15px; }
 .future-area.c-create { color: #c98a12; background: rgba(245, 176, 39, .15); }
 .future-card h3 { font-family: var(--font-display); font-size: 17.5px; font-weight: 700; color: var(--ink); line-height: 1.35; margin-bottom: 9px; }
