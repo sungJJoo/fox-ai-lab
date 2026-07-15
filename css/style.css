@@ -1461,3 +1461,13 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 @media (prefers-reduced-motion: reduce) {
 	.video-frame { transition: none !important; }
 }
+
+/* ── 오시는 길 지도 ──────────────────── */
+.map-card { margin-top: 22px; display: flex; flex-wrap: wrap; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.map-frame { flex: 1 1 420px; min-height: 320px; border: 0; display: block; }
+.map-info { flex: 1 1 280px; padding: 32px 30px; display: flex; flex-direction: column; justify-content: center; gap: 16px; }
+.map-info p { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--ink); line-height: 1.6; }
+.map-info .btn { align-self: flex-start; }
+@media (max-width: 640px) {
+	.map-frame { min-height: 240px; }
+}
