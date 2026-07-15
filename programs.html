@@ -296,11 +296,73 @@
 				<h2>우리 아이에게 맞는 프로그램이<br />궁금하신가요?</h2>
 				<p>유아(6세 이상)부터 성인·기관 연수까지 수준별 맞춤 운영</p>
 				<div class="cta-btns">
-					<a href="tel:1433-2700" class="btn btn-fill">전화 1433-2700</a>
-					<a href="contact.html" class="btn btn-ghost">상담 안내 보기 <span class="arr">→</span></a>
+					<button type="button" class="btn btn-fill" id="btnOpenSurvey">우리 아이에게 맞는 프로그램 찾아보기 <span class="arr">→</span></button>
 				</div>
 			</div>
 		</section>
+
+		<!-- 우리 아이에게 맞는 프로그램 찾기 설문 팝업 -->
+		<div class="survey-modal" id="surveyModal" aria-hidden="true" role="dialog" aria-modal="true">
+			<div class="survey-panel">
+				<button type="button" class="survey-close" aria-label="닫기">&times;</button>
+				<div class="survey-prog"><i id="surveyProgBar"></i></div>
+				<div class="survey-steps">
+					<section class="survey-step is-active" data-step="0">
+						<p class="survey-eyebrow">30초 진단</p>
+						<h3>우리 아이,<br />어떻게 키우고 싶으세요?</h3>
+						<p class="survey-sub">두 가지 질문에 답하면, 우리 아이에게 맞는 AI 교육 방향을 찾아드려요. 정답은 없습니다 — 부모님의 바람을 들려주세요.</p>
+						<button type="button" class="btn btn-fill" data-survey-go="1">시작하기 <span class="arr">→</span></button>
+					</section>
+					<section class="survey-step" data-step="1">
+						<span class="survey-qnum">Q1</span>
+						<h3>우리 아이를 어떤 방식으로<br />키우고 싶으세요?</h3>
+						<div class="survey-opts">
+							<button type="button" class="survey-opt" data-survey-pick="way:explore">
+								<span class="tx"><b>스스로 질문하고 탐구하는 아이</b><em>'왜?'를 던지며 원리를 파고드는 힘</em></span>
+								<span class="arr">→</span>
+							</button>
+							<button type="button" class="survey-opt" data-survey-pick="way:create">
+								<span class="tx"><b>직접 만들고 표현하는 아이</b><em>상상을 결과물로 완성하는 힘</em></span>
+								<span class="arr">→</span>
+							</button>
+							<button type="button" class="survey-opt" data-survey-pick="way:utilize">
+								<span class="tx"><b>디지털을 똑똑하게 다루는 아이</b><em>AI를 도구로 활용하는 힘</em></span>
+								<span class="arr">→</span>
+							</button>
+						</div>
+					</section>
+					<section class="survey-step" data-step="2">
+						<span class="survey-qnum">Q2</span>
+						<h3>어떤 강점을 가진 아이로<br />자라길 바라세요?</h3>
+						<div class="survey-opts">
+							<button type="button" class="survey-opt" data-survey-pick="strength:creative">
+								<span class="tx"><b>창의력과 상상력</b><em>남다른 아이디어를 떠올리는</em></span>
+								<span class="arr">→</span>
+							</button>
+							<button type="button" class="survey-opt" data-survey-pick="strength:logic">
+								<span class="tx"><b>논리적 문제 해결력</b><em>차근차근 답을 찾아가는</em></span>
+								<span class="arr">→</span>
+							</button>
+							<button type="button" class="survey-opt" data-survey-pick="strength:comm">
+								<span class="tx"><b>소통과 발표 자신감</b><em>생각을 당당히 표현하는</em></span>
+								<span class="arr">→</span>
+							</button>
+						</div>
+					</section>
+					<section class="survey-step survey-result" data-step="3">
+						<span class="survey-badge">진단 완료</span>
+						<h3 id="surveyRTitle"></h3>
+						<p class="survey-rdesc" id="surveyRDesc"></p>
+						<p class="survey-rfox" id="surveyRFox"></p>
+						<div class="survey-rbtns">
+							<a href="contact.html" class="btn btn-fill">무료 상담 신청 <span class="arr">→</span></a>
+							<a href="programs.html" class="btn btn-ghost">프로그램 보기</a>
+						</div>
+						<button type="button" class="survey-restart" id="surveyRestart">↺ 다시 진단하기</button>
+					</section>
+				</div>
+			</div>
+		</div>
 	</main>
 
 	<footer class="foxsite-footer">

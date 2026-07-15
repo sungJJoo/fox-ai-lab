@@ -258,4 +258,65 @@
 			if (e.key === 'ArrowRight') ssGoto(ssIdx + 1);
 		});
 	}
+
+	// 우리 아이에게 맞는 프로그램 찾기 설문 팝업 (30초 진단)
+	var svModal = document.getElementById('surveyModal');
+	var svOpenBtn = document.getElementById('btnOpenSurvey');
+	if (svModal && svOpenBtn) {
+		var svProgBar = document.getElementById('surveyProgBar');
+		var svAnswers = {};
+		var svPct = { 0: 0, 1: 33, 2: 66, 3: 100 };
+		var svWayMap = {
+			explore: { area: '이해', desc: 'AI가 어떻게 작동하는지 원리부터 파고드는' },
+			create: { area: '창작', desc: '상상한 것을 직접 결과물로 만들어내는' },
+			utilize: { area: '활용', desc: 'AI를 똑똑한 도구로 다루는' }
+		};
+		var svStrMap = { creative: '창의력과 상상력', logic: '논리적 문제 해결력', comm: '소통하고 발표하는 자신감' };
+
+		function svGoStep(n) {
+			svModal.querySelectorAll('.survey-step').forEach(function (s) { s.classList.remove('is-active', 'is-shown'); });
+			var target = svModal.querySelector('.survey-step[data-step="' + n + '"]');
+			target.classList.add('is-active');
+			void target.offsetWidth;
+			requestAnimationFrame(function () { target.classList.add('is-shown'); });
+			svProgBar.style.width = svPct[n] + '%';
+			svModal.querySelector('.survey-panel').scrollTop = 0;
+		}
+		function svShowResult() {
+			var w = svWayMap[svAnswers.way] || svWayMap.explore;
+			var s = svStrMap[svAnswers.strength] || svStrMap.creative;
+			document.getElementById('surveyRTitle').innerHTML = '우리 아이에겐 <em>‘' + w.area + '’</em>의 힘이<br />가장 잘 어울려요';
+			document.getElementById('surveyRDesc').textContent = w.desc + ' 아이로, 그리고 ' + s + '까지 함께 키우고 싶다면 — 영상을 보기만 하는 수업으로는 충분하지 않습니다.';
+			document.getElementById('surveyRFox').innerHTML = 'FOX AI 연구소는 <b>직접 질문하고, 만들고, 발표하는 프로젝트 학습(PBL)</b>으로 AI를 이해·소통·활용·창작하는 네 가지 힘을 키웁니다. 우리 아이에게 꼭 맞는 과정을 무료 상담에서 찾아드릴게요.';
+		}
+		function svOpen() {
+			svAnswers = {};
+			svModal.classList.add('is-open');
+			svModal.setAttribute('aria-hidden', 'false');
+			document.body.style.overflow = 'hidden';
+			svGoStep(0);
+		}
+		function svClose() {
+			svModal.classList.remove('is-open');
+			svModal.setAttribute('aria-hidden', 'true');
+			document.body.style.overflow = '';
+		}
+		svOpenBtn.addEventListener('click', svOpen);
+		svModal.querySelector('.survey-close').addEventListener('click', svClose);
+		svModal.addEventListener('click', function (e) { if (e.target === svModal) svClose(); });
+		document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && svModal.classList.contains('is-open')) svClose(); });
+		svModal.querySelectorAll('[data-survey-go]').forEach(function (btn) {
+			btn.addEventListener('click', function () { svGoStep(btn.getAttribute('data-survey-go')); });
+		});
+		svModal.querySelectorAll('[data-survey-pick]').forEach(function (btn) {
+			btn.addEventListener('click', function () {
+				var parts = btn.getAttribute('data-survey-pick').split(':');
+				svAnswers[parts[0]] = parts[1];
+				var cur = parseInt(svModal.querySelector('.survey-step.is-active').dataset.step, 10);
+				if (cur < 2) { svGoStep(cur + 1); } else { svShowResult(); svGoStep(3); }
+			});
+		});
+		var svRestartBtn = document.getElementById('surveyRestart');
+		if (svRestartBtn) svRestartBtn.addEventListener('click', function () { svAnswers = {}; svGoStep(0); });
+	}
 })();
