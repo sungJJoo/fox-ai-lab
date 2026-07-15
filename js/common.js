@@ -192,6 +192,14 @@
 				'함께 만든 트로피를 손에 들고, 서로를 바라봅니다.',
 				'긴 여정 끝에, 두 팀 모두가 함께 웃습니다.'
 			]
+		},
+		muhan: {
+			images: ['images/muhan-photos/muhan-01.jpg', 'images/muhan-photos/muhan-02.jpg', 'images/muhan-photos/muhan-03.jpg'],
+			captions: [
+				'대회장에 도착해 짧은 인터뷰 촬영을 진행합니다.',
+				'무한상상 과학탐구 서바이벌대전 현장, 발표를 기다립니다.',
+				'목차를 띄워두고 그동안 준비한 아이디어를 발표합니다.'
+			]
 		}
 	};
 	var ssEl = document.getElementById('slideshowFll');
@@ -318,5 +326,33 @@
 		});
 		var svRestartBtn = document.getElementById('surveyRestart');
 		if (svRestartBtn) svRestartBtn.addEventListener('click', function () { svAnswers = {}; svGoStep(0); });
+	}
+
+	// 관련 영상 팝업 (유튜브 임베드)
+	var vidData = {
+		muhan: { id: 'LBfBQKDI2dU', start: 158 }
+	};
+	var vidModal = document.getElementById('videoModal');
+	if (vidModal) {
+		var vidFrame = document.getElementById('videoFrame');
+		function vidOpen(key) {
+			var d = vidData[key];
+			if (!d) return;
+			vidFrame.src = 'https://www.youtube-nocookie.com/embed/' + d.id + '?start=' + d.start + '&autoplay=1&rel=0';
+			vidModal.classList.add('is-open');
+			vidModal.setAttribute('aria-hidden', 'false');
+			document.body.style.overflow = 'hidden';
+		}
+		function vidClose() {
+			vidModal.classList.remove('is-open');
+			vidModal.setAttribute('aria-hidden', 'true');
+			document.body.style.overflow = '';
+			vidFrame.src = '';
+		}
+		var btnMuhanVideo = document.getElementById('btnMuhanVideo');
+		if (btnMuhanVideo) btnMuhanVideo.addEventListener('click', function () { vidOpen('muhan'); });
+		vidModal.querySelector('.video-close').addEventListener('click', vidClose);
+		vidModal.addEventListener('click', function (e) { if (e.target === vidModal) vidClose(); });
+		document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && vidModal.classList.contains('is-open')) vidClose(); });
 	}
 })();

@@ -912,9 +912,10 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 .comp-card figure { width: 44%; min-height: 210px; overflow: hidden; }
 .comp-card figure img { width: 100%; height: 100%; object-fit: cover; }
 .comp-cont { flex: 1; padding: 32px 30px; }
-.comp-view { display: inline-flex; align-items: center; gap: 7px; margin-top: 16px; font-size: 14px; font-weight: 700; color: var(--spot1-dark); }
+.comp-view { display: inline-flex; align-items: center; gap: 7px; margin-top: 16px; font-size: 14px; font-weight: 700; color: var(--spot1-dark); background: none; border: none; padding: 0; font-family: inherit; cursor: pointer; }
+.comp-view + .comp-view { margin-top: 8px; }
 .comp-view .arr { transition: transform .25s var(--ease-out); }
-.comp-card-btn:hover .comp-view .arr { transform: translateX(4px); }
+.comp-card-btn:hover .comp-view .arr, .comp-view:hover .arr { transform: translateX(4px); }
 .comp-target {
 	display: inline-block;
 	font-family: var(--font-en);
@@ -1447,4 +1448,16 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 }
 @media (prefers-reduced-motion: reduce) {
 	.survey-step, .survey-panel { transition: none !important; }
+}
+
+/* ── 관련 영상 팝업 ──────────────────── */
+.video-modal { position: fixed; inset: 0; z-index: 400; display: flex; align-items: center; justify-content: center; padding: clamp(20px, 5vw, 56px); background: rgba(8, 16, 24, .93); opacity: 0; visibility: hidden; transition: opacity .3s, visibility .3s; }
+.video-modal.is-open { opacity: 1; visibility: visible; }
+.video-frame { position: relative; width: 100%; max-width: 900px; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; background: #000; box-shadow: 0 30px 80px rgba(0, 0, 0, .55); transform: scale(.96); transition: transform .35s var(--ease-out); }
+.video-modal.is-open .video-frame { transform: scale(1); }
+.video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video-close { position: absolute; top: clamp(16px, 3vw, 28px); right: clamp(16px, 3vw, 32px); width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .25); background: rgba(255, 255, 255, .08); color: #fff; font-size: 26px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s, transform .2s; z-index: 2; }
+.video-close:hover { background: rgba(255, 255, 255, .18); transform: rotate(90deg); }
+@media (prefers-reduced-motion: reduce) {
+	.video-frame { transition: none !important; }
 }
