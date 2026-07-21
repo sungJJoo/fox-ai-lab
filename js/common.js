@@ -330,7 +330,9 @@
 
 	// 관련 영상 팝업 (유튜브 임베드)
 	var vidData = {
-		muhan: { id: 'LBfBQKDI2dU', start: 158 }
+		muhan: { id: 'LBfBQKDI2dU', start: 158 },
+		fll1: { id: '3R2RygfS3t4' },
+		fll2: { id: 'hSecAYPlDkg' }
 	};
 	var vidModal = document.getElementById('videoModal');
 	if (vidModal) {
@@ -338,7 +340,9 @@
 		function vidOpen(key) {
 			var d = vidData[key];
 			if (!d) return;
-			vidFrame.src = 'https://www.youtube-nocookie.com/embed/' + d.id + '?start=' + d.start + '&autoplay=1&rel=0';
+			var src = 'https://www.youtube-nocookie.com/embed/' + d.id + '?autoplay=1&rel=0';
+			if (d.start) src += '&start=' + d.start;
+			vidFrame.src = src;
 			vidModal.classList.add('is-open');
 			vidModal.setAttribute('aria-hidden', 'false');
 			document.body.style.overflow = 'hidden';
@@ -351,6 +355,10 @@
 		}
 		var btnMuhanVideo = document.getElementById('btnMuhanVideo');
 		if (btnMuhanVideo) btnMuhanVideo.addEventListener('click', function () { vidOpen('muhan'); });
+		var btnFllVideo1 = document.getElementById('btnFllVideo1');
+		if (btnFllVideo1) btnFllVideo1.addEventListener('click', function () { vidOpen('fll1'); });
+		var btnFllVideo2 = document.getElementById('btnFllVideo2');
+		if (btnFllVideo2) btnFllVideo2.addEventListener('click', function () { vidOpen('fll2'); });
 		vidModal.querySelector('.video-close').addEventListener('click', vidClose);
 		vidModal.addEventListener('click', function (e) { if (e.target === vidModal) vidClose(); });
 		document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && vidModal.classList.contains('is-open')) vidClose(); });
