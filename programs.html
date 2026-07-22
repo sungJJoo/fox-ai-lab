@@ -308,48 +308,117 @@
 				<div class="survey-prog"><i id="surveyProgBar"></i></div>
 				<div class="survey-steps">
 					<section class="survey-step is-active" data-step="0">
-						<p class="survey-eyebrow">30초 진단</p>
-						<h3>우리 아이,<br />어떻게 키우고 싶으세요?</h3>
-						<p class="survey-sub">두 가지 질문에 답하면, 우리 아이에게 맞는 AI 교육 방향을 찾아드려요. 정답은 없습니다 — 부모님의 바람을 들려주세요.</p>
+						<p class="survey-eyebrow">1분 진단</p>
+						<h3>우리 아이,<br />어떤 프로그램이 맞을까요?</h3>
+						<p class="survey-sub">네 가지 질문에 답하면, 실제 14개 프로그램 중 우리 아이에게 맞는 활동을 찾아드려요.</p>
 						<button type="button" class="btn btn-fill" data-survey-go="1">시작하기 <span class="arr">→</span></button>
 					</section>
 					<section class="survey-step" data-step="1">
 						<span class="survey-qnum">Q1</span>
-						<h3>우리 아이를 어떤 방식으로<br />키우고 싶으세요?</h3>
+						<h3>아이의 나이는<br />어떻게 되나요?</h3>
 						<div class="survey-opts">
-							<button type="button" class="survey-opt" data-survey-pick="way:explore">
-								<span class="tx"><b>스스로 질문하고 탐구하는 아이</b><em>'왜?'를 던지며 원리를 파고드는 힘</em></span>
+							<button type="button" class="survey-opt" data-survey-pick="age:preschool">
+								<span class="tx"><b>유아</b><em>6세 이상</em></span>
 								<span class="arr">→</span>
 							</button>
-							<button type="button" class="survey-opt" data-survey-pick="way:create">
-								<span class="tx"><b>직접 만들고 표현하는 아이</b><em>상상을 결과물로 완성하는 힘</em></span>
+							<button type="button" class="survey-opt" data-survey-pick="age:low">
+								<span class="tx"><b>초등 저학년</b><em>1~3학년</em></span>
 								<span class="arr">→</span>
 							</button>
-							<button type="button" class="survey-opt" data-survey-pick="way:utilize">
-								<span class="tx"><b>디지털을 똑똑하게 다루는 아이</b><em>AI를 도구로 활용하는 힘</em></span>
+							<button type="button" class="survey-opt" data-survey-pick="age:high">
+								<span class="tx"><b>초등 고학년</b><em>4~6학년</em></span>
+								<span class="arr">→</span>
+							</button>
+							<button type="button" class="survey-opt" data-survey-pick="age:middle">
+								<span class="tx"><b>중학생 이상</b></span>
 								<span class="arr">→</span>
 							</button>
 						</div>
 					</section>
 					<section class="survey-step" data-step="2">
 						<span class="survey-qnum">Q2</span>
-						<h3>어떤 강점을 가진 아이로<br />자라길 바라세요?</h3>
+						<h3>아이가 가장 좋아하는<br />활동은 무엇인가요? <small>(최대 2개)</small></h3>
+						<div class="survey-opts" id="surveyInterestOpts">
+							<button type="button" class="survey-opt" data-survey-toggle="interest:build">
+								<span class="tx"><b>레고처럼 직접 만들기</b></span>
+								<span class="chk">✓</span>
+							</button>
+							<button type="button" class="survey-opt" data-survey-toggle="interest:game">
+								<span class="tx"><b>게임과 가상세계</b></span>
+								<span class="chk">✓</span>
+							</button>
+							<button type="button" class="survey-opt" data-survey-toggle="interest:creative">
+								<span class="tx"><b>그림과 이야기</b></span>
+								<span class="chk">✓</span>
+							</button>
+							<button type="button" class="survey-opt" data-survey-toggle="interest:logic">
+								<span class="tx"><b>퍼즐과 문제 해결</b></span>
+								<span class="chk">✓</span>
+							</button>
+							<button type="button" class="survey-opt" data-survey-toggle="interest:explore">
+								<span class="tx"><b>역사와 새로운 것 탐험</b></span>
+								<span class="chk">✓</span>
+							</button>
+							<button type="button" class="survey-opt" data-survey-toggle="interest:ai">
+								<span class="tx"><b>AI와 새로운 기술</b></span>
+								<span class="chk">✓</span>
+							</button>
+						</div>
+						<button type="button" class="btn btn-fill survey-next" data-survey-go="3" disabled>다음 <span class="arr">→</span></button>
+					</section>
+					<section class="survey-step" data-step="3">
+						<span class="survey-qnum">Q3</span>
+						<h3>아이는 무엇을 할 때<br />가장 즐거워하나요?</h3>
 						<div class="survey-opts">
-							<button type="button" class="survey-opt" data-survey-pick="strength:creative">
-								<span class="tx"><b>창의력과 상상력</b><em>남다른 아이디어를 떠올리는</em></span>
+							<button type="button" class="survey-opt" data-survey-pick="style:hands_on">
+								<span class="tx"><b>손으로 직접 만들고 조작할 때</b></span>
 								<span class="arr">→</span>
 							</button>
-							<button type="button" class="survey-opt" data-survey-pick="strength:logic">
-								<span class="tx"><b>논리적 문제 해결력</b><em>차근차근 답을 찾아가는</em></span>
+							<button type="button" class="survey-opt" data-survey-pick="style:computer">
+								<span class="tx"><b>컴퓨터·화면으로 작업할 때</b></span>
 								<span class="arr">→</span>
 							</button>
-							<button type="button" class="survey-opt" data-survey-pick="strength:comm">
-								<span class="tx"><b>소통과 발표 자신감</b><em>생각을 당당히 표현하는</em></span>
+							<button type="button" class="survey-opt" data-survey-pick="style:teamwork">
+								<span class="tx"><b>친구들과 함께 협력할 때</b></span>
+								<span class="arr">→</span>
+							</button>
+							<button type="button" class="survey-opt" data-survey-pick="style:imagination">
+								<span class="tx"><b>혼자 상상하고 표현할 때</b></span>
 								<span class="arr">→</span>
 							</button>
 						</div>
 					</section>
-					<section class="survey-step survey-result" data-step="3">
+					<section class="survey-step" data-step="4">
+						<span class="survey-qnum">Q4</span>
+						<h3>아이가 가장 만들어보고<br />싶은 것은 무엇인가요?</h3>
+						<div class="survey-opts">
+							<button type="button" class="survey-opt" data-survey-pick="output:robot">
+								<span class="tx"><b>움직이는 로봇</b></span>
+								<span class="arr">→</span>
+							</button>
+							<button type="button" class="survey-opt" data-survey-pick="output:game">
+								<span class="tx"><b>나만의 게임</b></span>
+								<span class="arr">→</span>
+							</button>
+							<button type="button" class="survey-opt" data-survey-pick="output:world">
+								<span class="tx"><b>새로운 가상세계</b></span>
+								<span class="arr">→</span>
+							</button>
+							<button type="button" class="survey-opt" data-survey-pick="output:story">
+								<span class="tx"><b>이야기와 그림</b></span>
+								<span class="arr">→</span>
+							</button>
+							<button type="button" class="survey-opt" data-survey-pick="output:program">
+								<span class="tx"><b>문제를 해결하는 프로그램</b></span>
+								<span class="arr">→</span>
+							</button>
+							<button type="button" class="survey-opt" data-survey-pick="output:culture">
+								<span class="tx"><b>역사 속 문화유산</b></span>
+								<span class="arr">→</span>
+							</button>
+						</div>
+					</section>
+					<section class="survey-step survey-result" data-step="5">
 						<span class="survey-badge">진단 완료</span>
 						<h3 id="surveyRTitle"></h3>
 						<p class="survey-rdesc" id="surveyRDesc"></p>
