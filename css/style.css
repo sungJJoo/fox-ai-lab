@@ -146,6 +146,7 @@ address { font-style: normal; }
 	color: #fff;
 	margin-left: 10px;
 	padding: 11px 24px;
+	border-radius: 12px;
 }
 .site-gnb .gnb-cta:hover { background: var(--spot1-dark); color: #fff; }
 .btn-gnb-open { display: none; }
@@ -160,7 +161,7 @@ address { font-style: normal; }
 	font-size: 16.5px;
 	font-weight: 700;
 	padding: 15px 32px;
-	border-radius: 999px;
+	border-radius: 14px;
 	transition: transform .25s var(--ease-out), box-shadow .25s, background .25s, color .25s;
 }
 .btn .arr { transition: transform .25s var(--ease-out); font-family: var(--font-en); }
@@ -343,7 +344,7 @@ main { padding-top: var(--header-h); }
 	transform: translateY(-50%);
 }
 .hero-btns { display: flex; align-items: center; gap: 30px; flex-wrap: wrap; }
-.hero-btns .btn-fill { border-radius: 12px; box-shadow: none; }
+.hero-btns .btn-fill { box-shadow: none; }
 .hero-btns .btn-fill:hover { box-shadow: none; }
 .hero-link {
 	position: relative;
@@ -1226,7 +1227,7 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 	body.gnb-opened .site-gnb { display: block; }
 	.site-gnb ul { flex-direction: column; align-items: stretch; gap: 0; padding: 12px 0; }
 	.site-gnb li a { display: block; padding: 14px 28px; border-radius: 0; }
-	.site-gnb .gnb-cta { margin: 12px 28px; text-align: center; border-radius: 999px; }
+	.site-gnb .gnb-cta { margin: 12px 28px; text-align: center; border-radius: 12px; }
 }
 
 /* ── 반응형: 모바일 ─────────────────────────── */
