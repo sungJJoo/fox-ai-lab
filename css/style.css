@@ -489,6 +489,7 @@ main { padding-top: var(--header-h); }
 .direction-list li.c-blue { --card-c: var(--c-blue); }
 .direction-list li.c-purple { --card-c: var(--c-purple); }
 .direction-list li.c-yellow { --card-c: var(--c-yellow); }
+.dir-dots { display: none; }
 /* ── 특징 5 ─────────────────────────────────── */
 .sec-feature { background: var(--bg-soft); }
 .feature-flex {
@@ -1249,6 +1250,9 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 	}
 	.direction-list::-webkit-scrollbar { display: none; }
 	.direction-list li { flex: 0 0 100%; scroll-snap-align: start; }
+	.dir-dots { display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 4px; }
+	.dir-dots button { width: 7px; height: 7px; border-radius: 50%; background: var(--line); border: none; padding: 0; cursor: pointer; transition: all .25s var(--ease-out); }
+	.dir-dots button.is-active { width: 22px; border-radius: 4px; background: var(--spot1); }
 	.feature-list li { padding: 20px 22px; }
 	.feature-list .num { width: 44px; font-size: 24px; }
 	.explore-card { aspect-ratio: 4 / 3.6; }

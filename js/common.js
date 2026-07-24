@@ -27,6 +27,37 @@
 		});
 	}
 
+	// 이해/소통/활용/창작 — 모바일 스와이프 캐러셀 점 표시
+	var dirList = document.querySelector('.direction-list');
+	var dirDots = document.getElementById('dirDots');
+	if (dirList && dirDots) {
+		var dirDotBtns = Array.prototype.slice.call(dirDots.children);
+		var dirItems = Array.prototype.slice.call(dirList.children);
+		function dirUpdateDots() {
+			var listRect = dirList.getBoundingClientRect();
+			var centerX = listRect.left + listRect.width / 2;
+			var closest = 0, minDist = Infinity;
+			dirItems.forEach(function (li, i) {
+				var r = li.getBoundingClientRect();
+				var dist = Math.abs((r.left + r.width / 2) - centerX);
+				if (dist < minDist) { minDist = dist; closest = i; }
+			});
+			dirDotBtns.forEach(function (b, i) { b.classList.toggle('is-active', i === closest); });
+		}
+		var dirScrollTimer;
+		dirList.addEventListener('scroll', function () {
+			clearTimeout(dirScrollTimer);
+			dirScrollTimer = setTimeout(dirUpdateDots, 60);
+		}, { passive: true });
+		dirDotBtns.forEach(function (btn, i) {
+			btn.addEventListener('click', function () {
+				var r = dirItems[i].getBoundingClientRect();
+				var listR = dirList.getBoundingClientRect();
+				dirList.scrollTo({ left: dirList.scrollLeft + (r.left - listR.left), behavior: 'smooth' });
+			});
+		});
+	}
+
 	// 리빌 모션 (스태거: data-stagger 컨테이너의 자식에 지연 부여)
 	document.querySelectorAll('[data-stagger]').forEach(function (box) {
 		Array.prototype.forEach.call(box.children, function (child, i) {
