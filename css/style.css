@@ -1235,7 +1235,18 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 	.hero-stats li:nth-child(n+3) { border-top: 1px solid rgba(255, 255, 255, .12); }
 	.hero-chip { display: none; }
 
-	.direction-list { grid-template-columns: 1fr; }
+	.direction-list {
+		display: flex;
+		grid-template-columns: none;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: none;
+		margin: 0 -28px;
+		padding: 4px 28px 10px;
+	}
+	.direction-list::-webkit-scrollbar { display: none; }
+	.direction-list li { flex: 0 0 84%; scroll-snap-align: start; }
 	.feature-list li { padding: 20px 22px; }
 	.feature-list .num { width: 44px; font-size: 24px; }
 	.explore-card { aspect-ratio: 4 / 3.6; }
@@ -1447,6 +1458,7 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 .survey-next { margin-top: 20px; }
 .survey-next[disabled] { opacity: .4; cursor: not-allowed; transform: none; box-shadow: none; }
 .survey-result .survey-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(32, 197, 188, .13); color: #7ce4dd; font-size: 13px; font-weight: 600; padding: 7px 15px; border-radius: 99px; margin-bottom: 20px; }
+.survey-result h3 em { font-style: normal; color: var(--spot1); }
 .survey-rdesc { font-size: 15px; color: rgba(255, 255, 255, .64); line-height: 1.85; margin-bottom: 16px; }
 .survey-rfox { background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .12); border-left: 3px solid var(--spot1); border-radius: 12px; padding: 16px 20px; font-size: 14.5px; color: rgba(255, 255, 255, .82); line-height: 1.72; margin-bottom: 28px; }
 .survey-rbtns { display: flex; gap: 12px; flex-wrap: wrap; }
