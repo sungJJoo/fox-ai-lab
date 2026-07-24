@@ -545,7 +545,7 @@ main { padding-top: var(--header-h); }
 /* ── 미리보기 카드 (메인 → 서브페이지) ──────── */
 .explore-grid {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: 1.15fr 1fr;
 	gap: 24px;
 }
 .explore-card {
@@ -553,8 +553,12 @@ main { padding-top: var(--header-h); }
 	display: block;
 	border-radius: var(--radius);
 	overflow: hidden;
-	aspect-ratio: 4 / 4.6;
+	aspect-ratio: 4 / 2.3;
 	color: #fff;
+}
+.explore-grid .explore-card:first-child {
+	grid-row: 1 / 3;
+	aspect-ratio: auto;
 }
 .explore-card img {
 	position: absolute;
@@ -1172,6 +1176,7 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 	.direction-list, .area-grid { grid-template-columns: repeat(2, 1fr); }
 	.explore-grid { grid-template-columns: 1fr; }
 	.explore-card { aspect-ratio: 16 / 8; }
+	.explore-grid .explore-card:first-child { grid-row: auto; aspect-ratio: 16 / 8; }
 	.poster-list { grid-template-columns: repeat(3, 1fr); }
 	.feature-flex { flex-direction: column; }
 	.feature-flex .sec-head { position: static; flex: none; }
