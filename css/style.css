@@ -1238,15 +1238,17 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 	.direction-list {
 		display: flex;
 		grid-template-columns: none;
+		gap: 28px;
 		overflow-x: auto;
 		scroll-snap-type: x mandatory;
+		scroll-padding-inline: 28px;
 		-webkit-overflow-scrolling: touch;
 		scrollbar-width: none;
 		margin: 0 -28px;
 		padding: 4px 28px 10px;
 	}
 	.direction-list::-webkit-scrollbar { display: none; }
-	.direction-list li { flex: 0 0 84%; scroll-snap-align: start; }
+	.direction-list li { flex: 0 0 100%; scroll-snap-align: start; }
 	.feature-list li { padding: 20px 22px; }
 	.feature-list .num { width: 44px; font-size: 24px; }
 	.explore-card { aspect-ratio: 4 / 3.6; }
