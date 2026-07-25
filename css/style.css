@@ -557,12 +557,24 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 
 /* ── 슬로건 밴드 ────────────────────────────── */
 .slogan-band {
+	position: relative;
+	overflow: hidden;
 	padding: clamp(70px, 9vw, 120px) 0;
 	text-align: center;
 	background:
 		radial-gradient(circle at 12% 0%, rgba(32, 197, 188, .08) 0, transparent 45%),
 		radial-gradient(circle at 88% 100%, rgba(49, 148, 219, .08) 0, transparent 45%);
 }
+.slogan-band::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: url("../images/slogan-bg.jpg") center/cover no-repeat;
+	opacity: .18;
+	z-index: 0;
+	pointer-events: none;
+}
+.slogan-band .wrap { position: relative; z-index: 1; }
 .slogan-band q {
 	quotes: "\201C" "\201D";
 	font-family: var(--font-display);
