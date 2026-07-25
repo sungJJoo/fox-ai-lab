@@ -443,4 +443,36 @@
 		vidModal.addEventListener('click', function (e) { if (e.target === vidModal) vidClose(); });
 		document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && vidModal.classList.contains('is-open')) vidClose(); });
 	}
+
+	// 배우는 방법 — 5단계 학습 여정 순차 애니메이션
+	var flowMap = document.getElementById('flowMap');
+	if (flowMap) {
+		var flowLis = Array.prototype.slice.call(flowMap.querySelectorAll('.flow-steps li'));
+		var flowBar = flowMap.querySelector('.flow-track i');
+		var flowTotal = flowLis.length;
+		function flowSet(n) {
+			flowLis.forEach(function (li, i) { li.classList.toggle('is-on', i <= n); });
+			flowBar.style.width = (flowTotal > 1 ? (n / (flowTotal - 1)) * 100 : 100) + '%';
+		}
+		function flowClear() {
+			flowLis.forEach(function (li) { li.classList.remove('is-on'); });
+			flowBar.style.width = '0%';
+		}
+		if (reduced) {
+			flowSet(flowTotal - 1);
+		} else {
+			var flowCycle = flowTotal + 3, flowIdx = 0, flowTimer = null;
+			function flowLoop() {
+				if (flowIdx === 0) flowClear();
+				else if (flowIdx <= flowTotal) flowSet(flowIdx - 1);
+				flowIdx = (flowIdx + 1) % flowCycle;
+			}
+			var flowIo = new IntersectionObserver(function (es) {
+				es.forEach(function (e) {
+					if (e.isIntersecting && !flowTimer) { flowLoop(); flowTimer = setInterval(flowLoop, 780); }
+				});
+			}, { threshold: 0.4 });
+			flowIo.observe(flowMap);
+		}
+	}
 })();

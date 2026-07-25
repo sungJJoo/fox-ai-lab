@@ -1368,3 +1368,23 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 @media (max-width: 640px) {
 	.map-frame { min-height: 240px; }
 }
+
+/* ── 배우는 방법: 5단계 학습 여정 애니메이션 ──────── */
+.flow-sec { padding-bottom: clamp(30px, 4vw, 48px); }
+.flow-map { --node: 56px; position: relative; max-width: 860px; margin: 6px auto 0; padding: 0 6px; }
+.flow-track { position: absolute; left: 10%; right: 10%; top: calc(var(--node) / 2); height: 4px; transform: translateY(-50%); background: var(--line); border-radius: 99px; overflow: hidden; }
+.flow-track i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #1fb9b0, #3194db, #8e5bd4); border-radius: 99px; transition: width .55s var(--ease-out); }
+.flow-steps { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; list-style: none; }
+.flow-steps li { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.flow-node { width: var(--node); height: var(--node); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-en); font-weight: 700; font-size: 19px; color: var(--txt-soft); background: #fff; border: 2px solid var(--line); transition: color .4s, background .4s, border-color .4s, transform .4s var(--ease-out), box-shadow .4s; }
+.flow-steps li b { margin-top: 13px; font-family: var(--font-display); font-weight: 700; font-size: 15.5px; color: var(--ink); letter-spacing: -.01em; transition: color .35s; }
+.flow-steps li em { font-style: normal; font-size: 12px; color: var(--txt-soft); margin-top: 3px; }
+.flow-steps li.is-on .flow-node { color: #fff; background: var(--fc); border-color: var(--fc); transform: scale(1.1); box-shadow: 0 10px 24px color-mix(in srgb, var(--fc) 42%, transparent); }
+.flow-steps li.is-on b { color: var(--fc); }
+@media (max-width: 767px) {
+	.flow-map { --node: 44px; }
+	.flow-node { font-size: 15px; }
+	.flow-steps { gap: 4px; }
+	.flow-steps li b { font-size: 12.5px; margin-top: 9px; }
+	.flow-steps li em { display: none; }
+}
