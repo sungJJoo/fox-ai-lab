@@ -561,7 +561,7 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 	overflow: hidden;
 	padding: clamp(70px, 9vw, 120px) 0;
 	text-align: center;
-	background: #17153a;
+	background: #0f2148;
 }
 .slogan-band::before {
 	content: "";
@@ -570,9 +570,9 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 	z-index: 0;
 	pointer-events: none;
 	background:
-		linear-gradient(180deg, rgba(21, 54, 109, .84) 0%, rgba(31, 23, 83, .86) 68%, rgba(59, 32, 87, .86) 100%),
+		linear-gradient(180deg, rgba(17, 44, 92, .86) 0%, rgba(13, 33, 72, .88) 100%),
 		url("../images/slogan-bg.jpg") center/cover no-repeat;
-	filter: blur(2px);
+	filter: blur(1.5px);
 }
 .slogan-band .wrap { position: relative; z-index: 1; }
 .slogan-band q {
