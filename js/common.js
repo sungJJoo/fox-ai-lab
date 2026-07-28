@@ -3,16 +3,22 @@
 	var header = document.querySelector('.site-header');
 	var progress = document.querySelector('.scroll-progress');
 
-	// 헤더 스크롤 상태 + 진행바
+	// 헤더 스크롤 상태 + 진행바 (scrollHeight는 캐시해 강제 리플로우 방지)
+	var scrollMax = 0;
+	function measureScroll() {
+		scrollMax = document.documentElement.scrollHeight - window.innerHeight;
+	}
 	function onScroll() {
 		var y = window.pageYOffset;
 		header.classList.toggle('is-scrolled', y > 10);
 		if (progress) {
-			var max = document.documentElement.scrollHeight - window.innerHeight;
-			progress.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
+			progress.style.width = (scrollMax > 0 ? (y / scrollMax) * 100 : 0) + '%';
 		}
 	}
 	window.addEventListener('scroll', onScroll, { passive: true });
+	window.addEventListener('resize', function () { measureScroll(); onScroll(); }, { passive: true });
+	window.addEventListener('load', function () { measureScroll(); onScroll(); });
+	measureScroll();
 	onScroll();
 
 	// 모바일 메뉴
@@ -96,19 +102,28 @@
 	}, { threshold: 0.5 });
 	document.querySelectorAll('.count[data-count]').forEach(function (el) { cio.observe(el); });
 
-	// 히어로 떠다니는 질문 — 마우스 패럴랙스 (절제된 깊이감)
+	// 히어로 떠다니는 질문 — 마우스 패럴랙스 (화면 밖에서는 루프 정지)
 	var qf = document.getElementById('qfield');
 	if (qf && !reduced) {
-		var tx = 0, ty = 0, cx = 0, cy = 0;
+		var tx = 0, ty = 0, cx = 0, cy = 0, qRaf = null;
 		window.addEventListener('mousemove', function (e) {
 			tx = (e.clientX / window.innerWidth - 0.5) * 22;
 			ty = (e.clientY / window.innerHeight - 0.5) * 22;
 		}, { passive: true });
-		(function loop() {
+		function qLoop() {
 			cx += (tx - cx) * 0.06; cy += (ty - cy) * 0.06;
 			qf.style.transform = 'translate(' + cx.toFixed(2) + 'px,' + cy.toFixed(2) + 'px)';
-			requestAnimationFrame(loop);
-		})();
+			qRaf = requestAnimationFrame(qLoop);
+		}
+		var qInView = false;
+		function qStart() { if (qRaf === null && qInView && !document.hidden) qLoop(); }
+		function qStop() { if (qRaf !== null) { cancelAnimationFrame(qRaf); qRaf = null; } }
+		new IntersectionObserver(function (es) {
+			es.forEach(function (e) { qInView = e.isIntersecting; qInView ? qStart() : qStop(); });
+		}, { threshold: 0 }).observe(qf);
+		document.addEventListener('visibilitychange', function () {
+			document.hidden ? qStop() : qStart();
+		});
 	}
 
 	// 떠다니는 질문 — 큰 이동 없이, 가끔 다른 문구로 은은하게 교체 (다양성은 시간차 크로스페이드로)
@@ -165,18 +180,29 @@
 			visionTrack.style.transform = 'translateY(' + (vCenter() - vRow / 2) + 'px)';
 			vPaint(0);
 		} else {
-			var vSpeed = 0.02, vt0 = null;
+			// 화면 밖·백그라운드에서는 정지 (경과 시간을 누적해 이어붙이므로 튐 없음)
+			var vSpeed = 0.02, vElapsed = 0, vLast = null, vRaf = null, vInView = false;
 			function vLoop(t) {
-				if (!vt0) vt0 = t;
-				var off = ((t - vt0) * vSpeed) % vTotal;
+				if (vLast === null) vLast = t;
+				vElapsed += t - vLast;
+				vLast = t;
+				var off = (vElapsed * vSpeed) % vTotal;
 				visionTrack.style.transform = 'translateY(' + ((vCenter() - vRow / 2) - off) + 'px)';
 				vPaint(off - (vCenter() - vRow / 2));
-				requestAnimationFrame(vLoop);
+				vRaf = requestAnimationFrame(vLoop);
 			}
-			var vio = new IntersectionObserver(function (es) {
-				es.forEach(function (e) { if (e.isIntersecting) { requestAnimationFrame(vLoop); vio.disconnect(); } });
-			}, { threshold: .3 });
-			vio.observe(visionFlow);
+			function vStart() {
+				if (vRaf === null && vInView && !document.hidden) { vLast = null; vRaf = requestAnimationFrame(vLoop); }
+			}
+			function vStop() {
+				if (vRaf !== null) { cancelAnimationFrame(vRaf); vRaf = null; vLast = null; }
+			}
+			new IntersectionObserver(function (es) {
+				es.forEach(function (e) { vInView = e.isIntersecting; vInView ? vStart() : vStop(); });
+			}, { threshold: .15 }).observe(visionFlow);
+			document.addEventListener('visibilitychange', function () {
+				document.hidden ? vStop() : vStart();
+			});
 		}
 	}
 
