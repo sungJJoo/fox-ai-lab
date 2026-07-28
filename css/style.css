@@ -2,18 +2,20 @@
 @charset "UTF-8";
 
 /* ── 폰트 ───────────────────────────────────── */
-/* 제목용: Gmarket Sans */
+/* 제목용: Gmarket Sans — 자체 호스팅(한글 상용 2,350자 서브셋, woff2 우선) */
 @font-face {
 	font-family: "GmarketSans";
 	font-weight: 500;
 	font-display: swap;
-	src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff") format("woff");
+	src: url("../fonts/GmarketSansMedium.woff2") format("woff2"),
+	     url("../fonts/GmarketSansMedium.woff") format("woff");
 }
 @font-face {
 	font-family: "GmarketSans";
 	font-weight: 700;
 	font-display: swap;
-	src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff") format("woff");
+	src: url("../fonts/GmarketSansBold.woff2") format("woff2"),
+	     url("../fonts/GmarketSansBold.woff") format("woff");
 }
 
 :root {
