@@ -585,7 +585,7 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 	pointer-events: none;
 	background:
 		linear-gradient(180deg, rgba(17, 44, 92, .86) 0%, rgba(13, 33, 72, .88) 100%),
-		url("../images/slogan-bg.jpg") center/cover no-repeat;
+		image-set(url("../images/slogan-bg.webp") type("image/webp"), url("../images/slogan-bg.jpg") type("image/jpeg")) center/cover no-repeat;
 	filter: blur(1.5px);
 }
 .slogan-band .wrap { position: relative; z-index: 1; }

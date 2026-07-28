@@ -234,7 +234,7 @@
 	// 대회 준비 과정 슬라이드쇼 (실제 활동 사진 + 설명)
 	var ssData = {
 		fll: {
-			images: ['images/fll-photos/fll-01.jpg', 'images/fll-photos/fll-02.jpg', 'images/fll-photos/fll-03.jpg', 'images/fll-photos/fll-04.jpg', 'images/fll-photos/fll-05.jpg', 'images/fll-photos/fll-06.jpg', 'images/fll-photos/fll-07.jpg', 'images/fll-photos/fll-08.jpg', 'images/fll-photos/fll-09.jpg', 'images/fll-photos/fll-10.jpg', 'images/fll-photos/fll-11.jpg', 'images/fll-photos/fll-12.jpg'],
+			images: ['images/fll-photos/fll-01.webp', 'images/fll-photos/fll-02.webp', 'images/fll-photos/fll-03.webp', 'images/fll-photos/fll-04.webp', 'images/fll-photos/fll-05.webp', 'images/fll-photos/fll-06.webp', 'images/fll-photos/fll-07.webp', 'images/fll-photos/fll-08.webp', 'images/fll-photos/fll-09.webp', 'images/fll-photos/fll-10.webp', 'images/fll-photos/fll-11.webp', 'images/fll-photos/fll-12.webp'],
 			captions: [
 				'레고 부품을 하나하나 분류하며 미션 준비를 시작합니다.',
 				'팀원들과 머리를 맞대고 미션 노트에 아이디어를 정리합니다.',
@@ -251,7 +251,7 @@
 			]
 		},
 		muhan: {
-			images: ['images/muhan-photos/muhan-01.jpg', 'images/muhan-photos/muhan-02.jpg', 'images/muhan-photos/muhan-03.jpg'],
+			images: ['images/muhan-photos/muhan-01.webp', 'images/muhan-photos/muhan-02.webp', 'images/muhan-photos/muhan-03.webp'],
 			captions: [
 				'대회장에 도착해 짧은 인터뷰 촬영을 진행합니다.',
 				'무한상상 과학탐구 서바이벌대전 현장, 발표를 기다립니다.',
