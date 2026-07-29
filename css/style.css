@@ -2,21 +2,7 @@
 @charset "UTF-8";
 
 /* ── 폰트 ───────────────────────────────────── */
-/* 제목용: Gmarket Sans — 자체 호스팅(한글 상용 2,350자 서브셋, woff2 우선) */
-@font-face {
-	font-family: "GmarketSans";
-	font-weight: 500;
-	font-display: swap;
-	src: url("../fonts/GmarketSansMedium.woff2") format("woff2"),
-	     url("../fonts/GmarketSansMedium.woff") format("woff");
-}
-@font-face {
-	font-family: "GmarketSans";
-	font-weight: 700;
-	font-display: swap;
-	src: url("../fonts/GmarketSansBold.woff2") format("woff2"),
-	     url("../fonts/GmarketSansBold.woff") format("woff");
-}
+/* 제목·본문 모두 Pretendard (외부 CDN), 영문 악센트는 Space Grotesk */
 
 :root {
 	/* 색 */
@@ -37,9 +23,9 @@
 	--grad-vision: linear-gradient(125deg, #0e5a68 0%, #146b8c 30%, #1f6fb0 55%, #5b5ec7 78%, #8e5bd4 100%);
 
 	/* 타이포 3단 체계 */
-	--font-display: "GmarketSans", "Pretendard Variable", sans-serif;   /* 제목 */
+	--font-display: "Pretendard Variable", Pretendard, "Noto Sans KR", "Malgun Gothic", sans-serif; /* 제목 */
 	--font-body: "Pretendard Variable", Pretendard, "Noto Sans KR", "Malgun Gothic", sans-serif; /* 본문 */
-	--font-en: "Space Grotesk", "GmarketSans", sans-serif;              /* 숫자·영문 악센트 */
+	--font-en: "Space Grotesk", "Pretendard Variable", sans-serif;      /* 숫자·영문 악센트 */
 
 	/* 크기 스케일 (clamp) */
 	--fs-hero: clamp(46px, 6.4vw, 84px);
