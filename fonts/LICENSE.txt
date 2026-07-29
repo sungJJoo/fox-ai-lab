@@ -1,0 +1,22 @@
+Gmarket Sans
+============
+
+이 폴더의 폰트 파일은 지마켓(Gmarket)이 배포하는 Gmarket Sans입니다.
+
+라이선스 : SIL Open Font License (OFL)
+공식 배포처 : https://corp.gmarket.com/fonts/
+
+지마켓 공식 안내 문구:
+  "'SIL Open Font License'에 따라 개인 또는 기업이 영리적, 비영리적 목적으로
+   자유롭게 사용할 수 있습니다."
+
+포함된 파일
+-----------
+  GmarketSansMedium.woff2 / .woff   (weight 500)
+  GmarketSansBold.woff2   / .woff   (weight 700)
+
+위 파일은 웹 사용을 위해 한글 상용 2,350자 + 사이트 사용 문자로
+서브셋(subset)한 버전입니다. SIL OFL은 폰트의 수정 및 재배포를 허용합니다.
+
+원본 폰트 전체 파일과 라이선스 원문(OFL 전문)은 위 공식 배포처에서
+내려받으실 수 있습니다.
