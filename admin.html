@@ -1,0 +1,88 @@
+<!-- 슬라이드쇼 사진 관리 페이지 (GitHub API로 직접 커밋) -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="robots" content="noindex, nofollow" />
+	<title>사진 관리 | AI 연구소</title>
+	<link rel="icon" type="image/png" href="images/favicon.png" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+	<link rel="stylesheet" href="css/admin.css?v=1" />
+</head>
+<body>
+
+<header class="ad-head">
+	<div class="ad-wrap">
+		<h1>사진 관리</h1>
+		<div class="ad-head-r">
+			<span class="ad-user" id="adUser" hidden></span>
+			<a class="ad-link" href="index.html" target="_blank" rel="noopener">사이트 보기 ↗</a>
+			<button type="button" class="ad-btn ad-btn-ghost" id="btnLogout" hidden>로그아웃</button>
+		</div>
+	</div>
+</header>
+
+<main class="ad-wrap ad-main">
+
+	<!-- 로그인 -->
+	<section class="ad-card" id="loginCard">
+		<h2>로그인</h2>
+		<p class="ad-desc">
+			GitHub 토큰으로 로그인합니다. 처음 한 번만 발급하면 이 브라우저에 저장되어 다음부터는 바로 들어옵니다.
+		</p>
+		<details class="ad-help">
+			<summary>토큰 발급 방법 (처음 한 번만)</summary>
+			<ol>
+				<li><a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub 토큰 발급 페이지</a>를 엽니다.</li>
+				<li><b>Token name</b>에 아무 이름이나 적습니다. (예: fox-ai-lab 사진관리)</li>
+				<li><b>Expiration</b>은 원하는 기간으로 정합니다. (기간이 지나면 다시 발급해야 합니다)</li>
+				<li><b>Repository access</b> → <b>Only select repositories</b> → <b>fox-ai-lab</b> 선택.</li>
+				<li><b>Repository permissions</b> → <b>Contents</b> 를 <b>Read and write</b> 로 변경.</li>
+				<li>맨 아래 <b>Generate token</b> → 나온 문자열을 복사해서 아래에 붙여넣습니다.</li>
+			</ol>
+			<p class="ad-warn">이 토큰은 이 저장소 하나만 수정할 수 있습니다. 공용 PC에서는 로그인하지 마세요.</p>
+		</details>
+		<div class="ad-row">
+			<input type="password" id="tokenInput" placeholder="github_pat_... 붙여넣기" autocomplete="off" />
+			<button type="button" class="ad-btn ad-btn-fill" id="btnLogin">로그인</button>
+		</div>
+		<p class="ad-msg" id="loginMsg"></p>
+	</section>
+
+	<!-- 관리 화면 -->
+	<section id="workArea" hidden>
+
+		<div class="ad-tabs" id="albumTabs"></div>
+
+		<div class="ad-card">
+			<div class="ad-card-head">
+				<h2 id="albumTitle">앨범</h2>
+				<span class="ad-count" id="photoCount"></span>
+			</div>
+
+			<label class="ad-drop" id="dropZone">
+				<input type="file" id="fileInput" accept="image/*" multiple hidden />
+				<span class="ad-drop-ico">＋</span>
+				<span class="ad-drop-tit">사진 추가</span>
+				<span class="ad-drop-sub">클릭하거나 파일을 끌어다 놓으세요 · 여러 장 가능</span>
+			</label>
+
+			<ul class="ad-list" id="photoList"></ul>
+		</div>
+
+		<div class="ad-savebar" id="saveBar" hidden>
+			<span class="ad-savebar-txt" id="saveInfo"></span>
+			<div class="ad-savebar-btns">
+				<button type="button" class="ad-btn ad-btn-ghost" id="btnDiscard">되돌리기</button>
+				<button type="button" class="ad-btn ad-btn-fill" id="btnSave">저장하고 사이트에 반영</button>
+			</div>
+		</div>
+	</section>
+</main>
+
+<div class="ad-toast" id="toast" hidden></div>
+
+<script src="js/admin.js?v=1"></script>
+</body>
+</html>

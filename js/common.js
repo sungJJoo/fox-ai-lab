@@ -232,33 +232,16 @@
 	}
 
 	// 대회 준비 과정 슬라이드쇼 (실제 활동 사진 + 설명)
-	var ssData = {
-		fll: {
-			images: ['images/fll-photos/fll-01.webp', 'images/fll-photos/fll-02.webp', 'images/fll-photos/fll-03.webp', 'images/fll-photos/fll-04.webp', 'images/fll-photos/fll-05.webp', 'images/fll-photos/fll-06.webp', 'images/fll-photos/fll-07.webp', 'images/fll-photos/fll-08.webp', 'images/fll-photos/fll-09.webp', 'images/fll-photos/fll-10.webp', 'images/fll-photos/fll-11.webp', 'images/fll-photos/fll-12.webp'],
-			captions: [
-				'레고 부품을 하나하나 분류하며 미션 준비를 시작합니다.',
-				'팀원들과 머리를 맞대고 미션 노트에 아이디어를 정리합니다.',
-				'구상한 아이디어를 레고 모델로 직접 조립해봅니다.',
-				'완성해가는 모델 앞에서 팀워크가 자랍니다.',
-				'그날의 활동을 기록하며 다음 단계를 준비합니다.',
-				'손끝으로 하나하나, 디테일을 채워갑니다.',
-				'여러 시간의 몰입 끝에 완성한 미션 모델.',
-				'완성된 미션 필드 위, 팀의 결과물이 한눈에 펼쳐집니다.',
-				'드디어 대회장에 도착해, 팀을 소개할 차례를 기다립니다.',
-				'그동안 준비한 내용을 자신 있게 발표합니다.',
-				'함께 만든 트로피를 손에 들고, 서로를 바라봅니다.',
-				'긴 여정 끝에, 두 팀 모두가 함께 웃습니다.'
-			]
-		},
-		muhan: {
-			images: ['images/muhan-photos/muhan-01.webp', 'images/muhan-photos/muhan-02.webp', 'images/muhan-photos/muhan-03.webp'],
-			captions: [
-				'대회장에 도착해 짧은 인터뷰 촬영을 진행합니다.',
-				'무한상상 과학탐구 서바이벌대전 현장, 발표를 기다립니다.',
-				'목차를 띄워두고 그동안 준비한 아이디어를 발표합니다.'
-			]
+	var ssData = null, ssLoading = null;
+	function ssLoad() {
+		if (ssData) return Promise.resolve(ssData);
+		if (!ssLoading) {
+			ssLoading = fetch('data/slideshows.json', { cache: 'no-cache' })
+				.then(function (r) { return r.json(); })
+				.then(function (j) { ssData = j; return j; });
 		}
-	};
+		return ssLoading;
+	}
 	var ssEl = document.getElementById('slideshowFll');
 	if (ssEl) {
 		var ssImg = ssEl.querySelector('.ss-img');
@@ -268,9 +251,9 @@
 
 		function ssRender() {
 			var d = ssData[ssCur];
-			ssImg.src = d.images[ssIdx];
-			ssImg.alt = d.captions[ssIdx];
-			ssCap.textContent = d.captions[ssIdx];
+			ssImg.src = d.photos[ssIdx].src;
+			ssImg.alt = d.photos[ssIdx].caption;
+			ssCap.textContent = d.photos[ssIdx].caption;
 			Array.prototype.forEach.call(ssDots.children, function (dot, i) {
 				dot.classList.toggle('is-active', i === ssIdx);
 			});
@@ -281,16 +264,20 @@
 		}
 		function ssGoto(i) {
 			var d = ssData[ssCur];
-			ssIdx = (i + d.images.length) % d.images.length;
+			ssIdx = (i + d.photos.length) % d.photos.length;
 			ssRender();
 			ssResetTimer();
 		}
 		function ssOpen(key) {
+			ssLoad().then(function (all) { ssShow(key, all); });
+		}
+		function ssShow(key, all) {
 			ssCur = key;
 			ssIdx = 0;
-			var d = ssData[key];
+			var d = all[key];
+			if (!d || !d.photos || !d.photos.length) return;
 			ssDots.innerHTML = '';
-			d.images.forEach(function (_, i) {
+			d.photos.forEach(function (_, i) {
 				var b = document.createElement('button');
 				b.type = 'button';
 				b.setAttribute('aria-label', (i + 1) + '번째 사진');
@@ -309,6 +296,7 @@
 			document.body.style.overflow = '';
 			if (ssTimer) clearInterval(ssTimer);
 		}
+		ssLoad();
 		document.querySelectorAll('[data-slideshow]').forEach(function (btn) {
 			btn.addEventListener('click', function () { ssOpen(btn.getAttribute('data-slideshow')); });
 		});
