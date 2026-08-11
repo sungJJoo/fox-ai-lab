@@ -21,7 +21,7 @@
 :root {
 	/* 색 */
 	--spot1: #20c5bc;
-	--spot1-dark: #189e96;
+	--spot1-dark: #137e78;   /* 본문 대비 4.5:1 확보 (WCAG AA) */
 	--spot2: #1d3661;
 	--ink: #0e1b33;
 	--c-blue: #3194db;
@@ -335,6 +335,8 @@ main { padding-top: var(--header-h); }
 	background-repeat: no-repeat;
 	transition: background-size .35s var(--ease-out);
 }
+/* 밑줄 위치는 그대로 두고 손가락이 닿는 영역만 위아래로 확장 */
+.hero-link::after { content: ""; position: absolute; inset: -13px -6px; }
 .hero-link:hover { background-size: 100% 2px; }
 .hero-link .arr { transition: transform .25s var(--ease-out); font-family: var(--font-en); }
 .hero-link:hover .arr { transform: translateX(4px); }
@@ -1126,8 +1128,9 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 		flex-direction: column;
 		justify-content: center;
 		gap: 5px;
-		width: 42px; height: 42px;
-		padding: 9px;
+		width: 44px; height: 44px;
+		padding: 10px;
+		touch-action: manipulation;
 		background: none;
 		border: none;
 		cursor: pointer;
@@ -1178,9 +1181,11 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 	}
 	.direction-list::-webkit-scrollbar { display: none; }
 	.direction-list li { flex: 0 0 100%; scroll-snap-align: start; }
-	.dir-dots { display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 4px; }
-	.dir-dots button { width: 7px; height: 7px; border-radius: 50%; background: var(--line); border: none; padding: 0; cursor: pointer; transition: all .25s var(--ease-out); }
-	.dir-dots button.is-active { width: 22px; border-radius: 4px; background: var(--spot1); }
+	/* 점은 작게 보이되 손가락이 닿는 영역은 44px 확보 */
+	.dir-dots { display: flex; justify-content: center; align-items: center; gap: 0; margin-top: -8px; }
+	.dir-dots button { width: 30px; height: 44px; display: grid; place-items: center; background: none; border: none; padding: 0; cursor: pointer; touch-action: manipulation; }
+	.dir-dots button::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--line); transition: width .25s var(--ease-out), background .25s var(--ease-out), border-radius .25s var(--ease-out); }
+	.dir-dots button.is-active::before { width: 22px; border-radius: 4px; background: var(--spot1); }
 	.feature-list li { padding: 20px 22px; }
 	.feature-list .num { width: 44px; font-size: 24px; }
 	.explore-card { aspect-ratio: 4 / 3.6; }
