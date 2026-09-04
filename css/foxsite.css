@@ -96,8 +96,7 @@
 
 .foxsite-nav-area .foxsite-logo-foxedu { background-image: url("https://store.foxconnect.kr/resources/front/site/SITE_00000/image/logo/logo_foxconnect.svg"); }
 .foxsite-nav-area .foxsite-logo-lc     { background-image: url("https://store.foxconnect.kr/resources/front/site/SITE_00000/image/logo/logo_foxlc.svg"); }
-/* FOX AI — 로고 CDN 주소 확정 전까지 저장소 내 SVG 참조 (확정되면 이 한 줄만 교체) */
-.foxsite-nav-area .foxsite-logo-ai     { background-image: url("../images/logo_foxai.svg"); }
+.foxsite-nav-area .foxsite-logo-ai     { background-image: url("https://down.foxedu.kr/download/foxsite/images/logo/logo_foxai.svg"); }
 .foxsite-nav-area .foxsite-logo-class  { background-image: url("https://store.foxconnect.kr/resources/front/site/SITE_00000/image/logo/logo_foxclass.svg"); }
 .foxsite-nav-area .foxsite-logo-story  { background-image: url("https://store.foxconnect.kr/resources/front/site/SITE_00000/image/logo/logo_foxstory.svg"); }
 .foxsite-nav-area .foxsite-logo-news   { background-image: url("https://store.foxconnect.kr/resources/front/site/SITE_00000/image/logo/logo_foxnews.svg"); }
