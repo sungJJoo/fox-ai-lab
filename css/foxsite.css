@@ -1,0 +1,191 @@
+/* 폭스 패밀리사이트 드롭다운 전용 스타일 (공식 style_foxsite.css에서 드롭다운 부분만 발췌·범위 한정) */
+
+:root {
+	--foxsite-color-spot: #1D3661;
+	--foxsite-color-gr100: #ccc;
+	--foxsite-color-gr80: #eee;
+	--foxsite-shadow: 15px 15px 30px rgba(0, 0, 0, .1);
+	--foxsite-border-radius: 10px;
+}
+
+/* 로고와 열기 버튼을 감싸는 기준 상자 — .foxsite-nav의 absolute 기준점 */
+.logo-area {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 0 10px;
+	z-index: 1;
+}
+
+/* 드롭다운 패널 */
+.foxsite-nav {
+	display: none;
+	position: absolute;
+	left: 0;
+	top: -10px;
+	width: 260px;
+	box-sizing: border-box;
+	padding: 0 20px 20px;
+	background-color: #fff;
+	border-radius: var(--foxsite-border-radius);
+	box-shadow: var(--foxsite-shadow);
+	font-size: 0;
+	z-index: 10;
+}
+
+.foxsite-nav.is-open {
+	display: block;
+	animation: foxsite-navopen .5s ease-in forwards;
+}
+
+@keyframes foxsite-navopen {
+	0%   { opacity: 0; transform: translateY(10px) scale(1); transform-origin: center center; }
+	25%  { opacity: 1; }
+	50%  { transform: scale(1.1); }
+	100% { transform: translateY(0) scale(1); }
+}
+
+.foxsite-nav-top {
+	position: relative;
+	display: flex;
+	align-items: center;
+	height: 60px;
+	border-bottom: 1px solid var(--foxsite-color-gr80);
+	margin-bottom: 20px;
+}
+
+.foxsite-nav-top cite {
+	display: block;
+	width: calc(100% - 50px);
+	margin-right: 50px;
+	font-style: normal;
+}
+
+/* 목록 초기화 — 드롭다운 안쪽으로만 한정 */
+.foxsite-nav-cont ul,
+.foxsite-nav-cont li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.foxsite-nav-list li {
+	position: relative;
+}
+
+.foxsite-nav-list li ~ li {
+	margin-top: 20px;
+}
+
+/* 로고 — 텍스트를 숨기고 배경 이미지로 표시 */
+.foxsite-nav-area [class^=foxsite-logo] {
+	display: block;
+	font-style: normal;
+	text-indent: -99999px;
+	height: 22px;
+	background-position: left 0;
+	background-repeat: no-repeat;
+	background-size: auto 100%;
+	transition: transform .3s;
+}
+
+.foxsite-nav-top [class^=foxsite-logo] {
+	height: 20px;
+	background-size: auto 20px;
+}
+
+.foxsite-nav-area .foxsite-logo-foxedu { background-image: url("https://store.foxconnect.kr/resources/front/site/SITE_00000/image/logo/logo_foxconnect.svg"); }
+.foxsite-nav-area .foxsite-logo-lc     { background-image: url("https://store.foxconnect.kr/resources/front/site/SITE_00000/image/logo/logo_foxlc.svg"); }
+/* FOX AI — 로고 CDN 주소 확정 전까지 저장소 내 SVG 참조 (확정되면 이 한 줄만 교체) */
+.foxsite-nav-area .foxsite-logo-ai     { background-image: url("../images/logo_foxai.svg"); }
+.foxsite-nav-area .foxsite-logo-class  { background-image: url("https://store.foxconnect.kr/resources/front/site/SITE_00000/image/logo/logo_foxclass.svg"); }
+.foxsite-nav-area .foxsite-logo-story  { background-image: url("https://store.foxconnect.kr/resources/front/site/SITE_00000/image/logo/logo_foxstory.svg"); }
+.foxsite-nav-area .foxsite-logo-news   { background-image: url("https://store.foxconnect.kr/resources/front/site/SITE_00000/image/logo/logo_foxnews.svg"); }
+.foxsite-nav-area .foxsite-logo-store  { background-image: url("https://store.foxconnect.kr/resources/front/site/SITE_00000/image/logo/logo_foxstore.svg"); }
+.foxsite-nav-area .foxsite-logo-steam  { background-image: url("https://store.foxconnect.kr/resources/front/site/SITE_00000/image/logo/logo_foxsteam.svg"); }
+
+/* 열기 / 닫기 버튼 */
+.btn-foxsite-nav-open,
+.btn-foxsite-nav-close {
+	position: relative;
+	display: inline-block;
+	width: 28px;
+	height: 28px;
+	box-sizing: border-box;
+	border: 1px solid var(--foxsite-color-gr100);
+	border-radius: 50%;
+	padding: 0;
+	background: transparent;
+	text-indent: -99999px;
+	cursor: pointer;
+	vertical-align: middle;
+}
+
+.btn-foxsite-nav-open::before,
+.btn-foxsite-nav-close::before {
+	content: " ";
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-top: -6px;
+	margin-left: -4px;
+	box-sizing: border-box;
+	width: 8px;
+	height: 8px;
+	border-top: 2px solid var(--foxsite-color-spot);
+	border-right: 2px solid var(--foxsite-color-spot);
+	transform: rotate(135deg);
+}
+
+.btn-foxsite-nav-close {
+	position: absolute;
+	top: 50%;
+	right: 0;
+	transform: translateY(-50%);
+}
+
+.btn-foxsite-nav-close::before {
+	margin-top: -2px;
+	transform: rotate(-45deg);
+}
+
+/* 태블릿 이하 */
+@media screen and (max-width: 1279px) {
+	.foxsite-nav {
+		padding-top: 10px;
+		top: 0;
+		left: -5px;
+	}
+	.foxsite-nav-top {
+		height: 50px;
+	}
+}
+
+/* 모바일 이하 */
+@media screen and (max-width: 767px) {
+	.foxsite-nav {
+		width: 180px;
+	}
+	.btn-foxsite-nav-open,
+	.btn-foxsite-nav-close {
+		width: 24px;
+		height: 24px;
+	}
+	.foxsite-nav-list li ~ li {
+		margin-top: 16px;
+	}
+	.foxsite-nav-area [class^=foxsite-logo] {
+		height: 20px;
+		background-size: auto 18px;
+	}
+	.foxsite-nav-top [class^=foxsite-logo] {
+		height: 16px;
+		background-size: auto 16px;
+	}
+}
+
+@media screen and (max-width: 374px) {
+	.foxsite-nav {
+		width: 70vw;
+	}
+}

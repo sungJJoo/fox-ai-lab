@@ -22,17 +22,41 @@
 	<link rel="preload" href="fonts/GmarketSansBold.woff2" as="font" type="font/woff2" crossorigin />
 	<link rel="preload" href="fonts/GmarketSansMedium.woff2" as="font" type="font/woff2" crossorigin />
 	<link rel="stylesheet" href="css/style.css?v=202608111520" />
+	<link rel="stylesheet" href="css/foxsite.css" />
 </head>
 <body>
 	<div class="scroll-progress" aria-hidden="true"></div>
 
 	<header class="site-header">
 		<div class="wrap">
-			<p class="logo">
-				<a href="index.html">
-					<img src="images/logo-fox-ai.png" width="350" height="114" alt="FOX AI 폭스러닝센터 AI 연구소" class="logo-img"  />
-				</a>
-			</p>
+			<div class="logo-area">
+				<p class="logo">
+					<a href="index.html">
+						<img src="images/logo-fox-ai.png" width="350" height="114" alt="FOX AI 폭스러닝센터 AI 연구소" class="logo-img" />
+					</a>
+				</p>
+
+				<div class="foxsite-nav-area">
+					<button type="button" class="btn-foxsite-nav-open" aria-expanded="false">FOXCONNECT SITE 열기</button>
+					<div class="foxsite-nav">
+						<div class="foxsite-nav-top">
+							<cite><a href="http://www.foxedu.kr" class="foxsite-logo-foxedu">폭스커넥트</a></cite>
+							<button type="button" class="btn-foxsite-nav-close">닫기</button>
+						</div>
+						<div class="foxsite-nav-cont">
+							<ul class="foxsite-nav-list">
+								<li><a href="https://portal.foxedu.kr" class="foxsite-logo-lc">FOX LC</a></li>
+								<li><a href="https://ai.foxconnect.kr" class="foxsite-logo-ai">FOX AI</a></li>
+								<li><a href="https://class.foxedu.kr" class="foxsite-logo-class">FOX CLASS</a></li>
+								<li><a href="https://story.foxedu.kr" class="foxsite-logo-story">FOX STORY</a></li>
+								<li><a href="https://news.foxedu.kr" class="foxsite-logo-news">FOX NEWS</a></li>
+								<li><a href="https://store.foxedu.kr" class="foxsite-logo-store">FOX STORE</a></li>
+								<li><a href="https://steam.foxedu.kr" class="foxsite-logo-steam">FOX STEAM</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
 			<button type="button" class="btn-gnb-open" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
 			<nav class="site-gnb" id="gnb">
 				<ul>
@@ -198,5 +222,6 @@
 	</footer>
 
 	<script src="js/common.js?v=202608111520"></script>
+	<script src="js/foxsite.js"></script>
 </body>
 </html>
