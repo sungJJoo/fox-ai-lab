@@ -1,9 +1,10 @@
-// 공지·소식 페이지: data/news.json 을 읽어 목록(분류·페이지)과 상세(?id=)를 그린다
+// 공지·소식: data/news.json 을 읽어 공지·소식 페이지(목록·상세)와 메인 「최근 소식」을 그린다
 (function () {
 	'use strict';
 
 	var app = document.getElementById('newsApp');
-	if (!app) return;
+	var latest = document.getElementById('newsLatest');
+	if (!app && !latest) return;
 
 	var F = window.FoxContent;
 	var PER_PAGE = 10;
@@ -93,10 +94,31 @@
 			'<p class="nw-back"><a class="btn btn-dark" href="news.html">목록으로</a></p>';
 	}
 
+	// 메인 최근 소식 3개 (글이 없거나 못 불러오면 영역째 숨김 유지)
+	function renderLatest(all) {
+		var rows = sorted(all).slice(0, 3);
+		if (!rows.length) return;
+		latest.querySelector('[data-news-latest]').innerHTML = rows.map(function (n) {
+			var im = n.images && n.images[0];
+			var cat = n.category === '공지' ? 'notice' : 'news';
+			return '<li><a href="' + link({ id: n.id }) + '">' +
+				'<figure class="nw-card-img' + (im ? '' : ' is-empty') + '">' +
+					(im ? '<img src="' + F.esc(F.url(im.src)) + '" width="' + im.width + '" height="' + im.height + '" alt="" loading="lazy" />'
+						: '<span aria-hidden="true">' + (cat === 'notice' ? 'NOTICE' : 'NEWS') + '</span>') +
+				'</figure>' +
+				'<div class="nw-card-cont"><span class="nw-cat c-' + cat + '">' + F.esc(n.category) + '</span>' +
+				'<strong>' + F.esc(n.title) + '</strong>' +
+				'<time datetime="' + F.esc(n.date) + '">' + fmtDate(n.date) + '</time></div></a></li>';
+		}).join('');
+		latest.hidden = false;
+	}
+
 	F.load('news').then(function (all) {
+		if (latest) renderLatest(all);
+		if (!app) return;
 		if (q.get('id')) renderView(all, q.get('id'));
 		else renderList(all);
 	}).catch(function () {
-		app.innerHTML = '<p class="nw-empty">글을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.</p>';
+		if (app) app.innerHTML = '<p class="nw-empty">글을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.</p>';
 	});
 })();

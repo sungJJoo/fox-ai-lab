@@ -286,8 +286,7 @@
 					list.push({ target: '', name: '새 활동', desc: '', image: null });
 					s.open = list.length - 1; changed(); rerender();
 				}, 'cms-btn-fill cms-btn-sm')),
-			h('p', { class: 'cms-desc', text: '번호는 순서대로 자동으로 매겨지고, 활동 수는 사이트의 「' + list.length + '가지 활동」 문구에 자동 반영됩니다. ' +
-				'※ 메인의 「우리 아이 프로그램 찾기」 설문 추천 목록은 별도로 고쳐야 합니다.' }),
+			h('p', { class: 'cms-desc', text: '번호는 순서대로 자동으로 매겨지고, 활동 수는 사이트의 「' + list.length + '가지 활동」 문구에 자동 반영됩니다.' }),
 			h('ul', { class: 'cms-list' }, list.map(function (a, i) {
 				var open = s.open === i;
 				return h('li', { class: 'cms-item' + (open ? ' is-open' : '') },

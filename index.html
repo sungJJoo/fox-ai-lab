@@ -282,6 +282,20 @@
 			</div>
 		</section>
 
+		<!-- 최근 소식 (data/news.json, 글이 없으면 숨김) -->
+		<section class="mn-section" id="newsLatest" hidden>
+			<div class="wrap">
+				<header class="sec-head nw-latest-head reveal">
+					<div>
+						<p class="overline">News</p>
+						<h2 class="sec-tit">AI 연구소 <span class="grad-txt">새 소식</span></h2>
+					</div>
+					<a href="news.html" class="btn btn-dark">전체 보기 <span class="arr">→</span></a>
+				</header>
+				<ul class="nw-cards" data-news-latest></ul>
+			</div>
+		</section>
+
 		<!-- 학부모 FAQ -->
 		<section class="mn-section sec-faq">
 			<div class="wrap">
@@ -397,6 +411,7 @@
 
 	<script src="js/content.js"></script>
 	<script src="js/popup.js"></script>
+	<script src="js/news.js"></script>
 	<script src="js/common.js?v=202609081357"></script>
 	<script src="js/foxsite.js"></script>
 </body>

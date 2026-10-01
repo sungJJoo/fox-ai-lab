@@ -37,3 +37,10 @@
 - [x] 본사 서버 모드 확인 (원격 데이터 없을 때 HTML 그대로)
 - [x] `main` 병합 · push (2026-10-01, GitHub Pages 반영 확인)
 - [ ] 본사에 업로드 요청 (upload.zip)
+
+## 7. 업로드 전 마무리 (2026-10-01 추가 요청)
+- [x] 메인 「최근 소식」 3개 (data/news.json)
+- [x] 설문: 확인 결과 7/28 사용자가 라이브에서 제거한 기능 → 작업 제외, 잘못된 안내 문구 정리
+- [ ] SEO: og:url · sitemap · robots · canonical → https://ai.foxconnect.kr
+- [ ] UI 점검 (web-design-guidelines) 후 수정
+- [ ] hyperframes 로 홍보 영상 제작
