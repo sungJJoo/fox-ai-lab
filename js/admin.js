@@ -117,12 +117,12 @@
 	}
 
 	function btn(label, fn, cls, title) {
-		return h('button', { type: 'button', class: 'ad-btn ' + (cls || 'ad-btn-ghost'), text: label, title: title, onclick: fn });
+		return h('button', { type: 'button', class: 'cms-btn ' + (cls || 'cms-btn-ghost'), text: label, title: title, onclick: fn });
 	}
 
 	function iconBtn(label, title, disabled, fn, isDel) {
 		return h('button', {
-			type: 'button', class: 'ad-ico-btn' + (isDel ? ' is-del' : ''), text: label,
+			type: 'button', class: 'cms-ico-btn' + (isDel ? ' is-del' : ''), text: label,
 			title: title, 'aria-label': title, disabled: disabled, onclick: fn
 		});
 	}
@@ -149,12 +149,12 @@
 		return el;
 	}
 	function field(label, control, hint) {
-		return h('label', { class: 'ad-field' }, h('span', { class: 'ad-field-l', text: label }), control,
-			hint ? h('small', { class: 'ad-hint', text: hint }) : null);
+		return h('label', { class: 'cms-field' }, h('span', { class: 'cms-field-l', text: label }), control,
+			hint ? h('small', { class: 'cms-hint', text: hint }) : null);
 	}
 	function checkbox(obj, key, label) {
 		var el = h('input', { type: 'checkbox', checked: !!obj[key], onchange: function () { obj[key] = el.checked; changed(); } });
-		return h('label', { class: 'ad-check' }, el, label);
+		return h('label', { class: 'cms-check' }, el, label);
 	}
 	function select(obj, key, options) {
 		var el = h('select', { onchange: function () { obj[key] = el.value; changed(); } },
@@ -240,9 +240,9 @@
 	// 사진 1장 칸 (선택/교체/빼기)
 	function imageBox(cur, o) {
 		var has = cur && cur.src;
-		return h('div', { class: 'ad-imgbox' },
-			h('div', { class: 'ad-thumb' }, has ? h('img', { src: imgUrl(cur.src), alt: '' }) : h('span', { text: '사진 없음' })),
-			h('div', { class: 'ad-imgbox-btns' },
+		return h('div', { class: 'cms-imgbox' },
+			h('div', { class: 'cms-thumb' }, has ? h('img', { src: imgUrl(cur.src), alt: '' }) : h('span', { text: '사진 없음' })),
+			h('div', { class: 'cms-imgbox-btns' },
 				btn(has ? '사진 교체' : '사진 선택', function () {
 					pickFiles(false, function (files) {
 						runImages(files, function (f) {
@@ -252,9 +252,9 @@
 							});
 						});
 					});
-				}, 'ad-btn-ghost ad-btn-sm'),
-				o.removable && has ? btn('사진 빼기', function () { dropImage(cur.src); o.set(null); changed(); rerender(); }, 'ad-btn-ghost ad-btn-sm') : null,
-				o.hint ? h('small', { class: 'ad-hint', text: o.hint }) : null));
+				}, 'cms-btn-ghost cms-btn-sm'),
+				o.removable && has ? btn('사진 빼기', function () { dropImage(cur.src); o.set(null); changed(); rerender(); }, 'cms-btn-ghost cms-btn-sm') : null,
+				o.hint ? h('small', { class: 'cms-hint', text: o.hint }) : null));
 	}
 
 	// 프로그램 페이지용 이미지 객체 (picture 태그 형식)
@@ -266,8 +266,8 @@
 
 	function viewPrograms() {
 		var P = D.programs, s = ui.prog;
-		var tabs = h('div', { class: 'ad-tabs' }, [['activities', '활동 프로그램 표'], ['areas', '4가지 영역'], ['posters', '포스터']].map(function (t) {
-			return h('button', { type: 'button', class: 'ad-tab' + (s.tab === t[0] ? ' is-on' : ''), text: t[1],
+		var tabs = h('div', { class: 'cms-tabs' }, [['activities', '활동 프로그램 표'], ['areas', '4가지 영역'], ['posters', '포스터']].map(function (t) {
+			return h('button', { type: 'button', class: 'cms-tab' + (s.tab === t[0] ? ' is-on' : ''), text: t[1],
 				onclick: function () { s.tab = t[0]; s.open = -1; rerender(); } });
 		}));
 		var body;
@@ -279,25 +279,25 @@
 
 	function progActivities(list) {
 		var s = ui.prog;
-		return h('section', { class: 'ad-card' },
-			h('div', { class: 'ad-card-head' },
+		return h('section', { class: 'cms-card' },
+			h('div', { class: 'cms-card-head' },
 				h('h2', { text: '활동 프로그램 ' + list.length + '개' }),
 				btn('+ 활동 추가', function () {
 					list.push({ target: '', name: '새 활동', desc: '', image: null });
 					s.open = list.length - 1; changed(); rerender();
-				}, 'ad-btn-fill ad-btn-sm')),
-			h('p', { class: 'ad-desc', text: '번호는 순서대로 자동으로 매겨지고, 활동 수는 사이트의 「' + list.length + '가지 활동」 문구에 자동 반영됩니다. ' +
+				}, 'cms-btn-fill cms-btn-sm')),
+			h('p', { class: 'cms-desc', text: '번호는 순서대로 자동으로 매겨지고, 활동 수는 사이트의 「' + list.length + '가지 활동」 문구에 자동 반영됩니다. ' +
 				'※ 메인의 「우리 아이 프로그램 찾기」 설문 추천 목록은 별도로 고쳐야 합니다.' }),
-			h('ul', { class: 'ad-list' }, list.map(function (a, i) {
+			h('ul', { class: 'cms-list' }, list.map(function (a, i) {
 				var open = s.open === i;
-				return h('li', { class: 'ad-item' + (open ? ' is-open' : '') },
-					h('div', { class: 'ad-item-row' },
-						h('span', { class: 'ad-item-no', text: i + 1 }),
-						h('div', { class: 'ad-item-thumb' }, a.image ? h('img', { src: imgUrl(a.image.src), alt: '', loading: 'lazy' }) : null),
-						h('div', { class: 'ad-item-body' },
+				return h('li', { class: 'cms-item' + (open ? ' is-open' : '') },
+					h('div', { class: 'cms-item-row' },
+						h('span', { class: 'cms-item-no', text: i + 1 }),
+						h('div', { class: 'cms-item-thumb' }, a.image ? h('img', { src: imgUrl(a.image.src), alt: '', loading: 'lazy' }) : null),
+						h('div', { class: 'cms-item-body' },
 							h('strong', { text: oneLine(a.name) || '(이름 없음)' }),
 							h('small', { text: oneLine(a.target) })),
-						h('div', { class: 'ad-item-acts' },
+						h('div', { class: 'cms-item-acts' },
 							moveBtns(list, i),
 							iconBtn(open ? '닫기' : '수정', open ? '닫기' : '수정', false, function () { s.open = open ? -1 : i; rerender(); }),
 							iconBtn('✕', '삭제', false, function () {
@@ -305,7 +305,7 @@
 								if (a.image) dropImage(a.image.src);
 								list.splice(i, 1); s.open = -1; changed(); rerender();
 							}, true))),
-					open ? h('div', { class: 'ad-editor' },
+					open ? h('div', { class: 'cms-editor' },
 						field('활동명', input(a, 'name', { rows: 2 }), '줄을 바꾸면 사이트에서도 줄이 바뀝니다.'),
 						field('추천 대상', input(a, 'target', { rows: 3, ph: '예) 초등 저·고학년\n(1~6학년)' })),
 						field('활동 내용', input(a, 'desc', { rows: 4 })),
@@ -324,9 +324,9 @@
 				rows: 6, value: a.items.join('\n'),
 				oninput: function () { a.items = items.value.split('\n').map(function (x) { return x.trim(); }).filter(Boolean); changed(); }
 			});
-			return h('section', { class: 'ad-card' },
+			return h('section', { class: 'cms-card' },
 				h('h2', { text: a.title + ' (' + a.en + ')' }),
-				h('div', { class: 'ad-grid2' },
+				h('div', { class: 'cms-grid2' },
 					field('영역 이름', input(a, 'title')),
 					field('영문 표기', input(a, 'en'))),
 				field('한 줄 설명', input(a, 'desc')),
@@ -340,8 +340,8 @@
 	}
 
 	function progPosters(list) {
-		return h('section', { class: 'ad-card' },
-			h('div', { class: 'ad-card-head' },
+		return h('section', { class: 'cms-card' },
+			h('div', { class: 'cms-card-head' },
 				h('h2', { text: '포스터 ' + list.length + '장' }),
 				btn('+ 포스터 추가', function () {
 					pickFiles(true, function (files) {
@@ -351,17 +351,17 @@
 							});
 						});
 					});
-				}, 'ad-btn-fill ad-btn-sm')),
-			h('p', { class: 'ad-desc', text: '포스터를 누르면 사이트에서 크게 볼 수 있습니다. 세로 포스터를 권장합니다.' }),
-			h('ul', { class: 'ad-list' }, list.map(function (p, i) {
-				return h('li', { class: 'ad-item' },
-					h('div', { class: 'ad-item-row' },
-						h('span', { class: 'ad-item-no', text: i + 1 }),
-						h('div', { class: 'ad-item-thumb is-tall' }, h('img', { src: imgUrl(p.image.src), alt: '', loading: 'lazy' })),
-						h('div', { class: 'ad-item-body' },
+				}, 'cms-btn-fill cms-btn-sm')),
+			h('p', { class: 'cms-desc', text: '포스터를 누르면 사이트에서 크게 볼 수 있습니다. 세로 포스터를 권장합니다.' }),
+			h('ul', { class: 'cms-list' }, list.map(function (p, i) {
+				return h('li', { class: 'cms-item' },
+					h('div', { class: 'cms-item-row' },
+						h('span', { class: 'cms-item-no', text: i + 1 }),
+						h('div', { class: 'cms-item-thumb is-tall' }, h('img', { src: imgUrl(p.image.src), alt: '', loading: 'lazy' })),
+						h('div', { class: 'cms-item-body' },
 							field('제목', input(p, 'caption', { ph: '포스터 아래에 표시되는 제목' })),
 							field('이미지 설명', input(p.image, 'alt', { ph: '예) 마을을 지켜라 포스터' }))),
-						h('div', { class: 'ad-item-acts' },
+						h('div', { class: 'cms-item-acts' },
 							moveBtns(list, i),
 							iconBtn('✕', '삭제', false, function () {
 								if (!confirm((i + 1) + '번째 포스터를 삭제할까요?')) return;
@@ -386,44 +386,44 @@
 		if (cur) return newsEditor(cur);
 		s.edit = null;
 
-		return h('section', { class: 'ad-card' },
-			h('div', { class: 'ad-card-head' },
+		return h('section', { class: 'cms-card' },
+			h('div', { class: 'cms-card-head' },
 				h('h2', { text: '글 ' + D.news.length + '개' }),
 				btn('+ 새 글', function () {
 					var id = D.news.reduce(function (m, n) { return Math.max(m, n.id); }, 0) + 1;
 					D.news.push({ id: id, category: '소식', title: '', date: today(), pinned: false, body: '', images: [] });
 					s.edit = id; changed(); rerender();
-				}, 'ad-btn-fill ad-btn-sm')),
-			D.news.length ? h('ul', { class: 'ad-rows' }, sortedNews().map(function (n) {
+				}, 'cms-btn-fill cms-btn-sm')),
+			D.news.length ? h('ul', { class: 'cms-rows' }, sortedNews().map(function (n) {
 				return h('li', null,
-					h('span', { class: 'ad-badge' + (n.category === '공지' ? ' is-dark' : ''), text: n.category }),
-					n.pinned ? h('span', { class: 'ad-badge is-red', text: '고정' }) : null,
-					h('button', { type: 'button', class: 'ad-rows-tit', text: n.title || '(제목 없음)', onclick: function () { s.edit = n.id; rerender(); } }),
+					h('span', { class: 'cms-badge' + (n.category === '공지' ? ' is-dark' : ''), text: n.category }),
+					n.pinned ? h('span', { class: 'cms-badge is-red', text: '고정' }) : null,
+					h('button', { type: 'button', class: 'cms-rows-tit', text: n.title || '(제목 없음)', onclick: function () { s.edit = n.id; rerender(); } }),
 					h('time', { text: n.date }),
-					btn('수정', function () { s.edit = n.id; rerender(); }, 'ad-btn-ghost ad-btn-sm'));
-			})) : h('p', { class: 'ad-empty', text: '아직 글이 없습니다. 「+ 새 글」로 첫 글을 올려 보세요.' }));
+					btn('수정', function () { s.edit = n.id; rerender(); }, 'cms-btn-ghost cms-btn-sm'));
+			})) : h('p', { class: 'cms-empty', text: '아직 글이 없습니다. 「+ 새 글」로 첫 글을 올려 보세요.' }));
 	}
 
 	function newsEditor(n) {
 		var s = ui.news;
 		var saved = JSON.parse(orig.news).some(function (x) { return x.id === n.id; });
-		return h('section', { class: 'ad-card' },
-			h('div', { class: 'ad-card-head' },
-				btn('← 목록으로', function () { s.edit = null; rerender(); }, 'ad-btn-ghost ad-btn-sm'),
-				saved ? h('a', { class: 'ad-link', href: 'news.html?id=' + n.id, target: '_blank', rel: 'noopener', text: '사이트에서 보기 ↗' }) : null),
-			h('div', { class: 'ad-grid3' },
+		return h('section', { class: 'cms-card' },
+			h('div', { class: 'cms-card-head' },
+				btn('← 목록으로', function () { s.edit = null; rerender(); }, 'cms-btn-ghost cms-btn-sm'),
+				saved ? h('a', { class: 'cms-link', href: 'news.html?id=' + n.id, target: '_blank', rel: 'noopener', text: '사이트에서 보기 ↗' }) : null),
+			h('div', { class: 'cms-grid3' },
 				field('분류', select(n, 'category', ['공지', '소식'])),
 				field('날짜', input(n, 'date', { type: 'date' })),
-				h('div', { class: 'ad-field' }, h('span', { class: 'ad-field-l', text: '목록 위에 고정' }), checkbox(n, 'pinned', '고정하기'))),
+				h('div', { class: 'cms-field' }, h('span', { class: 'cms-field-l', text: '목록 위에 고정' }), checkbox(n, 'pinned', '고정하기'))),
 			field('제목', input(n, 'title', { max: 120 })),
 			field('본문', input(n, 'body', { rows: 14 }), '빈 줄을 넣으면 문단이 나뉩니다. https:// 로 시작하는 주소는 자동으로 링크가 됩니다.'),
-			h('div', { class: 'ad-field' },
-				h('span', { class: 'ad-field-l', text: '사진 (본문 위에 순서대로 표시)' }),
-				h('ul', { class: 'ad-list' }, n.images.map(function (im, i) {
-					return h('li', { class: 'ad-item' }, h('div', { class: 'ad-item-row' },
-						h('div', { class: 'ad-item-thumb' }, h('img', { src: imgUrl(im.src), alt: '' })),
-						h('div', { class: 'ad-item-body' }, input(im, 'alt', { ph: '사진 설명 (시각장애인 안내용)' })),
-						h('div', { class: 'ad-item-acts' }, moveBtns(n.images, i),
+			h('div', { class: 'cms-field' },
+				h('span', { class: 'cms-field-l', text: '사진 (본문 위에 순서대로 표시)' }),
+				h('ul', { class: 'cms-list' }, n.images.map(function (im, i) {
+					return h('li', { class: 'cms-item' }, h('div', { class: 'cms-item-row' },
+						h('div', { class: 'cms-item-thumb' }, h('img', { src: imgUrl(im.src), alt: '' })),
+						h('div', { class: 'cms-item-body' }, input(im, 'alt', { ph: '사진 설명 (시각장애인 안내용)' })),
+						h('div', { class: 'cms-item-acts' }, moveBtns(n.images, i),
 							iconBtn('✕', '사진 삭제', false, function () { dropImage(im.src); n.images.splice(i, 1); changed(); rerender(); }, true))));
 				})),
 				btn('+ 사진 추가', function () {
@@ -434,14 +434,14 @@
 							});
 						});
 					});
-				}, 'ad-btn-ghost ad-btn-sm')),
-			h('div', { class: 'ad-danger' },
+				}, 'cms-btn-ghost cms-btn-sm')),
+			h('div', { class: 'cms-danger' },
 				btn('이 글 삭제', function () {
 					if (!confirm('「' + (n.title || '제목 없음') + '」 글을 삭제할까요?')) return;
 					n.images.forEach(function (im) { dropImage(im.src); });
 					D.news.splice(D.news.indexOf(n), 1);
 					s.edit = null; changed(); rerender();
-				}, 'ad-btn-danger ad-btn-sm')));
+				}, 'cms-btn-danger cms-btn-sm')));
 	}
 
 	/* ── 화면: 팝업 ───────────────────────── */
@@ -460,35 +460,35 @@
 		if (cur) return popupEditor(cur);
 		s.edit = null;
 
-		return h('section', { class: 'ad-card' },
-			h('div', { class: 'ad-card-head' },
+		return h('section', { class: 'cms-card' },
+			h('div', { class: 'cms-card-head' },
 				h('h2', { text: '팝업 ' + D.popups.length + '개' }),
 				btn('+ 새 팝업', function () {
 					var id = D.popups.reduce(function (m, p) { return Math.max(m, p.id); }, 0) + 1;
 					D.popups.unshift({ id: id, enabled: true, title: '', start: today(), end: '', body: '', image: null, link: '', linkText: '' });
 					s.edit = id; changed(); rerender();
-				}, 'ad-btn-fill ad-btn-sm')),
-			D.popups.length ? h('ul', { class: 'ad-rows' }, D.popups.map(function (p, i) {
+				}, 'cms-btn-fill cms-btn-sm')),
+			D.popups.length ? h('ul', { class: 'cms-rows' }, D.popups.map(function (p, i) {
 				var st = popupStatus(p);
 				return h('li', null,
-					h('span', { class: 'ad-badge' + st[1], text: st[0] }),
-					h('button', { type: 'button', class: 'ad-rows-tit', text: p.title || '(제목 없음)', onclick: function () { s.edit = p.id; rerender(); } }),
+					h('span', { class: 'cms-badge' + st[1], text: st[0] }),
+					h('button', { type: 'button', class: 'cms-rows-tit', text: p.title || '(제목 없음)', onclick: function () { s.edit = p.id; rerender(); } }),
 					h('time', { text: (p.start || '시작 제한 없음') + ' ~ ' + (p.end || '종료 제한 없음') }),
 					moveBtns(D.popups, i),
-					btn('수정', function () { s.edit = p.id; rerender(); }, 'ad-btn-ghost ad-btn-sm'));
-			})) : h('p', { class: 'ad-empty', text: '등록된 팝업이 없습니다.' }),
-			h('p', { class: 'ad-hint', text: '여러 개가 동시에 노출되면 위 순서대로 나란히 뜹니다. (모바일은 한 장씩)' }));
+					btn('수정', function () { s.edit = p.id; rerender(); }, 'cms-btn-ghost cms-btn-sm'));
+			})) : h('p', { class: 'cms-empty', text: '등록된 팝업이 없습니다.' }),
+			h('p', { class: 'cms-hint', text: '여러 개가 동시에 노출되면 위 순서대로 나란히 뜹니다. (모바일은 한 장씩)' }));
 	}
 
 	function popupEditor(p) {
 		var s = ui.popups;
-		return h('section', { class: 'ad-card' },
-			h('div', { class: 'ad-card-head' },
-				btn('← 목록으로', function () { s.edit = null; rerender(); }, 'ad-btn-ghost ad-btn-sm'),
-				h('span', { class: 'ad-badge' + popupStatus(p)[1], text: popupStatus(p)[0] })),
+		return h('section', { class: 'cms-card' },
+			h('div', { class: 'cms-card-head' },
+				btn('← 목록으로', function () { s.edit = null; rerender(); }, 'cms-btn-ghost cms-btn-sm'),
+				h('span', { class: 'cms-badge' + popupStatus(p)[1], text: popupStatus(p)[0] })),
 			checkbox(p, 'enabled', '사용 (끄면 기간과 상관없이 안 보입니다)'),
 			field('제목', input(p, 'title', { max: 60 }), '이미지만 있는 팝업이면 화면에는 안 보이고 이미지 설명으로 쓰입니다.'),
-			h('div', { class: 'ad-grid2' },
+			h('div', { class: 'cms-grid2' },
 				field('시작일', input(p, 'start', { type: 'date' }), '비우면 바로 시작'),
 				field('종료일', input(p, 'end', { type: 'date' }), '비우면 끌 때까지 계속')),
 			field('이미지', imageBox(p.image, {
@@ -496,16 +496,16 @@
 				set: function (n) { p.image = n; }
 			})),
 			field('내용', input(p, 'body', { rows: 4 }), '이미지 아래에 표시됩니다. 이미지가 있으면 비워도 됩니다.'),
-			h('div', { class: 'ad-grid2' },
+			h('div', { class: 'cms-grid2' },
 				field('링크 주소', input(p, 'link', { ph: '예) news.html?id=3  또는  https://...' }), '누르면 이동할 곳 (비우면 링크 없음)'),
 				field('버튼 문구', input(p, 'linkText', { ph: '자세히 보기' }), '이미지가 없을 때만 버튼으로 보입니다.')),
-			h('div', { class: 'ad-danger' },
+			h('div', { class: 'cms-danger' },
 				btn('이 팝업 삭제', function () {
 					if (!confirm('「' + (p.title || '제목 없음') + '」 팝업을 삭제할까요?')) return;
 					if (p.image) dropImage(p.image.src);
 					D.popups.splice(D.popups.indexOf(p), 1);
 					s.edit = null; changed(); rerender();
-				}, 'ad-btn-danger ad-btn-sm')));
+				}, 'cms-btn-danger cms-btn-sm')));
 	}
 
 	/* ── 화면: 대회 사진 (슬라이드쇼) ───────────── */
@@ -523,15 +523,15 @@
 
 	function viewPhotos() {
 		var keys = Object.keys(D.photos);
-		if (!keys.length) return h('p', { class: 'ad-empty', text: '앨범이 없습니다.' });
+		if (!keys.length) return h('p', { class: 'cms-empty', text: '앨범이 없습니다.' });
 		var s = ui.photos;
 		if (keys.indexOf(s.key) < 0) s.key = keys[0];
 		var al = D.photos[s.key];
 
-		var drop = h('label', { class: 'ad-drop' },
-			h('span', { class: 'ad-drop-ico', text: '＋' }),
-			h('span', { class: 'ad-drop-tit', text: '사진 추가' }),
-			h('span', { class: 'ad-drop-sub', text: '클릭하거나 파일을 끌어다 놓으세요 · 여러 장 가능' }));
+		var drop = h('label', { class: 'cms-drop' },
+			h('span', { class: 'cms-drop-ico', text: '＋' }),
+			h('span', { class: 'cms-drop-tit', text: '사진 추가' }),
+			h('span', { class: 'cms-drop-sub', text: '클릭하거나 파일을 끌어다 놓으세요 · 여러 장 가능' }));
 		function addPhotos(files) {
 			runImages(files, function (f) {
 				return addImage(f, 1440, nextPhotoName(s.key)).then(function (r) { al.photos.push({ src: r.src, caption: '' }); });
@@ -546,20 +546,20 @@
 		});
 
 		return [
-			h('div', { class: 'ad-tabs' }, keys.map(function (k) {
-				return h('button', { type: 'button', class: 'ad-tab' + (k === s.key ? ' is-on' : ''),
+			h('div', { class: 'cms-tabs' }, keys.map(function (k) {
+				return h('button', { type: 'button', class: 'cms-tab' + (k === s.key ? ' is-on' : ''),
 					text: D.photos[k].title + ' (' + D.photos[k].photos.length + ')', onclick: function () { s.key = k; rerender(); } });
 			})),
-			h('section', { class: 'ad-card' },
-				h('div', { class: 'ad-card-head' }, h('h2', { text: al.title }), h('span', { class: 'ad-count', text: '사진 ' + al.photos.length + '장' })),
+			h('section', { class: 'cms-card' },
+				h('div', { class: 'cms-card-head' }, h('h2', { text: al.title }), h('span', { class: 'cms-count', text: '사진 ' + al.photos.length + '장' })),
 				drop,
-				h('ul', { class: 'ad-list' }, al.photos.map(function (p, i) {
-					return h('li', { class: 'ad-item' + (newBlobs[p.src] ? ' is-new' : '') }, h('div', { class: 'ad-item-row' },
-						h('span', { class: 'ad-item-no', text: i + 1 }),
-						h('div', { class: 'ad-item-thumb' }, h('img', { src: imgUrl(p.src), alt: '', loading: 'lazy' })),
-						h('div', { class: 'ad-item-body' },
+				h('ul', { class: 'cms-list' }, al.photos.map(function (p, i) {
+					return h('li', { class: 'cms-item' + (newBlobs[p.src] ? ' is-new' : '') }, h('div', { class: 'cms-item-row' },
+						h('span', { class: 'cms-item-no', text: i + 1 }),
+						h('div', { class: 'cms-item-thumb' }, h('img', { src: imgUrl(p.src), alt: '', loading: 'lazy' })),
+						h('div', { class: 'cms-item-body' },
 							input(p, 'caption', { rows: 2, ph: '사진 설명을 적어주세요 (화면에 표시되고, 시각장애인 안내에도 쓰입니다)' })),
-						h('div', { class: 'ad-item-acts' }, moveBtns(al.photos, i),
+						h('div', { class: 'cms-item-acts' }, moveBtns(al.photos, i),
 							iconBtn('✕', '삭제', false, function () {
 								if (!confirm((i + 1) + '번째 사진을 삭제할까요?\n\n' + (p.caption || p.src))) return;
 								dropImage(p.src, true);
@@ -574,14 +574,14 @@
 	function viewSettings() {
 		var S = D.site;
 		return [
-			h('section', { class: 'ad-card' },
+			h('section', { class: 'cms-card' },
 				h('h2', { text: '온라인 상담 신청' }),
-				h('p', { class: 'ad-desc', text: '상담 문의 페이지의 신청 폼은 아래 「접수 주소」가 있을 때만 보입니다. 접수된 문의는 구글 시트에 쌓이고, 알림 메일이 갑니다.' }),
+				h('p', { class: 'cms-desc', text: '상담 문의 페이지의 신청 폼은 아래 「접수 주소」가 있을 때만 보입니다. 접수된 문의는 구글 시트에 쌓이고, 알림 메일이 갑니다.' }),
 				field('접수 주소 (Google Apps Script 웹 앱 URL)', input(S, 'inquiryEndpoint', { type: 'url', ph: 'https://script.google.com/macros/s/.../exec' }),
 					'비우면 신청 폼이 숨겨지고 전화·카카오톡 안내만 보입니다.'),
 				field('문의 시트 주소', input(S, 'inquirySheetUrl', { type: 'url', ph: 'https://docs.google.com/spreadsheets/d/...' }), '관리자 편의용 바로가기입니다. 사이트에는 노출되지 않습니다.'),
-				S.inquirySheetUrl ? h('p', null, h('a', { class: 'ad-btn ad-btn-ghost ad-btn-sm', href: S.inquirySheetUrl, target: '_blank', rel: 'noopener', text: '접수된 문의 보기 ↗' })) : null,
-				h('details', { class: 'ad-help' },
+				S.inquirySheetUrl ? h('p', null, h('a', { class: 'cms-btn cms-btn-ghost cms-btn-sm', href: S.inquirySheetUrl, target: '_blank', rel: 'noopener', text: '접수된 문의 보기 ↗' })) : null,
+				h('details', { class: 'cms-help' },
 					h('summary', { text: '접수 주소 만드는 방법 (처음 한 번만)' }),
 					h('ol', null,
 						h('li', { text: '구글 드라이브에서 새 스프레드시트를 만듭니다. (예: AI 연구소 상담 문의)' }),
@@ -739,7 +739,7 @@
 	function login(t) {
 		token = t;
 		var m = $('loginMsg');
-		m.className = 'ad-msg';
+		m.className = 'cms-msg';
 		m.textContent = '확인 중…';
 		return api('').then(function (repo) {
 			if (!repo.permissions || !repo.permissions.push) {
@@ -753,7 +753,7 @@
 			go(location.hash.slice(1));
 		}).catch(function (e) {
 			token = null;
-			m.className = 'ad-msg is-err';
+			m.className = 'cms-msg is-err';
 			m.textContent = e.status === 401 || e.status === 403
 				? '토큰이 올바르지 않거나 만료되었습니다. 다시 발급해 주세요.'
 				: e.message;
@@ -765,7 +765,7 @@
 
 	$('btnLogin').addEventListener('click', function () {
 		var v = $('tokenInput').value.trim();
-		if (!v) { $('loginMsg').className = 'ad-msg is-err'; $('loginMsg').textContent = '토큰을 붙여넣어 주세요.'; return; }
+		if (!v) { $('loginMsg').className = 'cms-msg is-err'; $('loginMsg').textContent = '토큰을 붙여넣어 주세요.'; return; }
 		login(v).catch(function () {});
 	});
 	$('tokenInput').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('btnLogin').click(); });

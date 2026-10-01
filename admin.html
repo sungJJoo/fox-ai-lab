@@ -8,18 +8,18 @@
 	<title>관리자 | AI 연구소</title>
 	<link rel="icon" type="image/png" href="images/favicon.png" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
-	<link rel="stylesheet" href="css/admin.css?v=2" />
+	<link rel="stylesheet" href="css/admin.css?v=3" />
 </head>
 <body>
 
 <!-- 로그인 -->
-<main class="ad-login" id="loginView">
-	<section class="ad-card">
+<main class="cms-login" id="loginView">
+	<section class="cms-card">
 		<h1>AI 연구소 관리자</h1>
-		<p class="ad-desc">
+		<p class="cms-desc">
 			GitHub 토큰으로 로그인합니다. 처음 한 번만 발급하면 이 브라우저에 저장되어 다음부터는 바로 들어옵니다.
 		</p>
-		<details class="ad-help">
+		<details class="cms-help">
 			<summary>토큰 발급 방법 (처음 한 번만)</summary>
 			<ol>
 				<li><a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub 토큰 발급 페이지</a>를 엽니다.</li>
@@ -29,53 +29,53 @@
 				<li><b>Repository permissions</b> → <b>Contents</b> 를 <b>Read and write</b> 로 변경.</li>
 				<li>맨 아래 <b>Generate token</b> → 나온 문자열을 복사해서 아래에 붙여넣습니다.</li>
 			</ol>
-			<p class="ad-warn">이 토큰은 이 저장소 하나만 수정할 수 있습니다. 공용 PC에서는 로그인하지 마세요.</p>
+			<p class="cms-warn">이 토큰은 이 저장소 하나만 수정할 수 있습니다. 공용 PC에서는 로그인하지 마세요.</p>
 		</details>
-		<div class="ad-row">
+		<div class="cms-row">
 			<input type="password" id="tokenInput" placeholder="github_pat_... 붙여넣기" autocomplete="off" />
-			<button type="button" class="ad-btn ad-btn-fill" id="btnLogin">로그인</button>
+			<button type="button" class="cms-btn cms-btn-fill" id="btnLogin">로그인</button>
 		</div>
-		<p class="ad-msg" id="loginMsg"></p>
+		<p class="cms-msg" id="loginMsg"></p>
 	</section>
 </main>
 
 <!-- 관리 화면 -->
-<div class="ad-app" id="appView" hidden>
-	<aside class="ad-side">
-		<p class="ad-brand">AI 연구소 <b>관리자</b></p>
-		<nav class="ad-nav" id="nav" aria-label="관리 메뉴">
+<div class="cms-app" id="appView" hidden>
+	<aside class="cms-side">
+		<p class="cms-brand">AI 연구소 <b>관리자</b></p>
+		<nav class="cms-nav" id="nav" aria-label="관리 메뉴">
 			<a href="#programs" data-view="programs">프로그램</a>
 			<a href="#news" data-view="news">공지·소식</a>
 			<a href="#popups" data-view="popups">팝업</a>
 			<a href="#photos" data-view="photos">대회 사진</a>
 			<a href="#settings" data-view="settings">설정</a>
 		</nav>
-		<div class="ad-side-foot">
+		<div class="cms-side-foot">
 			<a href="index.html" target="_blank" rel="noopener">사이트 보기 ↗</a>
 			<button type="button" id="btnLogout">로그아웃</button>
 		</div>
 	</aside>
 
-	<main class="ad-main">
-		<header class="ad-top">
+	<main class="cms-main">
+		<header class="cms-top">
 			<h1 id="viewTitle"></h1>
-			<p class="ad-top-desc" id="viewDesc"></p>
+			<p class="cms-top-desc" id="viewDesc"></p>
 		</header>
 		<div id="view"></div>
 	</main>
 </div>
 
-<div class="ad-savebar" id="saveBar" hidden>
-	<span class="ad-savebar-txt" id="saveInfo"></span>
-	<div class="ad-savebar-btns">
-		<button type="button" class="ad-btn ad-btn-ghost" id="btnDiscard">되돌리기</button>
-		<button type="button" class="ad-btn ad-btn-fill" id="btnSave">저장하고 사이트에 반영</button>
+<div class="cms-savebar" id="saveBar" hidden>
+	<span class="cms-savebar-txt" id="saveInfo"></span>
+	<div class="cms-savebar-btns">
+		<button type="button" class="cms-btn cms-btn-ghost" id="btnDiscard">되돌리기</button>
+		<button type="button" class="cms-btn cms-btn-fill" id="btnSave">저장하고 사이트에 반영</button>
 	</div>
 </div>
 
-<div class="ad-toast" id="toast" hidden></div>
+<div class="cms-toast" id="toast" hidden></div>
 
 <script src="js/content.js"></script>
-<script src="js/admin.js?v=2"></script>
+<script src="js/admin.js?v=3"></script>
 </body>
 </html>
