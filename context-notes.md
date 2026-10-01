@@ -25,7 +25,7 @@
 | WSU-SITE 참고 범위 | 관리자 화면 구성(사이드 메뉴·목록/작성 화면 패턴)만 차용 | WSU 는 Express+SQLite 서버 전제라 구조는 그대로 못 씀 |
 
 ## 주의
-- `fetch('data/...json')` 는 file:// 에서 막힌다 → 사이트 미리보기는 로컬 서버 필요(`npx serve` 등). 관리자는 파일 핸들로 읽으므로 무관.
+- `fetch('data/...json')` 는 file:// 에서 막힌다 → 사이트 미리보기는 로컬 서버 필요(`python -m http.server 8080`).
 - `js/common.js` 의 설문(SV_PROGRAMS)은 14개 프로그램이 하드코딩. 관리자에서 프로그램을 추가해도 설문 추천엔 안 들어감 → 후속 과제.
 - `og:url`, `sitemap.xml`, `robots.txt` 가 `sungjjoo.github.io` 를 가리킴 → 실도메인으로 바꿀지 사용자 확인 필요 (이번 범위 밖).
 - 개인정보 수집 동의 문구(보유기간 등)는 본사 확인 필요.
