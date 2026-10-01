@@ -47,9 +47,11 @@
 - [x] Python + FFmpeg 대회 사진 하이라이트 — videos/highlight/make_highlight.py → renders/fox-competition-highlight.mp4 (43.2s, 자막은 data/slideshows.json)
 
 ## 8. Remotion 마케팅 영상 (2026-10-01 추가 요청)
-- [ ] 기획: 타깃·인사이트·약속·증거·CTA, 9:16 30초, 120BPM 비트에 컷 맞춤
-- [ ] 프로젝트: videos/remotion-promo (create-video --blank), 폰트·사진 public/
-- [ ] 음악: Python 합성 BGM (저작권 없음) → public/music.wav
-- [ ] 장면 7개 (훅 AI 채팅 → 질문 → 전환 → 비트 몽타주 → 숫자 → 무대 → CTA)
-- [ ] Studio 미리보기 확인 → 렌더 → 프레임 추출 확인
-- [ ] 라이선스: 직원 4명 이상 회사는 Remotion 회사 라이선스 필요 — 사용자에게 고지함
+- [x] 기획: 타깃·인사이트·약속·증거·CTA, 9:16 30초, 120BPM 비트에 컷 맞춤
+- [x] 프로젝트: videos/remotion-promo (create-video --blank), 폰트·사진 public/
+- [x] 음악: Python 합성 BGM (저작권 없음) → public/music.wav
+- [x] 장면 7개 (훅 AI 채팅 → 질문 → 전환 → 비트 몽타주 → 숫자 → 무대 → CTA)
+- [x] Studio 미리보기 확인 → 렌더 → 프레임 추출 확인
+- [x] 라이선스: 직원 4명 이상 회사는 Remotion 회사 라이선스 필요 — 사용자에게 고지함
+- [x] Remotion 4.0.531 배포본 결함(@remotion/cli queue.js 0바이트 → Studio 오류) 발견, 4.0.530 으로 고정
+- [x] 대상 연령 문구 정정: 「6세부터 중등까지」 → 「6세부터 고등까지 · 성인·기관 연수도 가능」(사이트 상담 페이지 기준), Remotion·hyperframes 60초 재렌더 / 45초본은 미수정

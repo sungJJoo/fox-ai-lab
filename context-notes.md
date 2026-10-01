@@ -27,7 +27,7 @@
 ## 주의
 - `fetch('data/...json')` 는 file:// 에서 막힌다 → 사이트 미리보기는 로컬 서버 필요(`python -m http.server 8080`).
 - `js/common.js` 의 설문(SV_PROGRAMS)은 2026-07-28 사용자가 라이브에서 진입 버튼·마크업을 제거한 상태 (코드만 남음). 살릴지는 사용자 결정.
-- `og:url`, `sitemap.xml`, `robots.txt` 가 `sungjjoo.github.io` 를 가리킴 → 실도메인으로 바꿀지 사용자 확인 필요 (이번 범위 밖).
+- `og:url`, `sitemap.xml`, `robots.txt`, canonical 은 2026-10-01 `ai.foxconnect.kr` 로 변경 완료.
 - 개인정보 수집 동의 문구(보유기간 등)는 본사 확인 필요.
 - 이미 서버에 올라간 기존 `admin.html` 은 업체에 삭제 요청 필요.
 
