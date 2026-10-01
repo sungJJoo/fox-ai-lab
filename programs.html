@@ -74,7 +74,7 @@
 		<section class="page-hero">
 			<div class="wrap">
 				<p class="overline hero-rise" style="--d:.05s">Programs</p>
-				<h1 class="hero-rise" style="--d:.15s">4가지 영역,<br />14가지 활동 프로그램</h1>
+				<h1 class="hero-rise" style="--d:.15s">4가지 영역,<br /><span data-activity-count>14</span>가지 활동 프로그램</h1>
 				<p class="hero-rise" style="--d:.28s">
 					다양한 도구와 프로젝트 활동으로 AI 시대 핵심 역량을 키웁니다.
 				</p>
@@ -88,7 +88,7 @@
 					<p class="overline">4 Areas</p>
 					<h2 class="sec-tit">대표 프로그램 <span class="grad-txt">4가지 영역</span></h2>
 				</header>
-				<div class="area-grid" data-stagger>
+				<div class="area-grid" data-stagger data-programs="areas">
 					<article class="area-card c-teal">
 						<figure><picture><source type="image/webp" srcset="images/area-understand-480.webp 480w, images/area-understand-960.webp 960w, images/area-understand.webp 1400w" sizes="(max-width: 767px) 92vw, (max-width: 1279px) 46vw, 300px" /><img src="images/area-understand.jpg" width="1400" height="1050" alt="자율주행 데이터 사진들을 살펴보며 분류하는 아이들" loading="lazy" /></picture></figure>
 						<div class="area-cont">
@@ -154,8 +154,8 @@
 		<section class="mn-section">
 			<div class="wrap">
 				<header class="sec-head center reveal">
-					<p class="overline">14 Activities</p>
-					<h2 class="sec-tit">인공지능 · 코딩 · 수학을 융합한<br /><span class="grad-txt">14가지 활동 프로그램</span></h2>
+					<p class="overline"><span data-activity-count>14</span> Activities</p>
+					<h2 class="sec-tit">인공지능 · 코딩 · 수학을 융합한<br /><span class="grad-txt"><span data-activity-count>14</span>가지 활동 프로그램</span></h2>
 					<p class="sec-desc">
 						AI 연구소에서는 인공지능, 코딩, 수학 등을 융합한 다양한 프로그램을 개발 및 운영하고 있으며,
 						AI의 원리를 이해하고 효과적으로 소통하며 문제를 해결하고 자신만의 아이디어를 결과물로
@@ -176,7 +176,7 @@
 								<th scope="col">활동 사진</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody data-programs="activities">
 							<tr>
 								<td class="no">1</td>
 								<td class="target">유아</td>
@@ -288,7 +288,7 @@
 					<p class="overline">Posters</p>
 					<h2 class="sec-tit">프로그램을 <span class="grad-txt">포스터</span>로 만나보세요</h2>
 				</header>
-				<ul class="poster-list" data-stagger>
+				<ul class="poster-list" data-stagger data-programs="posters">
 					<li>
 						<figure><picture><source type="image/webp" srcset="images/poster-world-480.webp 480w, images/poster-world.webp 600w" sizes="(max-width: 767px) 46vw, (max-width: 1279px) 30vw, 200px" /><img src="images/poster-world.jpg" width="600" height="849" alt="FOX가 만드는 AI 세상 포스터" loading="lazy" /></picture></figure>
 						<p>우리가 만드는 세상</p>
@@ -347,6 +347,7 @@
 		<button type="button" class="lb-close" aria-label="닫기">&times;</button>
 		<img class="lb-img" src="" alt="" />
 	</div>
+	<script src="js/content.js"></script>
 	<script src="js/common.js?v=202609081357"></script>
 	<script src="js/foxsite.js"></script>
 </body>

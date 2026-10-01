@@ -223,8 +223,10 @@
 			document.body.style.overflow = '';
 			setTimeout(function () { lbImg.src = ''; }, 320);
 		}
-		document.querySelectorAll('.poster-list figure img').forEach(function (im) {
-			im.addEventListener('click', function () { openLb(im.src, im.alt); });
+		// 포스터 목록은 관리자 데이터로 다시 그려질 수 있어 위임 방식으로 연결
+		document.addEventListener('click', function (e) {
+			var im = e.target.closest && e.target.closest('.poster-list figure img');
+			if (im) openLb(im.src, im.alt);
 		});
 		lbClose.addEventListener('click', closeLb);
 		lb.addEventListener('click', function (e) { if (e.target === lb) closeLb(); });
@@ -236,8 +238,7 @@
 	function ssLoad() {
 		if (ssData) return Promise.resolve(ssData);
 		if (!ssLoading) {
-			ssLoading = fetch('data/slideshows.json', { cache: 'no-cache' })
-				.then(function (r) { return r.json(); })
+			ssLoading = window.FoxContent.load('slideshows')
 				.then(function (j) { ssData = j; return j; });
 		}
 		return ssLoading;
@@ -251,7 +252,7 @@
 
 		function ssRender() {
 			var d = ssData[ssCur];
-			ssImg.src = d.photos[ssIdx].src;
+			ssImg.src = window.FoxContent.url(d.photos[ssIdx].src);
 			ssImg.alt = d.photos[ssIdx].caption;
 			ssCap.textContent = d.photos[ssIdx].caption;
 			Array.prototype.forEach.call(ssDots.children, function (dot, i) {

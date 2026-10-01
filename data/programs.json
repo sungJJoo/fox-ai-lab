@@ -1,0 +1,341 @@
+{
+	"areas": [
+		{
+			"color": "teal",
+			"title": "AI 이해",
+			"en": "UNDERSTAND",
+			"desc": "AI와 친해지고 컴퓨팅 사고력을 기르는 과정",
+			"items": [
+				"키보드와 친해지기",
+				"비버챌린지",
+				"생성형 AI 활용",
+				"COS 도전단",
+				"컴퓨터 스킬"
+			],
+			"image": {
+				"src": "images/area-understand.jpg",
+				"srcset": "images/area-understand-480.webp 480w, images/area-understand-960.webp 960w, images/area-understand.webp 1400w",
+				"sizes": "(max-width: 767px) 92vw, (max-width: 1279px) 46vw, 300px",
+				"width": 1400,
+				"height": 1050,
+				"alt": "자율주행 데이터 사진들을 살펴보며 분류하는 아이들"
+			}
+		},
+		{
+			"color": "blue",
+			"title": "AI 소통",
+			"en": "COMMUNICATE",
+			"desc": "코딩 언어와 디지털 표현을 배우는 과정",
+			"items": [
+				"파이썬 기초",
+				"어린이 스크래치",
+				"어린이 스크래치 코딩",
+				"어린이 스크래치 친해지기"
+			],
+			"image": {
+				"src": "images/area-communicate.jpg",
+				"srcset": "images/area-communicate-480.webp 480w, images/area-communicate-960.webp 960w, images/area-communicate.webp 1400w",
+				"sizes": "(max-width: 767px) 92vw, (max-width: 1279px) 46vw, 300px",
+				"width": 1400,
+				"height": 1050,
+				"alt": "스크래치로 바다 속 친구 찾기 코딩 활동을 하는 학생"
+			}
+		},
+		{
+			"color": "purple",
+			"title": "AI 활용",
+			"en": "UTILIZE",
+			"desc": "AI와 다양한 도구로 문제를 해결하는 과정",
+			"items": [
+				"LEGO Education",
+				"레고 STEM 실험실",
+				"마인크래프트 Education",
+				"NASA Kids",
+				"Engineering Kids",
+				"딥레이서"
+			],
+			"image": {
+				"src": "images/area-utilize.jpg",
+				"srcset": "images/area-utilize-480.webp 480w, images/area-utilize-960.webp 960w, images/area-utilize.webp 1400w",
+				"sizes": "(max-width: 767px) 92vw, (max-width: 1279px) 46vw, 300px",
+				"width": 1400,
+				"height": 1050,
+				"alt": "프로젝트 워크시트에 아이디어를 정리하는 학생들"
+			}
+		},
+		{
+			"color": "yellow",
+			"title": "AI 창작",
+			"en": "CREATE",
+			"desc": "AI를 활용해 나만의 결과물을 만드는 과정",
+			"items": [
+				"AI 포스터 제작",
+				"AI 애니메이션 제작",
+				"AI 음악 만들기",
+				"웹 리포트 제작",
+				"스크래치 게임 제작",
+				"FLL 대비반"
+			],
+			"image": {
+				"src": "images/area-create.jpg",
+				"srcset": "images/area-create-480.webp 480w, images/area-create-960.webp 960w, images/area-create.webp 1400w",
+				"sizes": "(max-width: 767px) 92vw, (max-width: 1279px) 46vw, 300px",
+				"width": 1400,
+				"height": 1050,
+				"alt": "AI를 활용해 보고서 작성법을 배우는 웹 리포트 제작 수업"
+			}
+		}
+	],
+	"activities": [
+		{
+			"target": "유아",
+			"name": "어린이 스크래치 친해지기",
+			"desc": "스크래치 주니어, 스크래치에서 사용되는 기능과 조작 방식을 탐색하고 다양한 동화 속 문제를 파악하여 해결 방안을 블록 코딩으로 구현해보는 활동",
+			"image": {
+				"src": "images/act01.jpg",
+				"srcset": "images/act01-480.webp 480w, images/act01.webp 480w",
+				"sizes": "160px",
+				"width": 480,
+				"height": 360,
+				"alt": "어린이 스크래치 친해지기 활동"
+			}
+		},
+		{
+			"target": "유아,\n초등 저학년\n(1~3학년)",
+			"name": "즐거운 레고 실험실",
+			"desc": "브릭큐 모션 에센셜의 기본 학습 단원을 활용하여 다양한 과학 원리들을 직접 실험할 수 있는 활동",
+			"image": {
+				"src": "images/act02.jpg",
+				"srcset": "images/act02-480.webp 480w, images/act02.webp 480w",
+				"sizes": "160px",
+				"width": 480,
+				"height": 360,
+				"alt": "즐거운 레고 실험실 활동"
+			}
+		},
+		{
+			"target": "유아,\n초등 저·고학년\n(1~6학년)",
+			"name": "레고 튜토리얼",
+			"desc": "스파이크 에센셜의 기본 학습 단원을 활용하여 레고 코딩에 꼭 필요한 테크니컬 부품의 사용 방식을 경험하며 익힐 수 있는 활동",
+			"image": {
+				"src": "images/act03.jpg",
+				"srcset": "images/act03-480.webp 480w, images/act03.webp 480w",
+				"sizes": "160px",
+				"width": 480,
+				"height": 360,
+				"alt": "레고 튜토리얼 활동"
+			}
+		},
+		{
+			"target": "초등 저·고학년\n(1~6학년)",
+			"name": "레고로 키우는 문제 해결의 힘",
+			"desc": "기본 학습 단원을 1번 이상 끝낸 학생들을 대상으로 주제에 맞춰 문제를 해결할 수 있도록 기본 모델을 변형하고 코딩을 확장해보는 활동",
+			"image": {
+				"src": "images/act04.jpg",
+				"srcset": "images/act04-480.webp 480w, images/act04.webp 480w",
+				"sizes": "160px",
+				"width": 480,
+				"height": 360,
+				"alt": "레고로 키우는 문제 해결의 힘 활동"
+			}
+		},
+		{
+			"target": "초등 저·고학년\n(1~6학년)",
+			"name": "레고 STEM 실험실",
+			"desc": "스파이크 프라임의 기본 학습 단원을 통해 로보틱스 기술과 더불어 수학, 공학, 기술적 사고를 확장시킬 수 있는 활동",
+			"image": {
+				"src": "images/act05.jpg",
+				"srcset": "images/act05-480.webp 480w, images/act05.webp 480w",
+				"sizes": "160px",
+				"width": 480,
+				"height": 360,
+				"alt": "레고 STEM 실험실 활동"
+			}
+		},
+		{
+			"target": "초등 저·고학년\n(1~6학년)",
+			"name": "스크래치로 코딩과 친해지기",
+			"desc": "스크래치를 통해 다양한 창작활동을 접하고 조건문·루프문·변수 등 블록 코딩 개념을 쉽게 이해할 수 있는 활동",
+			"image": {
+				"src": "images/act06.jpg",
+				"srcset": "images/act06-480.webp 480w, images/act06.webp 480w",
+				"sizes": "160px",
+				"width": 480,
+				"height": 360,
+				"alt": "스크래치로 코딩과 친해지기 활동"
+			}
+		},
+		{
+			"target": "초등 저·고학년\n(1~6학년)",
+			"name": "스크래치로 게임 만들기",
+			"desc": "게임의 구성요소와 설계방법을 알아보고 다양한 구현 방식과 메커니즘을 탐구하여 나만의 게임을 설계·제작하는 활동",
+			"image": {
+				"src": "images/act07.jpg",
+				"srcset": "images/act07-480.webp 480w, images/act07.webp 480w",
+				"sizes": "160px",
+				"width": 480,
+				"height": 360,
+				"alt": "스크래치로 게임 만들기 활동"
+			}
+		},
+		{
+			"target": "초등 저학년\n(1~3학년)",
+			"name": "마인크래프트 Coding\n: 우리의 세상 만들기",
+			"desc": "마인크래프트 에듀케이션에서 블록코딩으로 우리의 세상을 만드는 팀 프로젝트 활동",
+			"image": {
+				"src": "images/act08.jpg",
+				"srcset": "images/act08.webp 449w",
+				"sizes": "160px",
+				"width": 449,
+				"height": 300,
+				"alt": "마인크래프트 우리의 세상 만들기 활동"
+			}
+		},
+		{
+			"target": "초등 저·고학년\n(1~6학년)",
+			"name": "마인크래프트 Coding\n: 마을을 지켜라",
+			"desc": "마인크래프트 에듀케이션에서 직업별로 코딩을 나누어 협업하는 PBL/SEL 기반 활동",
+			"image": {
+				"src": "images/act09.jpg",
+				"srcset": "images/act09-480.webp 480w, images/act09.webp 480w",
+				"sizes": "160px",
+				"width": 480,
+				"height": 360,
+				"alt": "마인크래프트 마을을 지켜라 활동"
+			}
+		},
+		{
+			"target": "초등 저·고학년\n(1~6학년)",
+			"name": "마인크래프트 Coding\n: 에이전트와 함께해요",
+			"desc": "마인크래프트 에듀케이션에서 에이전트를 움직이는 코드를 만들고 수정하며 문제를 해결하는 코딩 활동",
+			"image": {
+				"src": "images/act10.jpg",
+				"srcset": "images/act10-480.webp 480w, images/act10.webp 480w",
+				"sizes": "160px",
+				"width": 480,
+				"height": 360,
+				"alt": "마인크래프트 에이전트와 함께해요 활동"
+			}
+		},
+		{
+			"target": "초등 고학년\n(5~6학년), 중학생",
+			"name": "파이썬 기초",
+			"desc": "파이썬의 기본 문법과 명령 구조를 배우며 코딩을 통해 파이썬의 기초를 익히는 활동",
+			"image": {
+				"src": "images/act11.jpg",
+				"srcset": "images/act11.webp 449w",
+				"sizes": "160px",
+				"width": 449,
+				"height": 300,
+				"alt": "파이썬 기초 활동"
+			}
+		},
+		{
+			"target": "유아~고학년 전체",
+			"name": "생성형 AI 활용",
+			"desc": "주제에 따라 GPT를 활용하여 글쓰기·토론·그림 그리기 등을 진행하는 활동",
+			"image": {
+				"src": "images/act12.jpg",
+				"srcset": "images/act12-480.webp 480w, images/act12.webp 480w",
+				"sizes": "160px",
+				"width": 480,
+				"height": 360,
+				"alt": "생성형 AI 활용 활동"
+			}
+		},
+		{
+			"target": "초등 3학년 이상",
+			"name": "알수잇다!",
+			"desc": "수학 문제를 직접 풀고, 알고리즘으로 정리한 뒤 코딩으로 표현하여 수학 개념과 논리적 문제 해결 과정을 경험하는 활동",
+			"image": {
+				"src": "images/act13.jpg",
+				"srcset": "images/act13-480.webp 480w, images/act13.webp 480w",
+				"sizes": "160px",
+				"width": 480,
+				"height": 360,
+				"alt": "알수잇다 활동"
+			}
+		},
+		{
+			"target": "초등 2학년 이상",
+			"name": "AI·디지털 문화유산과\n떠나는 역사 여행!",
+			"desc": "AI·디지털 기술로 우리 문화유산을 탐구하고 보존·복원 과정을 체험하며 역사와 미래 기술을 이해하는 활동",
+			"image": {
+				"src": "images/act14.jpg",
+				"srcset": "images/act14-480.webp 480w, images/act14.webp 480w",
+				"sizes": "160px",
+				"width": 480,
+				"height": 360,
+				"alt": "AI 디지털 문화유산 역사 여행 활동"
+			}
+		}
+	],
+	"posters": [
+		{
+			"caption": "우리가 만드는 세상",
+			"image": {
+				"src": "images/poster-world.jpg",
+				"srcset": "images/poster-world-480.webp 480w, images/poster-world.webp 600w",
+				"sizes": "(max-width: 767px) 46vw, (max-width: 1279px) 30vw, 200px",
+				"width": 600,
+				"height": 849,
+				"alt": "FOX가 만드는 AI 세상 포스터"
+			}
+		},
+		{
+			"caption": "마을을 지켜라",
+			"image": {
+				"src": "images/poster-village.jpg",
+				"srcset": "images/poster-village-480.webp 480w, images/poster-village.webp 600w",
+				"sizes": "(max-width: 767px) 46vw, (max-width: 1279px) 30vw, 200px",
+				"width": 600,
+				"height": 848,
+				"alt": "마을을 지켜라 포스터"
+			}
+		},
+		{
+			"caption": "에이전트와 함께해요",
+			"image": {
+				"src": "images/poster-agent.jpg",
+				"srcset": "images/poster-agent.webp 385w",
+				"sizes": "(max-width: 767px) 92vw, 600px",
+				"width": 385,
+				"height": 544,
+				"alt": "에이전트와 함께해요 포스터"
+			}
+		},
+		{
+			"caption": "AI와 친해지기 첫발자국",
+			"image": {
+				"src": "images/poster-ai.jpg",
+				"srcset": "images/poster-ai-480.webp 480w, images/poster-ai.webp 600w",
+				"sizes": "(max-width: 767px) 92vw, 600px",
+				"width": 600,
+				"height": 844,
+				"alt": "AI와 친해지기 첫발자국 포스터"
+			}
+		},
+		{
+			"caption": "알수잇다!",
+			"image": {
+				"src": "images/poster-math.jpg",
+				"srcset": "images/poster-math-480.webp 480w, images/poster-math.webp 600w",
+				"sizes": "(max-width: 767px) 92vw, 600px",
+				"width": 600,
+				"height": 843,
+				"alt": "알고리즘과 수학을 잇다 포스터"
+			}
+		},
+		{
+			"caption": "AI 디지털 역사 여행",
+			"image": {
+				"src": "images/poster-culture.jpg",
+				"srcset": "images/poster-culture-480.webp 480w, images/poster-culture.webp 900w",
+				"sizes": "(max-width: 767px) 92vw, 600px",
+				"width": 900,
+				"height": 1273,
+				"alt": "AI·디지털 문화유산과 떠나는 역사 여행 포스터"
+			}
+		}
+	]
+}
