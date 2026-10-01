@@ -45,3 +45,11 @@
 - [x] UI 점검 (web-design-guidelines) 후 수정 — 본문 바로가기, 모달 포커스, 메뉴 aria-expanded, 헤더 가림 방지, 제목 줄바꿈, 캐시 버전
 - [x] hyperframes 로 홍보 영상 제작 — renders/video.mp4 (45s), renders/video-60s.mp4 (60s, PBL 5단계·다섯 가지 약속 추가) — 1920x1080, 무음, git 제외
 - [x] Python + FFmpeg 대회 사진 하이라이트 — videos/highlight/make_highlight.py → renders/fox-competition-highlight.mp4 (43.2s, 자막은 data/slideshows.json)
+
+## 8. Remotion 마케팅 영상 (2026-10-01 추가 요청)
+- [ ] 기획: 타깃·인사이트·약속·증거·CTA, 9:16 30초, 120BPM 비트에 컷 맞춤
+- [ ] 프로젝트: videos/remotion-promo (create-video --blank), 폰트·사진 public/
+- [ ] 음악: Python 합성 BGM (저작권 없음) → public/music.wav
+- [ ] 장면 7개 (훅 AI 채팅 → 질문 → 전환 → 비트 몽타주 → 숫자 → 무대 → CTA)
+- [ ] Studio 미리보기 확인 → 렌더 → 프레임 추출 확인
+- [ ] 라이선스: 직원 4명 이상 회사는 Remotion 회사 라이선스 필요 — 사용자에게 고지함
