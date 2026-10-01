@@ -79,6 +79,8 @@
 			return;
 		}
 		document.title = n.title + ' | 공지·소식 | AI 연구소 — 폭스러닝센터';
+		var can = document.querySelector('link[rel="canonical"]');
+		if (can) can.href = can.href.split('?')[0] + '?id=' + n.id;
 		var imgs = (n.images || []).map(function (im) {
 			return '<figure><img src="' + F.esc(F.url(im.src)) + '" width="' + im.width + '" height="' + im.height +
 				'" alt="' + F.esc(im.alt || '') + '" loading="lazy" /></figure>';
