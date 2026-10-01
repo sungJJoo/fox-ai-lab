@@ -5,6 +5,7 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="theme-color" content="#ffffff" />
 	<meta name="description" content="폭스러닝센터 AI 연구소 — AI를 이해하고 소통하고 활용하며 자신만의 결과물을 만들어가는 교육" />
 	<meta name="keywords" content="AI 교육, AI 연구소, 폭스러닝센터, 코딩 교육, 레고 교육, 마인크래프트 교육, 파이썬, 스크래치, FLL, 대전 코딩학원" />
 	<title>AI 연구소 — 폭스러닝센터</title>
@@ -59,11 +60,12 @@
 	<link rel="apple-touch-icon" href="images/favicon.png" />
 	<link rel="preload" href="fonts/GmarketSansBold.woff2" as="font" type="font/woff2" crossorigin />
 	<link rel="preload" href="fonts/GmarketSansMedium.woff2" as="font" type="font/woff2" crossorigin />
-	<link rel="stylesheet" href="css/style.css?v=202609081357" />
+	<link rel="stylesheet" href="css/style.css?v=20261001" />
 	<link rel="stylesheet" href="css/foxsite.css" />
-	<link rel="stylesheet" href="css/content.css" />
+	<link rel="stylesheet" href="css/content.css?v=20261001" />
 </head>
 <body>
+	<a class="skip-link" href="#main">본문 바로가기</a>
 	<div class="scroll-progress" aria-hidden="true"></div>
 
 	<header class="site-header">
@@ -96,7 +98,7 @@
 					</div>
 				</div>
 			</div>
-			<button type="button" class="btn-gnb-open" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
+			<button type="button" class="btn-gnb-open" aria-label="메뉴 열기" aria-expanded="false" aria-controls="gnb"><span></span><span></span><span></span></button>
 			<nav class="site-gnb" id="gnb">
 				<ul>
 					<li><a href="index.html" aria-current="page">연구소 소개</a></li>
@@ -110,7 +112,7 @@
 		</div>
 	</header>
 
-	<main>
+	<main id="main">
 		<!-- 히어로 -->
 		<section class="hero">
 			<div class="qfield" id="qfield" aria-hidden="true">
@@ -141,7 +143,7 @@
 					</div>
 					<div class="hero-img hero-rise" style="--d:.45s">
 						<figure>
-							<picture><source type="image/webp" srcset="images/hero-480.webp 480w, images/hero-960.webp 960w, images/hero-1440.webp 1440w, images/hero.webp 1600w" sizes="(max-width: 1279px) 92vw, 560px" /><img src="images/hero.jpg" width="1600" height="1067" alt="AWS DeepRacer League 시상식에서 기념 촬영하는 폭스러닝센터" /></picture>
+							<picture><source type="image/webp" srcset="images/hero-480.webp 480w, images/hero-960.webp 960w, images/hero-1440.webp 1440w, images/hero.webp 1600w" sizes="(max-width: 1279px) 92vw, 560px" /><img src="images/hero.jpg" width="1600" height="1067" alt="AWS DeepRacer League 시상식에서 기념 촬영하는 폭스러닝센터" fetchpriority="high" /></picture>
 						</figure>
 					</div>
 				</div>
@@ -410,10 +412,10 @@
 		</div>
 	</footer>
 
-	<script src="js/content.js"></script>
-	<script src="js/popup.js"></script>
-	<script src="js/news.js"></script>
-	<script src="js/common.js?v=202609081357"></script>
+	<script src="js/content.js?v=20261001"></script>
+	<script src="js/popup.js?v=20261001"></script>
+	<script src="js/news.js?v=20261001"></script>
+	<script src="js/common.js?v=20261001"></script>
 	<script src="js/foxsite.js"></script>
 </body>
 </html>

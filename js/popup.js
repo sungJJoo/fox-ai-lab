@@ -46,6 +46,7 @@
 		box.className = 'pp-layer';
 		box.innerHTML = '<div class="pp-stack">' + show.map(card).join('') + '</div>';
 		document.body.appendChild(box);
+		box.querySelector('button[data-act="close"]').focus({ preventScroll: true });
 
 		box.addEventListener('click', function (e) {
 			var b = e.target.closest('button[data-act]');

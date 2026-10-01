@@ -25,11 +25,16 @@
 	var btn = document.querySelector('.btn-gnb-open');
 	var gnb = document.querySelector('.site-gnb');
 	if (btn && gnb) {
+		var gnbSet = function (open) {
+			document.body.classList.toggle('gnb-opened', open);
+			btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+			btn.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+		};
 		btn.addEventListener('click', function () {
-			document.body.classList.toggle('gnb-opened');
+			gnbSet(!document.body.classList.contains('gnb-opened'));
 		});
 		gnb.addEventListener('click', function (e) {
-			if (e.target.tagName === 'A') document.body.classList.remove('gnb-opened');
+			if (e.target.tagName === 'A') gnbSet(false);
 		});
 	}
 
@@ -206,6 +211,11 @@
 		}
 	}
 
+	// 모달 포커스: 열 때 닫기 버튼으로 옮기고, 닫으면 열었던 버튼으로 되돌린다
+	var modalReturn = null;
+	function modalFocusIn(el) { modalReturn = document.activeElement; var b = el.querySelector('button'); if (b) b.focus({ preventScroll: true }); }
+	function modalFocusBack() { if (modalReturn && modalReturn.focus) modalReturn.focus({ preventScroll: true }); modalReturn = null; }
+
 	// 포스터 라이트박스 (클릭 확대 / 닫기)
 	var lb = document.getElementById('posterLightbox');
 	if (lb) {
@@ -215,11 +225,13 @@
 			lbImg.src = src; lbImg.alt = alt || '';
 			lb.classList.add('is-open');
 			lb.setAttribute('aria-hidden', 'false');
+			modalFocusIn(lb);
 			document.body.style.overflow = 'hidden';
 		}
 		function closeLb() {
 			lb.classList.remove('is-open');
 			lb.setAttribute('aria-hidden', 'true');
+			modalFocusBack();
 			document.body.style.overflow = '';
 			setTimeout(function () { lbImg.src = ''; }, 320);
 		}
@@ -288,12 +300,14 @@
 			ssRender();
 			ssEl.classList.add('is-open');
 			ssEl.setAttribute('aria-hidden', 'false');
+			modalFocusIn(ssEl);
 			document.body.style.overflow = 'hidden';
 			ssResetTimer();
 		}
 		function ssCloseFn() {
 			ssEl.classList.remove('is-open');
 			ssEl.setAttribute('aria-hidden', 'true');
+			modalFocusBack();
 			document.body.style.overflow = '';
 			if (ssTimer) clearInterval(ssTimer);
 		}
@@ -440,11 +454,13 @@
 			vidFrame.src = src;
 			vidModal.classList.add('is-open');
 			vidModal.setAttribute('aria-hidden', 'false');
+			modalFocusIn(vidModal);
 			document.body.style.overflow = 'hidden';
 		}
 		function vidClose() {
 			vidModal.classList.remove('is-open');
 			vidModal.setAttribute('aria-hidden', 'true');
+			modalFocusBack();
 			document.body.style.overflow = '';
 			vidFrame.src = '';
 		}

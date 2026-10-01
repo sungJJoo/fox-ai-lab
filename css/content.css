@@ -37,7 +37,8 @@
 	white-space: nowrap;
 	transition: color .2s;
 }
-.nw-list time, .nw-view time {
+.nw-list time, .nw-view time, .nw-card-cont time {
+	font-variant-numeric: tabular-nums;
 	font-family: var(--font-en);
 	font-size: 14px;
 	color: var(--txt-soft);
@@ -114,6 +115,7 @@
 	padding: 20px;
 	background: rgba(14, 27, 51, .45);
 	overflow-y: auto;
+	overscroll-behavior: contain;
 }
 .pp-stack { margin: auto 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 20px; }
 .pp-card {
@@ -165,7 +167,7 @@
 	transition: border-color .2s;
 }
 .iq-form textarea { resize: vertical; min-height: 130px; }
-.iq-form input:focus, .iq-form select:focus, .iq-form textarea:focus { outline: none; border-color: var(--spot1); }
+.iq-form input:focus, .iq-form select:focus, .iq-form textarea:focus { outline: none; border-color: var(--spot1); box-shadow: 0 0 0 4px rgba(32, 197, 188, .22); }
 .iq-form input:user-invalid { border-color: var(--c-red); }
 .iq-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .iq-terms { padding: 14px 18px; border-radius: 12px; background: var(--bg-soft); font-size: 14px; color: var(--txt-soft); }
