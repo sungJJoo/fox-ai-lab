@@ -44,3 +44,4 @@
 - [x] SEO: og:url · sitemap · robots · canonical → https://ai.foxconnect.kr
 - [x] UI 점검 (web-design-guidelines) 후 수정 — 본문 바로가기, 모달 포커스, 메뉴 aria-expanded, 헤더 가림 방지, 제목 줄바꿈, 캐시 버전
 - [x] hyperframes 로 홍보 영상 제작 — renders/video.mp4 (45s), renders/video-60s.mp4 (60s, PBL 5단계·다섯 가지 약속 추가) — 1920x1080, 무음, git 제외
+- [x] Python + FFmpeg 대회 사진 하이라이트 — videos/highlight/make_highlight.py → renders/fox-competition-highlight.mp4 (43.2s, 자막은 data/slideshows.json)
