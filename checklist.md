@@ -55,3 +55,8 @@
 - [x] 라이선스: 직원 4명 이상 회사는 Remotion 회사 라이선스 필요 — 사용자에게 고지함
 - [x] Remotion 4.0.531 배포본 결함(@remotion/cli queue.js 0바이트 → Studio 오류) 발견, 4.0.530 으로 고정
 - [x] 대상 연령 문구 정정: 「6세부터 중등까지」 → 「6세부터 고등까지 · 성인·기관 연수도 가능」(사이트 상담 페이지 기준), Remotion·hyperframes 60초 재렌더 / 45초본은 미수정
+
+## 9. Python 마케팅 영상 60초 (2026-10-02)
+- [x] videos/marketing-py/make_promo.py → out/fox-ai-marketing-60s.mp4 (1080x1920, 60s, 합성 BGM -11.8 LUFS)
+- [x] 장면 9개: 훅 AI 채팅 → 문제 제기(외우는 힘?·검색하는 힘?·질문하는 힘.) → 약속 → PBL 5단계 → 사진 12장 비트 몽타주 → 숫자 → 무대 → 다섯 가지 약속 → CTA
+- [x] Pillow 함정 기록: Space Grotesk 가변 글꼴 기본 굵기 Light → Bold 지정, GmarketSans 서브셋 공백 폭 → 단어 단위 배치
