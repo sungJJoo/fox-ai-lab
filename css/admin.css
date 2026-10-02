@@ -66,14 +66,12 @@ input, button, textarea, select { font: inherit; color: inherit; }
 .cms-nav { flex: 1; overflow-y: auto; padding: 10px 0; }
 .cms-nav-group { margin: 14px 18px 4px; padding-top: 12px; border-top: 1px solid var(--ad-line-soft); font-size: 12px; font-weight: 700; color: var(--ad-soft); }
 .cms-nav a {
-	display: flex; align-items: center; gap: 10px; margin: 1px 8px; padding: 7px 10px;
+	display: block; margin: 1px 8px; padding: 7px 12px;
 	border-radius: 4px; text-decoration: none; color: var(--ad-txt);
 }
 .cms-nav a { font-weight: 500; }
 .cms-nav a:hover { background: #e6e9ee; }
 .cms-nav a.is-on { background: var(--ad-spot); color: #fff; font-weight: 700; }
-.cms-nav svg { width: 16px; height: 16px; flex: none; color: #6b7382; }
-.cms-nav a.is-on svg { color: #fff; }
 
 /* 상단 관리 바: 반영 상태 · 사이트 보기 · 계정 · 로그아웃 */
 .cms-body { min-width: 0; }
@@ -292,7 +290,6 @@ button.cms-rows-tit:hover { color: var(--ad-spot-dark); text-decoration: underli
 	.cms-stat:nth-child(3) { border-left: 0; }
 	.cms-stat:nth-child(n+3) { border-top: 1px solid var(--ad-line-soft); }
 	.cms-nav-group { display: none; }
-	.cms-nav svg { display: none; }
 	.cms-app { grid-template-columns: 1fr; }
 	.cms-side { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--ad-line); background: #fff; }
 	.cms-brand { height: 46px; }
