@@ -5,12 +5,14 @@
 	--ad-spot: #466db3;        /* FOX 브랜드 파랑 */
 	--ad-spot-dark: #2f5597;
 	--ad-spot-bg: #edf2fa;
-	--ad-ink: #1f2633;
-	--ad-txt: #333a47;
-	--ad-soft: #6b7280;
-	--ad-line: #dde1e7;
-	--ad-line-soft: #eceef2;
-	--ad-bg: #f3f4f6;
+	--ad-ink: #161c28;
+	--ad-txt: #262d3a;
+	--ad-soft: #555d6b;
+	--ad-line: #cfd4dc;
+	--ad-line-soft: #e1e4e9;
+	--ad-bg: #e9ecf0;
+	--ad-head: #f0f2f5;         /* 패널 제목 줄 · 표 머리 */
+	--ad-bar: #1f2b44;          /* 상단 관리 바 */
 	--ad-red: #c9302c;
 	--ad-green: #2e8b57;
 	--ad-side-w: 208px;
@@ -54,24 +56,24 @@ input, button, textarea, select { font: inherit; color: inherit; }
 .cms-side {
 	position: sticky; top: 0; height: 100vh;
 	display: flex; flex-direction: column;
-	background: #fff; border-right: 1px solid var(--ad-line);
+	background: #f7f8fa; border-right: 1px solid var(--ad-line);
 }
 .cms-mark { display: block; flex: none; }
-.cms-brand { display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 18px; color: var(--ad-ink); text-decoration: none; border-bottom: 1px solid var(--ad-line); }
+.cms-brand { display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 18px; color: #fff; text-decoration: none; background: var(--ad-bar); }
 .cms-brand .cms-mark { width: 26px; height: 26px; }
 .cms-brand b { font-size: 15px; font-weight: 800; }
-.cms-brand small { margin-left: 6px; font-size: 12px; color: var(--ad-soft); }
+.cms-brand small { margin-left: 6px; font-size: 12px; color: #a9b6cf; }
 .cms-nav { flex: 1; overflow-y: auto; padding: 10px 0; }
-.cms-nav-group { margin: 14px 18px 4px; padding-top: 12px; border-top: 1px solid var(--ad-line-soft); font-size: 12px; font-weight: 600; color: #9aa0aa; }
+.cms-nav-group { margin: 14px 18px 4px; padding-top: 12px; border-top: 1px solid var(--ad-line-soft); font-size: 12px; font-weight: 700; color: var(--ad-soft); }
 .cms-nav a {
 	display: flex; align-items: center; gap: 10px; margin: 1px 8px; padding: 7px 10px;
 	border-radius: 4px; text-decoration: none; color: var(--ad-txt);
 }
-.cms-nav a:hover { background: var(--ad-bg); }
-.cms-nav a.is-on { background: var(--ad-spot-bg); color: var(--ad-spot-dark); font-weight: 700; }
-.cms-nav svg { width: 16px; height: 16px; flex: none; color: #8a919c; }
-.cms-nav a.is-on svg { color: var(--ad-spot); }
-.cms-side-ver { padding: 12px 18px; border-top: 1px solid var(--ad-line-soft); font-size: 11.5px; color: #a0a6b0; }
+.cms-nav a { font-weight: 500; }
+.cms-nav a:hover { background: #e6e9ee; }
+.cms-nav a.is-on { background: var(--ad-spot); color: #fff; font-weight: 700; }
+.cms-nav svg { width: 16px; height: 16px; flex: none; color: #6b7382; }
+.cms-nav a.is-on svg { color: #fff; }
 
 /* 상단 관리 바: 반영 상태 · 사이트 보기 · 계정 · 로그아웃 */
 .cms-body { min-width: 0; }
@@ -79,27 +81,28 @@ input, button, textarea, select { font: inherit; color: inherit; }
 	position: sticky; top: 0; z-index: 20;
 	display: flex; align-items: center; justify-content: space-between; gap: 16px;
 	height: 52px; padding: 0 clamp(16px, 2.5vw, 32px);
-	background: #fff; border-bottom: 1px solid var(--ad-line); font-size: 13px;
+	background: var(--ad-bar); color: #d5dceb; font-size: 13px;
 }
 .cms-bar-right { display: flex; align-items: center; gap: 4px; }
 .cms-bar-right > a, .cms-bar-right > button {
 	padding: 5px 10px; border: 0; border-radius: 4px; background: none; cursor: pointer;
-	text-decoration: none; color: var(--ad-soft);
+	text-decoration: none; color: #d5dceb;
 }
-.cms-bar-right > a:hover, .cms-bar-right > button:hover { background: var(--ad-bg); color: var(--ad-ink); }
-.cms-user { display: inline-flex; align-items: center; gap: 7px; padding: 0 10px; margin: 0 4px; border-left: 1px solid var(--ad-line); border-right: 1px solid var(--ad-line); font-weight: 600; color: var(--ad-ink); }
+.cms-bar-right > a:hover, .cms-bar-right > button:hover { background: rgba(255,255,255,.1); color: #fff; }
+.cms-user { display: inline-flex; align-items: center; gap: 7px; padding: 0 10px; margin: 0 4px; border-left: 1px solid rgba(255,255,255,.2); border-right: 1px solid rgba(255,255,255,.2); font-weight: 700; color: #fff; }
 .cms-user img { width: 22px; height: 22px; border-radius: 50%; }
-.cms-deploy { display: flex; align-items: center; gap: 7px; color: var(--ad-soft); }
-.cms-deploy i { flex: none; width: 7px; height: 7px; border-radius: 50%; background: #b5bbc4; }
-.cms-deploy[data-state='pending'] i { background: #e39b16; }
-.cms-deploy[data-state='done'] i { background: var(--ad-green); }
-.cms-deploy[data-state='late'] i { background: var(--ad-red); }
-.cms-deploy[data-state='pending'] span { color: #a86f06; }
+.cms-deploy { display: flex; align-items: center; gap: 7px; color: #d5dceb; }
+.cms-deploy i { flex: none; width: 8px; height: 8px; border-radius: 50%; background: #8d99b0; }
+.cms-deploy[data-state='pending'] i { background: #f2b33d; }
+.cms-deploy[data-state='done'] i { background: #4cc38a; }
+.cms-deploy[data-state='late'] i { background: #ff6b66; }
+.cms-deploy[data-state='pending'] span { color: #f8d48a; }
 
 .cms-main { padding: 22px clamp(16px, 2.5vw, 32px) 130px; max-width: 1080px; width: 100%; }
 .cms-top { margin-bottom: 18px; }
-.cms-crumb { font-size: 12px; color: #9aa0aa; margin-bottom: 2px; }
-.cms-top h1 { font-size: 20px; font-weight: 800; color: var(--ad-ink); }
+.cms-crumb { font-size: 12px; color: var(--ad-soft); margin-bottom: 2px; }
+.cms-top { padding-bottom: 12px; border-bottom: 2px solid var(--ad-ink); }
+.cms-top h1 { font-size: 21px; font-weight: 800; color: var(--ad-ink); }
 .cms-top-desc { color: var(--ad-soft); font-size: 13.5px; margin-top: 2px; }
 
 /* 대시보드 */
@@ -110,7 +113,7 @@ input, button, textarea, select { font: inherit; color: inherit; }
 .cms-stat:hover strong { color: var(--ad-spot-dark); }
 .cms-stat-l { font-size: 12.5px; font-weight: 600; color: var(--ad-soft); }
 .cms-stat strong { font-size: 24px; font-weight: 700; line-height: 1.3; color: var(--ad-ink); font-variant-numeric: tabular-nums; }
-.cms-stat small { font-size: 12px; color: #9aa0aa; }
+.cms-stat small { font-size: 12px; color: var(--ad-soft); }
 
 /* ── 패널 ─────────────────────────────────── */
 .cms-card {
@@ -124,7 +127,7 @@ input, button, textarea, select { font: inherit; color: inherit; }
 }
 .cms-card h2 { font-size: 15px; font-weight: 700; color: var(--ad-ink); }
 .cms-card > h2:first-child, .cms-card > .cms-card-head:first-child {
-	margin: -20px -20px 0; padding: 12px 20px; border-bottom: 1px solid var(--ad-line-soft); background: #fafbfc;
+	margin: -20px -20px 0; padding: 11px 20px; border-bottom: 1px solid var(--ad-line); background: var(--ad-head);
 	border-radius: var(--ad-radius) var(--ad-radius) 0 0;
 }
 .cms-card-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
@@ -204,7 +207,7 @@ input, button, textarea, select { font: inherit; color: inherit; }
 .cms-item.is-new { background: #f6f9fe; }
 .cms-item.is-open { background: #fafbfc; }
 .cms-item-row { display: flex; align-items: center; gap: 12px; padding: 8px 4px; }
-.cms-item-no { width: 24px; flex: none; text-align: center; font-size: 12.5px; color: #9aa0aa; font-variant-numeric: tabular-nums; }
+.cms-item-no { width: 24px; flex: none; text-align: center; font-size: 12.5px; color: var(--ad-soft); font-variant-numeric: tabular-nums; }
 .cms-item-thumb {
 	width: 88px; height: 62px; flex: none;
 	border: 1px solid var(--ad-line-soft); overflow: hidden; background: var(--ad-bg);
@@ -236,7 +239,7 @@ input, button, textarea, select { font: inherit; color: inherit; }
 .cms-imgbox-btns { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
 
 /* 글 목록 (공지·팝업·이력) */
-.cms-rows { border-top: 1px solid var(--ad-ink); }
+.cms-rows { border-top: 2px solid var(--ad-ink); }
 .cms-rows li { display: flex; align-items: center; gap: 10px; padding: 9px 6px; border-bottom: 1px solid var(--ad-line-soft); }
 .cms-rows li:hover { background: #fafbfc; }
 .cms-rows-tit {
@@ -247,7 +250,7 @@ button.cms-rows-tit:hover { color: var(--ad-spot-dark); text-decoration: underli
 .cms-rows time { font-size: 12.5px; color: var(--ad-soft); white-space: nowrap; font-variant-numeric: tabular-nums; }
 .cms-badge {
 	flex: none; display: inline-block; padding: 1px 7px; border-radius: 3px; border: 1px solid var(--ad-line);
-	font-size: 12px; font-weight: 600; background: #fff; color: var(--ad-soft);
+	font-size: 12px; font-weight: 600; background: var(--ad-head); color: var(--ad-txt);
 }
 .cms-badge.is-dark { background: var(--ad-ink); border-color: var(--ad-ink); color: #fff; }
 .cms-badge.is-red { background: #fbeceb; border-color: #f0c9c7; color: var(--ad-red); }
@@ -288,15 +291,18 @@ button.cms-rows-tit:hover { color: var(--ad-spot-dark); text-decoration: underli
 	.cms-stats { grid-template-columns: 1fr 1fr; }
 	.cms-stat:nth-child(3) { border-left: 0; }
 	.cms-stat:nth-child(n+3) { border-top: 1px solid var(--ad-line-soft); }
-	.cms-nav-group, .cms-side-ver { display: none; }
+	.cms-nav-group { display: none; }
 	.cms-nav svg { display: none; }
 	.cms-app { grid-template-columns: 1fr; }
-	.cms-side { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--ad-line); }
+	.cms-side { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--ad-line); background: #fff; }
 	.cms-brand { height: 46px; }
 	.cms-nav { display: flex; overflow-x: auto; padding: 0 6px; }
 	.cms-nav a { flex: none; margin: 0; padding: 11px 12px; border-radius: 0; border-bottom: 2px solid transparent; }
-	.cms-nav a.is-on { background: none; border-bottom-color: var(--ad-spot); }
-	.cms-bar { position: static; height: auto; padding: 8px 14px; flex-wrap: wrap; }
+	.cms-nav a.is-on { background: none; color: var(--ad-spot-dark); border-bottom-color: var(--ad-spot); }
+	.cms-bar { position: static; height: auto; padding: 8px 14px; flex-wrap: wrap; background: var(--ad-head); color: var(--ad-txt); border-bottom: 1px solid var(--ad-line); }
+	.cms-deploy, .cms-bar-right > a, .cms-bar-right > button { color: var(--ad-soft); }
+	.cms-user { color: var(--ad-ink); border-color: var(--ad-line); }
+	.cms-deploy[data-state='pending'] span { color: #a86f06; }
 	.cms-savebar { left: 0; flex-direction: column; align-items: stretch; gap: 8px; }
 	.cms-savebar-btns .cms-btn { flex: 1; }
 	.cms-grid2, .cms-grid3 { grid-template-columns: 1fr; }
