@@ -60,3 +60,9 @@
 - [x] videos/marketing-py/make_promo.py → out/fox-ai-marketing-60s.mp4 (1080x1920, 60s, 합성 BGM -11.8 LUFS)
 - [x] 장면 9개: 훅 AI 채팅 → 문제 제기(외우는 힘?·검색하는 힘?·질문하는 힘.) → 약속 → PBL 5단계 → 사진 12장 비트 몽타주 → 숫자 → 무대 → 다섯 가지 약속 → CTA
 - [x] Pillow 함정 기록: Space Grotesk 가변 글꼴 기본 굵기 Light → Bold 지정, GmarketSans 서브셋 공백 폭 → 단어 단위 배치
+
+## 10. Blender 3D 영상 60초 (2026-10-02)
+- [x] Blender 5.2.2 LTS 포터블(공식, sha256 확인)을 임시 폴더에서 사용 — 사용자 승인
+- [x] videos/blender-promo/build.py: 구역 9개를 3D 공간에 배치, 카메라가 120BPM 장면 경계에 맞춰 이동
+- [x] 함정: 서브셋 GmarketSans 이름 테이블(1·4번) 누락 → Blender 글꼴 로드 크래시 → fontTools 로 채움 / SVG 클래스 색 미지원 → 경로 순서로 직접 칠함 / 위치·회전 보간 불일치 → 같은 각도로 함께 키 / 사진 간격 < 카메라 거리 → 지나간 사진이 화면을 가림
+- [x] 1800 프레임 렌더(7분 43초, Eevee · RTX 4060) → 음악 합성 → videos/blender-promo/out/fox-ai-3d-60s.mp4 (60s, 31MB) / 약속 장면 카메라 기울기로 왼쪽 잘림 → 180프레임 재렌더
