@@ -1,21 +1,42 @@
-<!-- 사이트 관리자 페이지: 프로그램·공지·팝업·사진·설정을 GitHub 커밋으로 반영 -->
+<!-- FOX CMS: AI 연구소 사이트 콘텐츠 관리 시스템 (대시보드·콘텐츠 편집·변경 이력을 GitHub 커밋으로 반영) -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta name="robots" content="noindex, nofollow" />
-	<title>관리자 | AI 연구소</title>
+	<title>FOX CMS | AI 연구소</title>
 	<link rel="icon" type="image/png" href="images/favicon.png" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
-	<link rel="stylesheet" href="css/admin.css?v=3" />
+	<link rel="stylesheet" href="css/admin.css?v=4" />
 </head>
 <body>
+
+<!-- 로고 마크 · 메뉴 아이콘 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+	<symbol id="i-mark" viewBox="0 0 46 46">
+		<path fill="#466DB3" d="M22.85,0C10.22,0,0,10.24,0,22.87s10.23,22.83,22.85,22.83h0c4.33,0,8.38-1.21,11.83-3.3.38-.23.8-.35,1.24-.35.16,0,.32.02.48.05l5.84,1.22c.06,0,.13.02.19.02.56,0,1.02-.52.9-1.11l-1.22-5.84c-.12-.59-.02-1.21.3-1.72,2.09-3.45,3.3-7.5,3.3-11.83-.01-12.61-10.21-22.84-22.84-22.84h-.02Z"/>
+		<path fill="#fff" d="M29.8,12.57l-6.74,6.31c-.11.11-.29.11-.41,0l-6.74-6.31c-.16-.15-.38-.24-.61-.24h-.79c-.16,0-.29.12-.29.27v14.49c0,.21.09.42.25.57l8.19,7.66c.11.11.29.11.41,0l8.19-7.66c.16-.15.25-.36.25-.57v-14.49c0-.15-.13-.27-.29-.27h-.79c-.23,0-.45.09-.61.24,0,0-.02,0-.02,0Z"/>
+	</symbol>
+	<symbol id="i-dash" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="9" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="5" rx="1.5"/><rect x="13.5" y="11" width="7.5" height="10" rx="1.5"/><rect x="3" y="15" width="7.5" height="6" rx="1.5"/></g></symbol>
+	<symbol id="i-prog" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16M4 12h16M4 18.5h10"/></g></symbol>
+	<symbol id="i-news" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5h12v14H6a2 2 0 0 1-2-2z"/><path d="M16 9h3a1 1 0 0 1 1 1v7a2 2 0 0 1-4 0"/><path d="M7.5 9h5M7.5 12.5h5" stroke-linecap="round"/></g></symbol>
+	<symbol id="i-popup" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><rect x="7.5" y="8.5" width="9" height="7" rx="1.2"/></g></symbol>
+	<symbol id="i-photo" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-4.5L7 19"/></g></symbol>
+	<symbol id="i-history" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1L3.5 8.5"/><path d="M3.5 4v4.5H8"/><path d="M12 7.5V12l3 2"/></g></symbol>
+	<symbol id="i-gear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7" stroke-linecap="round"/></g></symbol>
+</svg>
 
 <!-- 로그인 -->
 <main class="cms-login" id="loginView">
 	<section class="cms-card">
-		<h1>AI 연구소 관리자</h1>
+		<div class="cms-login-brand">
+			<svg class="cms-mark" aria-hidden="true"><use href="#i-mark" /></svg>
+			<div>
+				<h1>FOX CMS</h1>
+				<p>폭스러닝센터 AI 연구소 · 콘텐츠 관리 시스템</p>
+			</div>
+		</div>
 		<p class="cms-desc">
 			GitHub 토큰으로 로그인합니다. 처음 한 번만 발급하면 이 브라우저에 저장되어 다음부터는 바로 들어옵니다.
 		</p>
@@ -23,7 +44,7 @@
 			<summary>토큰 발급 방법 (처음 한 번만)</summary>
 			<ol>
 				<li><a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub 토큰 발급 페이지</a>를 엽니다.</li>
-				<li><b>Token name</b>에 아무 이름이나 적습니다. (예: fox-ai-lab 관리자)</li>
+				<li><b>Token name</b>에 아무 이름이나 적습니다. (예: fox-ai-lab CMS)</li>
 				<li><b>Expiration</b>은 원하는 기간으로 정합니다. (기간이 지나면 다시 발급해야 합니다)</li>
 				<li><b>Repository access</b> → <b>Only select repositories</b> → <b>fox-ai-lab</b> 선택.</li>
 				<li><b>Repository permissions</b> → <b>Contents</b> 를 <b>Read and write</b> 로 변경.</li>
@@ -42,22 +63,36 @@
 <!-- 관리 화면 -->
 <div class="cms-app" id="appView" hidden>
 	<aside class="cms-side">
-		<p class="cms-brand">AI 연구소 <b>관리자</b></p>
+		<a class="cms-brand" href="#dashboard">
+			<svg class="cms-mark" aria-hidden="true"><use href="#i-mark" /></svg>
+			<span><b>FOX CMS</b><small>AI 연구소</small></span>
+		</a>
 		<nav class="cms-nav" id="nav" aria-label="관리 메뉴">
-			<a href="#programs" data-view="programs">프로그램</a>
-			<a href="#news" data-view="news">공지·소식</a>
-			<a href="#popups" data-view="popups">팝업</a>
-			<a href="#photos" data-view="photos">대회 사진</a>
-			<a href="#settings" data-view="settings">설정</a>
+			<a href="#dashboard" data-view="dashboard"><svg aria-hidden="true"><use href="#i-dash" /></svg>대시보드</a>
+			<p class="cms-nav-group">콘텐츠</p>
+			<a href="#programs" data-view="programs"><svg aria-hidden="true"><use href="#i-prog" /></svg>프로그램</a>
+			<a href="#news" data-view="news"><svg aria-hidden="true"><use href="#i-news" /></svg>공지·소식</a>
+			<a href="#popups" data-view="popups"><svg aria-hidden="true"><use href="#i-popup" /></svg>팝업</a>
+			<a href="#photos" data-view="photos"><svg aria-hidden="true"><use href="#i-photo" /></svg>대회 사진</a>
+			<p class="cms-nav-group">시스템</p>
+			<a href="#history" data-view="history"><svg aria-hidden="true"><use href="#i-history" /></svg>변경 이력</a>
+			<a href="#settings" data-view="settings"><svg aria-hidden="true"><use href="#i-gear" /></svg>설정</a>
 		</nav>
+		<div class="cms-deploy" id="deployState" data-state="idle" role="status" aria-live="polite">
+			<i></i><span>사이트와 동기화됨</span>
+		</div>
 		<div class="cms-side-foot">
-			<a href="index.html" target="_blank" rel="noopener">사이트 보기 ↗</a>
-			<button type="button" id="btnLogout">로그아웃</button>
+			<div class="cms-user" id="userChip"><img id="userAvatar" alt="" hidden /><span id="userName">GitHub</span></div>
+			<div class="cms-side-links">
+				<a href="index.html" target="_blank" rel="noopener">사이트 보기 ↗</a>
+				<button type="button" id="btnLogout">로그아웃</button>
+			</div>
 		</div>
 	</aside>
 
 	<main class="cms-main">
 		<header class="cms-top">
+			<p class="cms-crumb" id="viewCrumb"></p>
 			<h1 id="viewTitle"></h1>
 			<p class="cms-top-desc" id="viewDesc"></p>
 		</header>
@@ -75,7 +110,7 @@
 
 <div class="cms-toast" id="toast" hidden></div>
 
-<script src="js/content.js"></script>
-<script src="js/admin.js?v=3"></script>
+<script src="js/content.js?v=20261002"></script>
+<script src="js/admin.js?v=4"></script>
 </body>
 </html>

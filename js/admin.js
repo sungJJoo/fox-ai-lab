@@ -18,7 +18,11 @@
 		site: { path: 'data/site.json', label: '설정', empty: { inquiryEndpoint: '', inquirySheetUrl: '' } }
 	};
 
+	var PAGES = 'https://sungjjoo.github.io/fox-ai-lab/';   // 사이트 데이터가 실제로 배포되는 곳 (본사 서버도 여기서 읽음)
+
 	var VIEWS = {
+		dashboard: ['대시보드', '사이트 콘텐츠 현황과 최근 변경 내역입니다.', '홈'],
+		history: ['변경 이력', '콘텐츠가 언제 어떻게 바뀌었는지 보고, 원하는 시점의 내용으로 되돌릴 수 있습니다.', '시스템'],
 		programs: ['프로그램', '프로그램 페이지의 활동 표 · 4가지 영역 · 포스터를 관리합니다.'],
 		news: ['공지·소식', '공지·소식 페이지에 올라갈 글을 관리합니다.'],
 		popups: ['팝업', '메인 화면에 뜨는 팝업입니다. 「사용」이 켜져 있고 기간 안에 있는 팝업만 보입니다.'],
@@ -32,7 +36,8 @@
 	var sha = {};        // 불러온 시점의 파일 sha (동시 수정 감지)
 	var newBlobs = {};   // { 경로: base64 } 저장 시 올릴 새 이미지
 	var removed = [];    // 저장 시 지울 이미지 경로
-	var view = 'programs';
+	var view = 'dashboard';
+	var commitLog = null;  // 변경 이력 캐시 (data/ 를 건드린 커밋)
 	var ui = { prog: { tab: 'activities', open: -1 }, news: { edit: null }, popups: { edit: null }, photos: { key: null } };
 
 	var $ = function (id) { return document.getElementById(id); };
@@ -591,9 +596,173 @@
 		];
 	}
 
+	/* ── 화면: 대시보드 ───────────────────────── */
+
+	function fmtTime(iso) {
+		var d = new Date(iso);
+		return d.getFullYear() + '.' + pad(d.getMonth() + 1) + '.' + pad(d.getDate()) + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
+	}
+
+	function loadHistory(force) {
+		if (commitLog && !force) return Promise.resolve(commitLog);
+		return api('/commits?sha=' + BRANCH + '&path=data&per_page=30').then(function (list) {
+			commitLog = list.map(function (c) {
+				return { sha: c.sha, msg: c.commit.message.split('\n')[0], date: c.commit.author.date, who: (c.author && c.author.login) || c.commit.author.name };
+			});
+			return commitLog;
+		});
+	}
+
+	function stat(label, value, sub, target) {
+		return h('button', { type: 'button', class: 'cms-stat', onclick: function () { location.hash = target; } },
+			h('span', { class: 'cms-stat-l', text: label }),
+			h('strong', { text: String(value) }),
+			h('small', { text: sub }));
+	}
+
+	function historyRows(list, limit) {
+		return h('ul', { class: 'cms-rows' }, list.slice(0, limit).map(function (c) {
+			return h('li', null,
+				h('time', { text: fmtTime(c.date) }),
+				h('span', { class: 'cms-rows-tit', text: c.msg }),
+				h('span', { class: 'cms-badge', text: c.who }));
+		}));
+	}
+
+	function viewDashboard() {
+		var P = D.programs;
+		var live = D.popups.filter(function (p) { return popupStatus(p)[0] === '노출 중'; }).length;
+		var photoCount = Object.keys(D.photos).reduce(function (n, k) { return n + D.photos[k].photos.length; }, 0);
+		var connected = !!D.site.inquiryEndpoint.trim();
+		var recent = h('div', null, h('p', { class: 'cms-empty', text: '불러오는 중…' }));
+		loadHistory().then(function (list) {
+			recent.innerHTML = '';
+			append(recent, list.length ? historyRows(list, 5) : h('p', { class: 'cms-empty', text: '아직 변경 기록이 없습니다.' }));
+		}).catch(function () { recent.innerHTML = ''; append(recent, h('p', { class: 'cms-empty', text: '변경 이력을 불러오지 못했습니다.' })); });
+
+		return [
+			h('div', { class: 'cms-stats' },
+				stat('활동 프로그램', P.activities.length, '영역 ' + P.areas.length + ' · 포스터 ' + P.posters.length, 'programs'),
+				stat('공지·소식', D.news.length, '고정 ' + D.news.filter(function (n) { return n.pinned; }).length + '개', 'news'),
+				stat('노출 중 팝업', live, '전체 ' + D.popups.length + '개', 'popups'),
+				stat('대회 사진', photoCount, '앨범 ' + Object.keys(D.photos).length + '개', 'photos')),
+			h('div', { class: 'cms-grid2' },
+				h('section', { class: 'cms-card' },
+					h('h2', { text: '온라인 상담 신청' }),
+					h('p', null, h('span', { class: 'cms-badge' + (connected ? ' is-on' : ''), text: connected ? '연결됨' : '연결 안 됨' })),
+					h('p', { class: 'cms-desc', text: connected ? '상담 문의 페이지에 신청 폼이 보이고, 접수 내용은 구글 시트에 쌓입니다.' : '설정에서 접수 주소를 넣으면 상담 문의 페이지에 신청 폼이 나타납니다.' }),
+					connected && D.site.inquirySheetUrl
+						? h('p', null, h('a', { class: 'cms-btn cms-btn-ghost cms-btn-sm', href: D.site.inquirySheetUrl, target: '_blank', rel: 'noopener', text: '접수된 문의 보기 ↗' }))
+						: btn('설정으로 가기', function () { location.hash = 'settings'; }, 'cms-btn-ghost cms-btn-sm')),
+				h('section', { class: 'cms-card' },
+					h('h2', { text: '사이트 반영' }),
+					h('p', { class: 'cms-desc', text: '저장하면 GitHub Pages 에 1~2분 안에 반영되고, 본사 사이트(ai.foxconnect.kr)는 캐시 때문에 최대 10분 걸립니다. 반영 여부는 왼쪽 아래에서 자동으로 확인됩니다.' }),
+					h('p', null,
+						h('a', { class: 'cms-btn cms-btn-ghost cms-btn-sm', href: PAGES, target: '_blank', rel: 'noopener', text: 'GitHub Pages ↗' }), ' ',
+						h('a', { class: 'cms-btn cms-btn-ghost cms-btn-sm', href: 'https://ai.foxconnect.kr/', target: '_blank', rel: 'noopener', text: 'ai.foxconnect.kr ↗' })))),
+			h('section', { class: 'cms-card' },
+				h('div', { class: 'cms-card-head' }, h('h2', { text: '최근 변경' }), btn('전체 이력 →', function () { location.hash = 'history'; }, 'cms-btn-ghost cms-btn-sm')),
+				recent)
+		];
+	}
+
+	/* ── 화면: 변경 이력 · 되돌리기 ─────────────── */
+
+	function viewHistory() {
+		var box = h('div', null, h('p', { class: 'cms-empty', text: '불러오는 중…' }));
+		loadHistory(true).then(function (list) {
+			box.innerHTML = '';
+			if (!list.length) { append(box, h('p', { class: 'cms-empty', text: '아직 변경 기록이 없습니다.' })); return; }
+			append(box, h('ul', { class: 'cms-rows' }, list.map(function (c, i) {
+				return h('li', null,
+					h('time', { text: fmtTime(c.date) }),
+					h('span', { class: 'cms-rows-tit', text: c.msg }),
+					h('span', { class: 'cms-badge', text: c.who }),
+					i === 0 ? h('span', { class: 'cms-badge is-on', text: '현재' })
+						: btn('이 시점으로 되돌리기', function () { restoreAt(c); }, 'cms-btn-ghost cms-btn-sm'));
+			})));
+		}).catch(function (e) { box.innerHTML = ''; append(box, h('p', { class: 'cms-empty', text: '불러오지 못했습니다 — ' + e.message })); });
+		return [
+			h('section', { class: 'cms-card' },
+				h('p', { class: 'cms-desc', text: '「이 시점으로 되돌리기」는 그 저장 직후의 내용을 편집 화면으로 불러옵니다. 바로 저장되지 않으니, 확인한 뒤 아래 「저장하고 사이트에 반영」을 누르세요. 그 뒤에 지워진 사진도 함께 되살립니다.' }),
+				box)
+		];
+	}
+
+	function getFileAt(path, ref) {
+		return api('/contents/' + path + '?ref=' + ref).catch(function (e) {
+			if (e.status === 404) return null;
+			throw e;
+		});
+	}
+
+	function restoreAt(c) {
+		if (isDirty() && !confirm('저장하지 않은 변경이 있습니다. 버리고 ' + fmtTime(c.date) + ' 시점 내용을 불러올까요?')) return;
+		toast(fmtTime(c.date) + ' 시점 내용을 불러오는 중…');
+		var next = {};
+		Promise.all(Object.keys(FILES).map(function (k) {
+			return getFileAt(FILES[k].path, c.sha).then(function (f) { next[k] = f ? JSON.parse(base64ToUtf8(f.content)) : JSON.parse(orig[k]); });
+		})).then(function () {
+			// 그 시점에 쓰던 업로드 사진 중 지금 저장소에 없는 것은 그 시점 파일을 가져와 새 사진으로 다시 올린다
+			var refs = (JSON.stringify(next).match(/"images\/u\/[^"]+"/g) || []).map(function (s) { return s.slice(1, -1); });
+			refs = refs.filter(function (p, i) { return refs.indexOf(p) === i; });
+			return Promise.all(refs.map(function (p) {
+				return getFile(p).then(function (now) {
+					if (now) return null;
+					return getFileAt(p, c.sha).then(function (old) { if (old) newBlobs[p] = old.content.replace(/\n/g, ''); });
+				});
+			}));
+		}).then(function () {
+			Object.keys(FILES).forEach(function (k) { D[k] = next[k]; });
+			removed = [];
+			ui.prog.open = -1; ui.news.edit = null; ui.popups.edit = null;
+			rerender();
+			toast('불러왔습니다. 확인한 뒤 「저장하고 사이트에 반영」을 누르세요.');
+		}).catch(function (e) { toast('불러오기 실패 — ' + e.message, true); });
+	}
+
+	/* ── 사이트 반영 확인 ─────────────────────── */
+
+	var deployTimer = null;
+
+	function deployState(state, text) {
+		var el = $('deployState');
+		el.setAttribute('data-state', state);
+		el.querySelector('span').textContent = text;
+	}
+
+	// 저장한 내용이 GitHub Pages 의 data/*.json 과 같아질 때까지 10초마다 확인 (최대 6분)
+	function watchDeploy(keys) {
+		var expect = {};
+		keys.forEach(function (k) { expect[k] = JSON.stringify(D[k]); });
+		var started = Date.now();
+		clearTimeout(deployTimer);
+		deployState('pending', '사이트에 반영하는 중…');
+		(function check() {
+			Promise.all(keys.map(function (k) {
+				return fetch(PAGES + FILES[k].path + '?t=' + Date.now(), { cache: 'no-store' })
+					.then(function (r) { return r.ok ? r.json() : null; })
+					.then(function (j) { return j !== null && JSON.stringify(j) === expect[k]; })
+					.catch(function () { return false; });
+			})).then(function (ok) {
+				if (ok.every(Boolean)) {
+					var d = new Date();
+					deployState('done', '반영 완료 · ' + pad(d.getHours()) + ':' + pad(d.getMinutes()));
+					toast('사이트에 반영되었습니다. (본사 사이트는 최대 10분)');
+					commitLog = null;
+					if (view === 'dashboard' || view === 'history') rerender();
+				} else if (Date.now() - started > 6 * 60 * 1000) {
+					deployState('late', '반영 확인 지연 — 잠시 후 사이트를 확인하세요');
+				} else {
+					deployTimer = setTimeout(check, 10000);
+				}
+			});
+		})();
+	}
+
 	/* ── 렌더 ─────────────────────────────── */
 
-	var RENDER = { programs: viewPrograms, news: viewNews, popups: viewPopups, photos: viewPhotos, settings: viewSettings };
+	var RENDER = { dashboard: viewDashboard, history: viewHistory, programs: viewPrograms, news: viewNews, popups: viewPopups, photos: viewPhotos, settings: viewSettings };
 
 	function rerender() {
 		var y = window.scrollY;
@@ -602,7 +771,8 @@
 		append(box, RENDER[view]());
 		$('viewTitle').textContent = VIEWS[view][0];
 		$('viewDesc').textContent = VIEWS[view][1];
-		Array.prototype.forEach.call($('nav').children, function (a) {
+		$('viewCrumb').textContent = 'FOX CMS / ' + (VIEWS[view][2] || '콘텐츠');
+		Array.prototype.forEach.call($('nav').querySelectorAll('a'), function (a) {
 			a.classList.toggle('is-on', a.getAttribute('data-view') === view);
 		});
 		window.scrollTo(0, y);
@@ -610,7 +780,7 @@
 	}
 
 	function go(v) {
-		if (!RENDER[v]) v = 'programs';
+		if (!RENDER[v]) v = 'dashboard';
 		if (v !== view) window.scrollTo(0, 0);
 		view = v;
 		rerender();
@@ -717,7 +887,9 @@
 				newBlobs = {};
 				removed = [];
 				rerender();
-				toast('저장했습니다. 1~2분 뒤 사이트에 반영됩니다. (본사 서버는 최대 10분)');
+				commitLog = null;
+				toast('저장했습니다. 사이트 반영을 확인하는 중입니다…');
+				watchDeploy(keys);
 			})
 			.catch(function (e) { toast('저장 실패 — ' + e.message, true); })
 			.then(function () { b.disabled = false; });
@@ -750,6 +922,14 @@
 			$('loginView').hidden = true;
 			$('appView').hidden = false;
 			go(location.hash.slice(1));
+			// 로그인한 GitHub 계정 표시 (실패해도 관리 기능과 무관)
+			fetch('https://api.github.com/user', { headers: { 'Authorization': 'Bearer ' + token } })
+				.then(function (r) { return r.ok ? r.json() : null; })
+				.then(function (u) {
+					if (!u) return;
+					$('userName').textContent = u.login;
+					if (u.avatar_url) { $('userAvatar').src = u.avatar_url + '&s=64'; $('userAvatar').hidden = false; }
+				}).catch(function () {});
 		}).catch(function (e) {
 			token = null;
 			m.className = 'cms-msg is-err';
