@@ -344,7 +344,7 @@
 							maxW: 640, dir: 'programs', removable: true,
 							set: function (n) { a.image = n ? progImage(n, oneLine(a.name) + ' 활동') : null; }
 						})),
-						a.image ? field('사진 설명', input(a.image, 'alt'), '화면에는 안 보이고, 시각장애인 안내와 검색에 쓰입니다.') : null
+						a.image ? field('사진 설명', input(a.image, 'alt'), '화면에는 안 보이고, 검색에 쓰입니다.') : null
 					) : null);
 			})));
 	}
@@ -453,7 +453,7 @@
 				h('ul', { class: 'cms-list' }, n.images.map(function (im, i) {
 					return h('li', { class: 'cms-item' }, h('div', { class: 'cms-item-row' },
 						h('div', { class: 'cms-item-thumb' }, h('img', { src: imgUrl(im.src), alt: '' })),
-						h('div', { class: 'cms-item-body' }, input(im, 'alt', { ph: '사진 설명 (시각장애인 안내용)' })),
+						h('div', { class: 'cms-item-body' }, input(im, 'alt', { ph: '사진 설명' })),
 						h('div', { class: 'cms-item-acts' }, moveBtns(n.images, i),
 							iconBtn('✕', '사진 삭제', false, function () { dropImage(im.src); n.images.splice(i, 1); changed(); rerender(); }, true))));
 				})),
@@ -589,7 +589,7 @@
 						h('span', { class: 'cms-item-no', text: i + 1 }),
 						h('div', { class: 'cms-item-thumb' }, h('img', { src: imgUrl(p.src), alt: '', loading: 'lazy' })),
 						h('div', { class: 'cms-item-body' },
-							input(p, 'caption', { rows: 2, ph: '사진 설명을 적어주세요 (화면에 표시되고, 시각장애인 안내에도 쓰입니다)' })),
+							input(p, 'caption', { rows: 2, ph: '사진 설명을 적어주세요' })),
 						h('div', { class: 'cms-item-acts' }, moveBtns(al.photos, i),
 							iconBtn('✕', '삭제', false, function () {
 								if (!confirm((i + 1) + '번째 사진을 삭제할까요?\n\n' + (p.caption || p.src))) return;
