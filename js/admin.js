@@ -5,7 +5,9 @@
 	var REPO_OWNER = 'sungJJoo';
 	var REPO_NAME = 'fox-ai-lab';
 	var BRANCH = 'main';
-	var TOKEN_KEY = 'foxai_admin_token';
+	var TOKEN_KEY = 'foxai_admin_token';       // 개발자 로그인 (GitHub 토큰)
+	var SESSION_KEY = 'foxai_cms_session';     // 비밀번호 로그인 (Apps Script 저장 대행 세션)
+	var CMS_EMAIL = 'cms@ai.foxconnect.kr';    // 저장 대행이 남기는 커밋 작성자 메일 (tools/cms-apps-script.gs)
 	var API = 'https://api.github.com/repos/' + REPO_OWNER + '/' + REPO_NAME;
 	var UPLOAD_DIR = 'images/u/';     // 관리자가 올린 이미지 (교체·삭제 시 함께 지움)
 	var WEBP_QUALITY = 0.8;
@@ -15,7 +17,7 @@
 		news: { path: 'data/news.json', label: '공지·소식', empty: [] },
 		popups: { path: 'data/popups.json', label: '팝업', empty: [] },
 		photos: { path: 'data/slideshows.json', label: '대회 사진', empty: {} },
-		site: { path: 'data/site.json', label: '설정', empty: { inquiryEndpoint: '', inquirySheetUrl: '' } }
+		site: { path: 'data/site.json', label: '설정', empty: { inquiryEndpoint: '', inquirySheetUrl: '', cmsEndpoint: '' } }
 	};
 
 	var PAGES = 'https://sungjjoo.github.io/fox-ai-lab/';   // 사이트 데이터가 실제로 배포되는 곳 (본사 서버도 여기서 읽음)
@@ -30,7 +32,9 @@
 		settings: ['설정', '온라인 상담 신청 연결 등 사이트 설정입니다.']
 	};
 
-	var token = null;
+	var token = null;     // 개발자 로그인일 때 GitHub 토큰
+	var session = null;   // 비밀번호 로그인일 때 { id, name }
+	var cmsUrl = '';      // 저장 대행 주소 (data/site.json 의 cmsEndpoint)
 	var D = {};          // 편집 중인 데이터
 	var orig = {};       // 불러온 시점의 JSON 문자열 (변경 감지·되돌리기)
 	var sha = {};        // 불러온 시점의 파일 sha (동시 수정 감지)
@@ -77,8 +81,31 @@
 		});
 	}
 
+	function cmsCall(payload) {
+		return fetch(cmsUrl, {
+			method: 'POST',
+			headers: { 'Content-Type': 'text/plain;charset=utf-8' },   // 단순 요청: Apps Script 는 사전 요청(OPTIONS)을 받지 못한다
+			body: JSON.stringify(payload)
+		}).then(function (r) {
+			if (!r.ok) throw new Error('저장 대행 서버에 연결하지 못했습니다. (' + r.status + ')');
+			return r.json();
+		});
+	}
+
 	function api(path, opts) {
 		opts = opts || {};
+		if (session) {
+			return cmsCall({ action: 'api', session: session.id, method: opts.method || 'GET', path: path, body: opts.body || null }).then(function (r) {
+				if (r.status < 400) return r.body;
+				var msg = r.error === 'session' ? '로그인이 만료되었습니다. 다시 로그인해 주세요.'
+					: r.error === 'github-auth' ? '저장 대행의 GitHub 토큰이 만료되었습니다. 관리 담당자에게 토큰 재발급을 요청하세요.'
+					: (r.body && r.body.message) || r.error || '오류';
+				var e = new Error(r.error === 'session' || r.error === 'github-auth' ? msg : 'GitHub ' + r.status + ': ' + msg);
+				e.status = r.status;
+				e.expired = r.error === 'session';
+				throw e;
+			});
+		}
 		return fetch(API + path, {
 			method: opts.method || 'GET',
 			cache: 'no-store',
@@ -592,7 +619,23 @@
 						h('li', { text: '메뉴 「확장 프로그램 → Apps Script」를 엽니다.' }),
 						h('li', { text: '저장소의 tools/inquiry-apps-script.gs 내용을 전부 붙여넣고, 맨 위 NOTIFY_EMAIL 을 알림 받을 메일로 바꿔 저장합니다.' }),
 						h('li', { text: '「배포 → 새 배포 → 유형: 웹 앱」, 실행 사용자 「나」, 액세스 권한 「모든 사용자」로 배포합니다. (권한 승인 창이 뜨면 허용)' }),
-						h('li', { text: '나온 웹 앱 URL(…/exec)을 위 「접수 주소」에, 스프레드시트 주소를 「문의 시트 주소」에 붙여넣고 저장합니다.' }))))
+						h('li', { text: '나온 웹 앱 URL(…/exec)을 위 「접수 주소」에, 스프레드시트 주소를 「문의 시트 주소」에 붙여넣고 저장합니다.' })))),
+			h('section', { class: 'cms-card' },
+				h('h2', { text: '관리자 로그인 (비밀번호)' }),
+				h('p', { class: 'cms-desc', text: 'GitHub 계정 없이 이름과 비밀번호로 이 CMS 에 들어올 수 있게 합니다. 저장은 구글 Apps Script 가 숨겨 둔 GitHub 토큰으로 대신하며, 사이트 코드는 바꿀 수 없고 콘텐츠·사진만 저장됩니다.' }),
+				h('p', null, h('span', { class: 'cms-badge' + (S.cmsEndpoint ? ' is-on' : ''), text: S.cmsEndpoint ? '사용 중' : '설정 안 됨' })),
+				field('CMS 저장 대행 주소 (Google Apps Script 웹 앱 URL)', input(S, 'cmsEndpoint', { type: 'url', ph: 'https://script.google.com/macros/s/.../exec' }),
+					'상담 신청 접수 주소와는 다른 CMS 전용 주소입니다. 비우면 비밀번호 로그인이 꺼지고 GitHub 토큰으로만 들어올 수 있습니다.'),
+				h('details', { class: 'cms-help' },
+					h('summary', { text: '저장 대행 만드는 방법 (처음 한 번만)' }),
+					h('ol', null,
+						h('li', { text: 'script.google.com 에서 「새 프로젝트」를 만듭니다. (예: FOX CMS 저장 대행)' }),
+						h('li', { text: '저장소의 tools/cms-apps-script.gs 내용을 전부 붙여넣고 저장합니다.' }),
+						h('li', { text: 'GitHub 토큰을 발급합니다. (로그인 화면 「개발자 로그인」의 방법과 같고, 만료 기간은 길게)' }),
+						h('li', { text: '「프로젝트 설정 → 스크립트 속성」에 GITHUB_TOKEN(토큰)과 ADMIN_PASSWORD(관리자 비밀번호)를 추가합니다.' }),
+						h('li', { text: '「배포 → 새 배포 → 유형: 웹 앱」, 실행 사용자 「나」, 액세스 권한 「모든 사용자」로 배포합니다. (권한 승인 창이 뜨면 허용)' }),
+						h('li', { text: '나온 웹 앱 URL(…/exec)을 위 칸에 붙여넣고 저장합니다. 반영되면 로그인 화면에 이름·비밀번호 칸이 나타납니다.' })),
+					h('p', { class: 'cms-warn', text: '비밀번호를 바꾸려면 스크립트 속성의 ADMIN_PASSWORD 만 고치면 되고, 바꾸는 즉시 모든 기기의 로그인이 풀립니다. 토큰이 만료되면 GITHUB_TOKEN 만 새 토큰으로 바꾸세요.' })))
 		];
 	}
 
@@ -607,7 +650,7 @@
 		if (commitLog && !force) return Promise.resolve(commitLog);
 		return api('/commits?sha=' + BRANCH + '&path=data&per_page=30').then(function (list) {
 			commitLog = list.map(function (c) {
-				return { sha: c.sha, msg: c.commit.message.split('\n')[0], date: c.commit.author.date, who: (c.author && c.author.login) || c.commit.author.name };
+				return { sha: c.sha, msg: c.commit.message.split('\n')[0], date: c.commit.author.date, who: c.commit.author.email === CMS_EMAIL ? c.commit.author.name : (c.author && c.author.login) || c.commit.author.name };
 			});
 			return commitLog;
 		});
@@ -821,7 +864,11 @@
 			if (!p.image && !p.body.trim()) out.push('팝업 「' + p.title + '」 이미지나 내용 중 하나는 있어야 합니다.');
 		});
 		var ep = D.site.inquiryEndpoint.trim();
-		if (ep && !/^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/.test(ep)) out.push('설정: 접수 주소는 https://script.google.com/macros/s/…/exec 형식이어야 합니다.');
+		var GAS = /^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/;
+		if (ep && !GAS.test(ep)) out.push('설정: 접수 주소는 https://script.google.com/macros/s/…/exec 형식이어야 합니다.');
+		var cms = (D.site.cmsEndpoint || '').trim();
+		if (cms && !GAS.test(cms)) out.push('설정: CMS 저장 대행 주소는 https://script.google.com/macros/s/…/exec 형식이어야 합니다.');
+		if (session && !cms) out.push('설정: 비밀번호로 로그인한 상태에서는 CMS 저장 대행 주소를 비울 수 없습니다.');
 		return out;
 	}
 
@@ -907,56 +954,103 @@
 		}));
 	}
 
-	function login(t) {
-		token = t;
+	function loginMsg(text, isErr) {
 		var m = $('loginMsg');
-		m.className = 'cms-msg';
-		m.textContent = '확인 중…';
+		m.className = 'cms-msg' + (isErr ? ' is-err' : '');
+		m.textContent = text;
+	}
+
+	// 로그인 성공 후 공통: 데이터 불러오고 관리 화면 열기
+	function enter() {
+		return loadAll().then(function () {
+			$('loginView').hidden = true;
+			$('appView').hidden = false;
+			go(location.hash.slice(1));
+		});
+	}
+
+	function showUser(name, avatar) {
+		$('userName').textContent = name;
+		if (avatar) { $('userAvatar').src = avatar; $('userAvatar').hidden = false; }
+	}
+
+	// 비밀번호 로그인: 저장 대행이 세션을 발급하고, 이후 모든 GitHub 요청을 대신한다
+	function loginPassword(name, pw) {
+		loginMsg('확인 중…');
+		return cmsCall({ action: 'login', name: name, password: pw }).then(function (r) {
+			if (r.status !== 200) throw new Error(r.error || '로그인하지 못했습니다.');
+			session = { id: r.session, name: r.name };
+			try { localStorage.setItem(SESSION_KEY, JSON.stringify(session)); } catch (e) { /* 저장 불가: 이번만 로그인 */ }
+			return enter();
+		}).then(function () {
+			showUser(session.name);
+		}).catch(function (e) {
+			session = null;
+			loginMsg(e.message, true);
+			throw e;
+		});
+	}
+
+	function resumeSession(saved) {
+		session = saved;
+		return enter().then(function () { showUser(session.name); }).catch(function (e) {
+			session = null;
+			try { localStorage.removeItem(SESSION_KEY); } catch (x) { /* 무시 */ }
+			loginMsg(e.expired ? '로그인이 만료되었습니다. 다시 로그인해 주세요.' : e.message, true);
+		});
+	}
+
+	// 개발자 로그인: GitHub 토큰으로 직접
+	function loginToken(t) {
+		token = t;
+		loginMsg('확인 중…');
 		return api('').then(function (repo) {
 			if (!repo.permissions || !repo.permissions.push) {
 				throw new Error('이 저장소에 쓰기 권한이 없는 토큰입니다. Contents 권한을 Read and write로 발급해 주세요.');
 			}
-			return loadAll();
+			return enter();
 		}).then(function () {
 			try { localStorage.setItem(TOKEN_KEY, token); } catch (e) { /* 저장 불가: 이번만 로그인 */ }
-			$('loginView').hidden = true;
-			$('appView').hidden = false;
-			go(location.hash.slice(1));
 			// 로그인한 GitHub 계정 표시 (실패해도 관리 기능과 무관)
 			fetch('https://api.github.com/user', { headers: { 'Authorization': 'Bearer ' + token } })
 				.then(function (r) { return r.ok ? r.json() : null; })
-				.then(function (u) {
-					if (!u) return;
-					$('userName').textContent = u.login;
-					if (u.avatar_url) { $('userAvatar').src = u.avatar_url + '&s=64'; $('userAvatar').hidden = false; }
-				}).catch(function () {});
+				.then(function (u) { if (u) showUser(u.login, u.avatar_url && u.avatar_url + '&s=64'); })
+				.catch(function () {});
 		}).catch(function (e) {
 			token = null;
-			m.className = 'cms-msg is-err';
-			m.textContent = e.status === 401 || e.status === 403
-				? '토큰이 올바르지 않거나 만료되었습니다. 다시 발급해 주세요.'
-				: e.message;
+			loginMsg(e.status === 401 || e.status === 403 ? '토큰이 올바르지 않거나 만료되었습니다. 다시 발급해 주세요.' : e.message, true);
 			throw e;
 		});
 	}
 
 	/* ── 초기화 ───────────────────────────── */
 
+	$('pwForm').addEventListener('submit', function (e) {
+		e.preventDefault();
+		var name = $('nameInput').value.trim();
+		var pw = $('pwInput').value;
+		if (!name || !pw) { loginMsg('이름과 비밀번호를 모두 적어 주세요.', true); return; }
+		$('pwInput').value = '';
+		try { localStorage.setItem('foxai_cms_name', name); } catch (x) { /* 무시 */ }
+		loginPassword(name, pw).catch(function () {});
+	});
+
 	$('btnLogin').addEventListener('click', function () {
 		var v = $('tokenInput').value.trim();
-		if (!v) { $('loginMsg').className = 'cms-msg is-err'; $('loginMsg').textContent = '토큰을 붙여넣어 주세요.'; return; }
-		login(v).catch(function () {});
+		if (!v) { loginMsg('토큰을 붙여넣어 주세요.', true); return; }
+		loginToken(v).catch(function () {});
 	});
 	$('tokenInput').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('btnLogin').click(); });
 
 	$('btnLogout').addEventListener('click', function () {
 		if (isDirty() && !confirm('저장하지 않은 변경이 있습니다. 로그아웃할까요?')) return;
-		try { localStorage.removeItem(TOKEN_KEY); } catch (e) { /* 무시 */ }
-		location.hash = '';
-		location.reload();
+		try { localStorage.removeItem(TOKEN_KEY); localStorage.removeItem(SESSION_KEY); } catch (e) { /* 무시 */ }
+		var done = function () { location.hash = ''; location.reload(); };
+		if (session) cmsCall({ action: 'logout', session: session.id }).then(done, done);
+		else done();
 	});
 
-	window.addEventListener('hashchange', function () { if (token) go(location.hash.slice(1)); });
+	window.addEventListener('hashchange', function () { if (token || session) go(location.hash.slice(1)); });
 
 	$('btnSave').addEventListener('click', save);
 	$('btnDiscard').addEventListener('click', function () {
@@ -973,8 +1067,21 @@
 		if (isDirty()) { e.preventDefault(); e.returnValue = ''; }
 	});
 
-	// 저장된 토큰으로 자동 로그인
-	var saved = null;
-	try { saved = localStorage.getItem(TOKEN_KEY); } catch (e) { /* 무시 */ }
-	if (saved) login(saved).catch(function () { try { localStorage.removeItem(TOKEN_KEY); } catch (e) { /* 무시 */ } });
+	// 저장 대행 주소를 읽고, 저장된 세션·토큰이 있으면 자동 로그인
+	function read(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+	$('nameInput').value = read('foxai_cms_name') || '';
+
+	window.FoxContent.load('site').catch(function () { return {}; }).then(function (site) {
+		cmsUrl = (site && site.cmsEndpoint) || '';
+		if (!cmsUrl) {
+			$('pwForm').hidden = true;
+			$('pwOff').hidden = false;
+			$('tokenBox').open = true;
+		}
+		var savedSession = null;
+		try { savedSession = JSON.parse(read(SESSION_KEY)); } catch (e) { /* 무시 */ }
+		var savedToken = read(TOKEN_KEY);
+		if (savedSession && savedSession.id && cmsUrl) resumeSession(savedSession);
+		else if (savedToken) loginToken(savedToken).catch(function () { try { localStorage.removeItem(TOKEN_KEY); } catch (e) { /* 무시 */ } });
+	});
 })();

@@ -43,6 +43,10 @@ input, button, textarea, select { font: inherit; color: inherit; }
 .cms-login-brand .cms-mark { width: 52px; height: 52px; }
 .cms-login h1 { font-size: 26px; font-weight: 800; letter-spacing: -0.01em; color: var(--ad-ink); }
 .cms-login-brand p { color: var(--ad-soft); font-size: 14px; }
+.cms-login-form { display: grid; gap: 16px; margin-top: 22px; }
+.cms-login-form .cms-btn { justify-self: stretch; padding-block: 12px; }
+.cms-help > .cms-desc, .cms-help > .cms-field-l { margin-top: 10px; }
+.cms-help .cms-row { margin-top: 12px; }
 
 /* ── 레이아웃 ─────────────────────────────── */
 .cms-app { display: grid; grid-template-columns: var(--ad-side-w) minmax(0, 1fr); min-height: 100vh; }

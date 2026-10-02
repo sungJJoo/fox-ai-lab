@@ -8,7 +8,7 @@
 	<title>FOX CMS | AI 연구소</title>
 	<link rel="icon" type="image/png" href="images/favicon.png" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
-	<link rel="stylesheet" href="css/admin.css?v=4" />
+	<link rel="stylesheet" href="css/admin.css?v=6" />
 </head>
 <body>
 
@@ -37,11 +37,22 @@
 				<p>폭스러닝센터 AI 연구소 · 콘텐츠 관리 시스템</p>
 			</div>
 		</div>
-		<p class="cms-desc">
-			GitHub 토큰으로 로그인합니다. 처음 한 번만 발급하면 이 브라우저에 저장되어 다음부터는 바로 들어옵니다.
-		</p>
-		<details class="cms-help">
-			<summary>토큰 발급 방법 (처음 한 번만)</summary>
+		<form class="cms-login-form" id="pwForm">
+			<label class="cms-field"><span class="cms-field-l">이름</span>
+				<input type="text" id="nameInput" maxlength="20" autocomplete="username" placeholder="예: 홍길동" />
+				<small class="cms-hint">변경 이력에 누가 고쳤는지 이 이름으로 남습니다.</small>
+			</label>
+			<label class="cms-field"><span class="cms-field-l">비밀번호</span>
+				<input type="password" id="pwInput" autocomplete="current-password" />
+			</label>
+			<button type="submit" class="cms-btn cms-btn-fill">로그인</button>
+		</form>
+		<p class="cms-desc" id="pwOff" hidden>비밀번호 로그인이 아직 설정되지 않았습니다. 아래 개발자 로그인으로 들어와 「설정 → 관리자 로그인」을 마쳐 주세요.</p>
+		<p class="cms-msg" id="loginMsg" role="alert"></p>
+		<details class="cms-help" id="tokenBox">
+			<summary>개발자 로그인 (GitHub 토큰)</summary>
+			<p class="cms-desc">GitHub 토큰으로 직접 들어옵니다. 저장 대행 설정이나 고장 났을 때 쓰는 비상용입니다.</p>
+			<p class="cms-field-l">토큰 발급 방법 (처음 한 번만)</p>
 			<ol>
 				<li><a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub 토큰 발급 페이지</a>를 엽니다.</li>
 				<li><b>Token name</b>에 아무 이름이나 적습니다. (예: fox-ai-lab CMS)</li>
@@ -51,12 +62,11 @@
 				<li>맨 아래 <b>Generate token</b> → 나온 문자열을 복사해서 아래에 붙여넣습니다.</li>
 			</ol>
 			<p class="cms-warn">이 토큰은 이 저장소 하나만 수정할 수 있습니다. 공용 PC에서는 로그인하지 마세요.</p>
+			<div class="cms-row">
+				<input type="password" id="tokenInput" placeholder="github_pat_... 붙여넣기" autocomplete="off" aria-label="GitHub 토큰" />
+				<button type="button" class="cms-btn cms-btn-ghost" id="btnLogin">토큰으로 로그인</button>
+			</div>
 		</details>
-		<div class="cms-row">
-			<input type="password" id="tokenInput" placeholder="github_pat_... 붙여넣기" autocomplete="off" />
-			<button type="button" class="cms-btn cms-btn-fill" id="btnLogin">로그인</button>
-		</div>
-		<p class="cms-msg" id="loginMsg"></p>
 	</section>
 </main>
 
@@ -111,6 +121,6 @@
 <div class="cms-toast" id="toast" hidden></div>
 
 <script src="js/content.js?v=20261002"></script>
-<script src="js/admin.js?v=5"></script>
+<script src="js/admin.js?v=6"></script>
 </body>
 </html>
