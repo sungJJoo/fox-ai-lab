@@ -453,7 +453,7 @@
 	function popupStatus(p) {
 		var t = today();
 		if (!p.enabled) return ['꺼짐', ''];
-		if (p.start && t < p.start) return ['예정', ''];
+		if (p.start && t < p.start) return ['예정 · ' + p.start.slice(5).replace('-', '/') + '부터', ''];
 		if (p.end && t > p.end) return ['종료', ''];
 		return ['노출 중', ' is-on'];
 	}
