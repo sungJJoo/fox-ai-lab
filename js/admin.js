@@ -508,7 +508,7 @@
 					moveBtns(D.popups, i),
 					btn('수정', function () { s.edit = p.id; rerender(); }, 'cms-btn-ghost cms-btn-sm'));
 			})) : h('p', { class: 'cms-empty', text: '등록된 팝업이 없습니다.' }),
-			h('p', { class: 'cms-hint', text: '여러 개가 동시에 노출되면 위 순서대로 나란히 뜹니다. (모바일은 한 장씩)' }));
+			h('p', { class: 'cms-hint', text: '여러 개가 동시에 노출되면 한 칸에서 위 순서대로 ‹ › 로 넘겨 봅니다. 「오늘 하루 보지 않기」는 전체에 적용됩니다.' }));
 	}
 
 	function popupEditor(p) {
@@ -523,7 +523,7 @@
 				field('시작일', input(p, 'start', { type: 'date' }), '비우면 바로 시작'),
 				field('종료일', input(p, 'end', { type: 'date' }), '비우면 끌 때까지 계속')),
 			field('이미지', imageBox(p.image, {
-				maxW: 800, dir: 'popups', removable: true, hint: '가로 400px 크기로 보입니다. 포스터·안내 이미지를 권장합니다.',
+				maxW: 800, dir: 'popups', removable: true, hint: '가로 360px 칸에 보입니다. 제목·날짜를 이미지 안에 넣은 세로 포스터(예: 800×1000)가 가장 잘 읽힙니다. 이미지가 있으면 아래 내용은 사진 밑 한 줄 설명으로 나옵니다.',
 				set: function (n) { p.image = n; }
 			})),
 			field('내용', input(p, 'body', { rows: 4 }), '이미지 아래에 표시됩니다. 이미지가 있으면 비워도 됩니다.'),
