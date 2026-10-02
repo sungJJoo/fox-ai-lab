@@ -699,7 +699,7 @@
 						: btn('설정으로 가기', function () { location.hash = 'settings'; }, 'cms-btn-ghost cms-btn-sm')),
 				h('section', { class: 'cms-card' },
 					h('h2', { text: '사이트 반영' }),
-					h('p', { class: 'cms-desc', text: '저장하면 GitHub Pages 에 1~2분 안에 반영되고, 본사 사이트(ai.foxconnect.kr)는 캐시 때문에 최대 10분 걸립니다. 반영 여부는 왼쪽 아래에서 자동으로 확인됩니다.' }),
+					h('p', { class: 'cms-desc', text: '저장하면 GitHub Pages 에 1~2분 안에 반영되고, 본사 사이트(ai.foxconnect.kr)는 캐시 때문에 최대 10분 걸립니다. 반영 여부는 화면 위쪽 상태 표시에서 자동으로 확인됩니다.' }),
 					h('p', null,
 						h('a', { class: 'cms-btn cms-btn-ghost cms-btn-sm', href: PAGES, target: '_blank', rel: 'noopener', text: 'GitHub Pages ↗' }), ' ',
 						h('a', { class: 'cms-btn cms-btn-ghost cms-btn-sm', href: 'https://ai.foxconnect.kr/', target: '_blank', rel: 'noopener', text: 'ai.foxconnect.kr ↗' })))),

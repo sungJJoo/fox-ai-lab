@@ -8,7 +8,7 @@
 	<title>FOX CMS | AI 연구소</title>
 	<link rel="icon" type="image/png" href="images/favicon.png" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
-	<link rel="stylesheet" href="css/admin.css?v=6" />
+	<link rel="stylesheet" href="css/admin.css?v=7" />
 </head>
 <body>
 
@@ -88,17 +88,20 @@
 			<a href="#history" data-view="history"><svg aria-hidden="true"><use href="#i-history" /></svg>변경 이력</a>
 			<a href="#settings" data-view="settings"><svg aria-hidden="true"><use href="#i-gear" /></svg>설정</a>
 		</nav>
+		<p class="cms-side-ver">FOX CMS · 폭스러닝센터 AI 연구소</p>
+	</aside>
+
+	<div class="cms-body">
+	<div class="cms-bar">
 		<div class="cms-deploy" id="deployState" data-state="idle" role="status" aria-live="polite">
 			<i></i><span>사이트와 동기화됨</span>
 		</div>
-		<div class="cms-side-foot">
-			<div class="cms-user" id="userChip"><img id="userAvatar" alt="" hidden /><span id="userName">GitHub</span></div>
-			<div class="cms-side-links">
-				<a href="index.html" target="_blank" rel="noopener">사이트 보기 ↗</a>
-				<button type="button" id="btnLogout">로그아웃</button>
-			</div>
+		<div class="cms-bar-right">
+			<a href="index.html" target="_blank" rel="noopener">사이트 보기</a>
+			<span class="cms-user" id="userChip"><img id="userAvatar" alt="" hidden /><span id="userName">GitHub</span></span>
+			<button type="button" id="btnLogout">로그아웃</button>
 		</div>
-	</aside>
+	</div>
 
 	<main class="cms-main">
 		<header class="cms-top">
@@ -108,6 +111,7 @@
 		</header>
 		<div id="view"></div>
 	</main>
+	</div>
 </div>
 
 <div class="cms-savebar" id="saveBar" hidden>
@@ -121,6 +125,6 @@
 <div class="cms-toast" id="toast" hidden></div>
 
 <script src="js/content.js?v=20261002"></script>
-<script src="js/admin.js?v=7"></script>
+<script src="js/admin.js?v=8"></script>
 </body>
 </html>
