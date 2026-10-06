@@ -1,1 +1,24 @@
-[]
+[
+	{
+		"id": 1,
+		"category": "공지",
+		"title": "가족과 함께하는 토요 프로그램 오픈!",
+		"date": "2026-09-30",
+		"pinned": false,
+		"body": "가족과 함께하는 토요 프로그램이 오픈합니다.",
+		"images": [
+			{
+				"src": "images/u/popups/20261001-140351-is0h.webp",
+				"width": 800,
+				"height": 533,
+				"alt": "가족과 함께하는 토요 프로그램 오픈!"
+			}
+		],
+		"popup": {
+			"on": true,
+			"start": "2026-09-30",
+			"end": "2026-10-10",
+			"image": null
+		}
+	}
+]

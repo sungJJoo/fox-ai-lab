@@ -140,6 +140,7 @@ input, button, textarea, select { font: inherit; color: inherit; }
 
 /* ── 입력 ─────────────────────────────────── */
 .cms-field { display: grid; gap: 5px; align-content: start; }
+.cms-field > .cms-btn { justify-self: start; }
 .cms-field-l { font-weight: 600; font-size: 13.5px; color: var(--ad-ink); }
 .cms-hint { font-size: 12px; color: var(--ad-soft); }
 .cms-field input:not([type="checkbox"]), .cms-field textarea, .cms-field select, .cms-item-body > textarea, .cms-item-body > input, .cms-row input {
@@ -225,6 +226,11 @@ input, button, textarea, select { font: inherit; color: inherit; }
 .cms-ico-btn:disabled { opacity: .35; cursor: not-allowed; }
 .cms-ico-btn.is-del:hover { border-color: var(--ad-red); color: var(--ad-red); }
 .cms-editor { display: grid; gap: 14px; padding: 16px 18px 18px; border-top: 1px dashed var(--ad-line); }
+
+/* 글 편집 안의 메인 팝업 옵션 */
+.cms-popopt { display: grid; gap: 12px; padding: 14px 16px 16px; border: 1px solid var(--ad-line); border-radius: 4px; background: var(--ad-head); }
+.cms-popopt.is-on { border-color: var(--ad-spot); background: var(--ad-spot-bg); }
+.cms-popopt legend { padding: 0 6px; font-weight: 700; color: var(--ad-ink); }
 
 /* 사진 1장 칸 */
 .cms-imgbox { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }

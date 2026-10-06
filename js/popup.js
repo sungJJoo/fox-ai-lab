@@ -1,4 +1,4 @@
-// 메인 팝업: data/popups.json 중 사용 중이고 기간 안인 팝업을 한 칸에 모아 넘겨 보게 띄운다 (페이지를 가리지 않음, 오늘 하루 보지 않기)
+// 메인 팝업: 공지·소식 글 중 「팝업으로 띄우기」가 켜져 있고 기간 안인 글을 한 칸에 모아 넘겨 보게 띄운다 (누르면 글 상세로)
 (function () {
 	'use strict';
 
@@ -18,31 +18,33 @@
 		try { localStorage.setItem(KEY + id, today()); } catch (e) { /* 저장 불가 환경: 이번 화면에서만 닫힘 */ }
 	}
 
-	// 이미지가 있으면 포스터 중심(설명은 한 줄), 없으면 글 카드
-	function slide(p, i) {
-		var link = p.link ? F.esc(p.link) : '';
+	// 팝업 이미지가 있으면 포스터 중심, 없으면 글의 첫 사진, 그것도 없으면 글 카드
+	function slide(n, i) {
+		var link = 'news.html?id=' + encodeURIComponent(n.id);
+		var im = (n.popup && n.popup.image) || (n.images && n.images[0]);
+		var more = '<a class="pp-more" href="' + link + '">자세히 보기 <span aria-hidden="true">→</span></a>';
 		var inner;
-		if (p.image && p.image.src) {
-			var img = '<img src="' + F.esc(F.url(p.image.src)) + '" width="' + p.image.width + '" height="' + p.image.height +
-				'" alt="' + F.esc(p.title) + '" />';
+		if (im && im.src) {
+			var src = F.url(im.src);
+			var img = '<img src="' + F.esc(src) + '" width="' + im.width + '" height="' + im.height + '" alt="' + F.esc(n.title) + '" />';
 			// 사진 비율이 칸과 달라도 빈 곳이 어색하지 않게, 같은 사진을 흐리게 깔아 둔다 (CSS 변수 속 상대 주소는 CSS 파일 기준이라 절대 주소로)
-			inner = '<div class="pp-img" style="--pp-bg:url(&quot;' + F.esc(new URL(F.url(p.image.src), location.href).href) + '&quot;)">' + (link ? '<a href="' + link + '">' + img + '</a>' : img) + '</div>' +
-				(p.body ? '<p class="pp-cap">' + F.text(p.body) + '</p>' : '');
+			inner = '<div class="pp-img" style="--pp-bg:url(&quot;' + F.esc(new URL(src, location.href).href) + '&quot;)"><a href="' + link + '">' + img + '</a></div>' +
+				'<div class="pp-cap"><strong>' + F.esc(n.title) + '</strong>' + more + '</div>';
 		} else {
-			inner = '<div class="pp-text"><span class="pp-label">알림</span>' +
-				'<h2 class="pp-tit">' + F.esc(p.title) + '</h2>' +
-				(p.body ? '<p class="pp-body">' + F.text(p.body) + '</p>' : '') +
-				(link ? '<a class="btn btn-fill pp-go" href="' + link + '">' + F.esc(p.linkText || '자세히 보기') + '</a>' : '') +
-				'</div>';
+			inner = '<div class="pp-text"><span class="pp-label">' + F.esc(n.category || '알림') + '</span>' +
+				'<h2 class="pp-tit">' + F.esc(n.title) + '</h2>' +
+				'<p class="pp-date">' + F.esc(String(n.date || '').replace(/-/g, '.')) + '</p>' +
+				'<a class="btn btn-fill pp-go" href="' + link + '">자세히 보기</a></div>';
 		}
-		return '<div class="pp-slide" data-id="' + F.esc(p.id) + '"' + (i ? ' hidden' : '') + '>' + inner + '</div>';
+		return '<div class="pp-slide" data-id="' + F.esc(n.id) + '"' + (i ? ' hidden' : '') + '>' + inner + '</div>';
 	}
 
-	F.load('popups').then(function (list) {
+	F.load('news').then(function (list) {
 		var t = today();
-		var show = list.filter(function (p) {
-			return p.enabled && (!p.start || p.start <= t) && (!p.end || t <= p.end) && !hiddenToday(p.id);
-		});
+		var show = list.filter(function (n) {
+			var p = n.popup;
+			return p && p.on && (!p.start || p.start <= t) && (!p.end || t <= p.end) && !hiddenToday(n.id);
+		}).sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : b.id - a.id; });
 		if (!show.length) return;
 
 		var many = show.length > 1;
@@ -74,8 +76,8 @@
 			var act = b.getAttribute('data-act');
 			if (act === 'prev') return go(cur - 1);
 			if (act === 'next') return go(cur + 1);
-			if (act === 'today') show.forEach(function (p) { hideToday(p.id); });
+			if (act === 'today') show.forEach(function (n) { hideToday(n.id); });
 			box.remove();
 		});
-	}).catch(function () { /* 팝업 데이터가 없으면 띄우지 않음 */ });
+	}).catch(function () { /* 글 데이터가 없으면 띄우지 않음 */ });
 })();

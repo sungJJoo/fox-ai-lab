@@ -15,7 +15,6 @@
 	var FILES = {
 		programs: { path: 'data/programs.json', label: '프로그램', empty: { areas: [], activities: [], posters: [] } },
 		news: { path: 'data/news.json', label: '공지·소식', empty: [] },
-		popups: { path: 'data/popups.json', label: '팝업', empty: [] },
 		photos: { path: 'data/slideshows.json', label: '대회 사진', empty: {} },
 		site: { path: 'data/site.json', label: '설정', empty: { inquiryEndpoint: '', inquirySheetUrl: '', cmsEndpoint: '' } }
 	};
@@ -27,7 +26,7 @@
 		history: ['변경 이력', '콘텐츠가 언제 어떻게 바뀌었는지 보고, 원하는 시점의 내용으로 되돌릴 수 있습니다.', '시스템'],
 		programs: ['프로그램', '프로그램 페이지의 활동 표 · 4가지 영역 · 포스터를 관리합니다.'],
 		news: ['공지·소식', '공지·소식 페이지에 올라갈 글을 관리합니다.'],
-		popups: ['팝업', '메인 화면에 뜨는 팝업입니다. 「사용」이 켜져 있고 기간 안에 있는 팝업만 보입니다.'],
+		popups: ['팝업', '메인 화면 팝업은 공지·소식 글에서 「메인 팝업으로 띄우기」를 켜서 만듭니다. 팝업을 누르면 그 글로 이동합니다.'],
 		photos: ['대회 사진', '대회 활동 페이지 「사진으로 보기」 슬라이드쇼의 사진과 설명입니다.'],
 		settings: ['설정', '온라인 상담 신청 연결 등 사이트 설정입니다.']
 	};
@@ -42,7 +41,7 @@
 	var removed = [];    // 저장 시 지울 이미지 경로
 	var view = 'dashboard';
 	var commitLog = null;  // 변경 이력 캐시 (data/ 를 건드린 커밋)
-	var ui = { prog: { tab: 'activities', open: -1 }, news: { edit: null }, popups: { edit: null }, photos: { key: null } };
+	var ui = { prog: { tab: 'activities', open: -1 }, news: { edit: null }, photos: { key: null } };
 
 	var $ = function (id) { return document.getElementById(id); };
 
@@ -429,6 +428,7 @@
 				return h('li', null,
 					h('span', { class: 'cms-badge' + (n.category === '공지' ? ' is-dark' : ''), text: n.category }),
 					n.pinned ? h('span', { class: 'cms-badge is-red', text: '고정' }) : null,
+					n.popup && n.popup.on ? h('span', { class: 'cms-badge' + popupStatus(n.popup)[1], text: '팝업 · ' + popupStatus(n.popup)[0] }) : null,
 					h('button', { type: 'button', class: 'cms-rows-tit', text: n.title || '(제목 없음)', onclick: function () { s.edit = n.id; rerender(); } }),
 					h('time', { text: n.date }),
 					btn('수정', function () { s.edit = n.id; rerender(); }, 'cms-btn-ghost cms-btn-sm'));
@@ -466,10 +466,12 @@
 						});
 					});
 				}, 'cms-btn-ghost cms-btn-sm')),
+			popupOption(n),
 			h('div', { class: 'cms-danger' },
 				btn('이 글 삭제', function () {
 					if (!confirm('「' + (n.title || '제목 없음') + '」 글을 삭제할까요?')) return;
 					n.images.forEach(function (im) { dropImage(im.src); });
+					if (n.popup && n.popup.image) dropImage(n.popup.image.src);
 					D.news.splice(D.news.indexOf(n), 1);
 					s.edit = null; changed(); rerender();
 				}, 'cms-btn-danger cms-btn-sm')));
@@ -479,64 +481,63 @@
 
 	function popupStatus(p) {
 		var t = today();
-		if (!p.enabled) return ['꺼짐', ''];
+		if (!p.on) return ['꺼짐', ''];
 		if (p.start && t < p.start) return ['예정 · ' + p.start.slice(5).replace('-', '/') + '부터', ''];
 		if (p.end && t > p.end) return ['종료', ''];
 		return ['노출 중', ' is-on'];
 	}
 
-	function viewPopups() {
-		var s = ui.popups;
-		var cur = s.edit != null && D.popups.filter(function (p) { return p.id === s.edit; })[0];
-		if (cur) return popupEditor(cur);
-		s.edit = null;
-
-		return h('section', { class: 'cms-card' },
-			h('div', { class: 'cms-card-head' },
-				h('h2', { text: '팝업 ' + D.popups.length + '개' }),
-				btn('+ 새 팝업', function () {
-					var id = D.popups.reduce(function (m, p) { return Math.max(m, p.id); }, 0) + 1;
-					D.popups.unshift({ id: id, enabled: true, title: '', start: today(), end: '', body: '', image: null, link: '', linkText: '' });
-					s.edit = id; changed(); rerender();
-				}, 'cms-btn-fill cms-btn-sm')),
-			D.popups.length ? h('ul', { class: 'cms-rows' }, D.popups.map(function (p, i) {
-				var st = popupStatus(p);
-				return h('li', null,
-					h('span', { class: 'cms-badge' + st[1], text: st[0] }),
-					h('button', { type: 'button', class: 'cms-rows-tit', text: p.title || '(제목 없음)', onclick: function () { s.edit = p.id; rerender(); } }),
-					h('time', { text: (p.start || '시작 제한 없음') + ' ~ ' + (p.end || '종료 제한 없음') }),
-					moveBtns(D.popups, i),
-					btn('수정', function () { s.edit = p.id; rerender(); }, 'cms-btn-ghost cms-btn-sm'));
-			})) : h('p', { class: 'cms-empty', text: '등록된 팝업이 없습니다.' }),
-			h('p', { class: 'cms-hint', text: '여러 개가 동시에 노출되면 한 칸에서 위 순서대로 ‹ › 로 넘겨 봅니다. 「오늘 하루 보지 않기」는 전체에 적용됩니다.' }));
-	}
-
-	function popupEditor(p) {
-		var s = ui.popups;
-		return h('section', { class: 'cms-card' },
-			h('div', { class: 'cms-card-head' },
-				btn('← 목록으로', function () { s.edit = null; rerender(); }, 'cms-btn-ghost cms-btn-sm'),
-				h('span', { class: 'cms-badge' + popupStatus(p)[1], text: popupStatus(p)[0] })),
-			checkbox(p, 'enabled', '사용 (끄면 기간과 상관없이 안 보입니다)'),
-			field('제목', input(p, 'title', { max: 60 }), '이미지만 있는 팝업이면 화면에는 안 보이고 이미지 설명으로 쓰입니다.'),
+	// 글 편집 화면 안의 「메인 팝업」 옵션
+	function popupOption(n) {
+		var p = n.popup;
+		var box = h('fieldset', { class: 'cms-popopt' + (p && p.on ? ' is-on' : '') },
+			h('legend', { text: '메인 팝업' }),
+			h('label', { class: 'cms-check' },
+				h('input', { type: 'checkbox', checked: !!(p && p.on), onchange: function (e) {
+					if (!n.popup) n.popup = { on: false, start: today(), end: '', image: null };
+					n.popup.on = e.target.checked;
+					changed(); rerender();
+				} }),
+				'이 글을 메인 화면 팝업으로 띄우기'));
+		if (!p || !p.on) {
+			append(box, h('p', { class: 'cms-hint', text: '켜면 메인 화면에 팝업이 뜨고, 누르면 이 글로 이동합니다.' }));
+			return box;
+		}
+		append(box, [
+			h('p', null, h('span', { class: 'cms-badge' + popupStatus(p)[1], text: popupStatus(p)[0] })),
 			h('div', { class: 'cms-grid2' },
 				field('시작일', input(p, 'start', { type: 'date' }), '비우면 바로 시작'),
 				field('종료일', input(p, 'end', { type: 'date' }), '비우면 끌 때까지 계속')),
-			field('이미지', imageBox(p.image, {
-				maxW: 800, dir: 'popups', removable: true, hint: '가로 360px 칸에 보입니다. 제목·날짜를 이미지 안에 넣은 세로 포스터(예: 800×1000)가 가장 잘 읽힙니다. 이미지가 있으면 아래 내용은 사진 밑 한 줄 설명으로 나옵니다.',
-				set: function (n) { p.image = n; }
-			})),
-			field('내용', input(p, 'body', { rows: 4 }), '이미지 아래에 표시됩니다. 이미지가 있으면 비워도 됩니다.'),
-			h('div', { class: 'cms-grid2' },
-				field('링크 주소', input(p, 'link', { ph: '예) news.html?id=3  또는  https://...' }), '누르면 이동할 곳 (비우면 링크 없음)'),
-				field('버튼 문구', input(p, 'linkText', { ph: '자세히 보기' }), '이미지가 없을 때만 버튼으로 보입니다.')),
-			h('div', { class: 'cms-danger' },
-				btn('이 팝업 삭제', function () {
-					if (!confirm('「' + (p.title || '제목 없음') + '」 팝업을 삭제할까요?')) return;
-					if (p.image) dropImage(p.image.src);
-					D.popups.splice(D.popups.indexOf(p), 1);
-					s.edit = null; changed(); rerender();
-				}, 'cms-btn-danger cms-btn-sm')));
+			field('팝업 이미지 (선택)', imageBox(p.image, {
+				maxW: 800, dir: 'popups', removable: true,
+				hint: '비우면 글의 첫 사진을 쓰고, 사진이 없으면 제목만 있는 글자 팝업으로 뜹니다. 제목·날짜를 넣은 세로 포스터(예: 800×1000)가 가장 잘 읽힙니다.',
+				set: function (img) { p.image = img; }
+			}))]);
+		return box;
+	}
+
+	// 팝업 메뉴: 팝업으로 지정된 글 모아 보기
+	function viewPopups() {
+		var list = sortedNews().filter(function (n) { return n.popup && n.popup.on; });
+		function edit(id) { ui.news.edit = id; location.hash = 'news'; }
+		return h('section', { class: 'cms-card' },
+			h('div', { class: 'cms-card-head' },
+				h('h2', { text: '팝업으로 띄운 글 ' + list.length + '개' }),
+				btn('+ 팝업 공지 쓰기', function () {
+					var id = D.news.reduce(function (m, n) { return Math.max(m, n.id); }, 0) + 1;
+					D.news.push({ id: id, category: '공지', title: '', date: today(), pinned: false, body: '', images: [],
+						popup: { on: true, start: today(), end: '', image: null } });
+					changed(); edit(id);
+				}, 'cms-btn-fill cms-btn-sm')),
+			list.length ? h('ul', { class: 'cms-rows' }, list.map(function (n) {
+				var st = popupStatus(n.popup);
+				return h('li', null,
+					h('span', { class: 'cms-badge' + st[1], text: st[0] }),
+					h('button', { type: 'button', class: 'cms-rows-tit', text: n.title || '(제목 없음)', onclick: function () { edit(n.id); } }),
+					h('time', { text: (n.popup.start || '시작 제한 없음') + ' ~ ' + (n.popup.end || '종료 제한 없음') }),
+					btn('글 수정', function () { edit(n.id); }, 'cms-btn-ghost cms-btn-sm'));
+			})) : h('p', { class: 'cms-empty', text: '팝업으로 띄운 글이 없습니다. 공지·소식 글을 쓸 때 「메인 팝업으로 띄우기」를 켜 보세요.' }),
+			h('p', { class: 'cms-hint', text: '여러 개가 동시에 노출되면 최신 글부터 한 칸에서 ‹ › 로 넘겨 봅니다. 「오늘 하루 보지 않기」는 전체에 적용됩니다.' }));
 	}
 
 	/* ── 화면: 대회 사진 (슬라이드쇼) ───────────── */
@@ -674,7 +675,8 @@
 
 	function viewDashboard() {
 		var P = D.programs;
-		var live = D.popups.filter(function (p) { return popupStatus(p)[0] === '노출 중'; }).length;
+		var pops = D.news.filter(function (n) { return n.popup && n.popup.on; });
+		var live = pops.filter(function (n) { return popupStatus(n.popup)[0] === '노출 중'; }).length;
 		var photoCount = Object.keys(D.photos).reduce(function (n, k) { return n + D.photos[k].photos.length; }, 0);
 		var connected = !!D.site.inquiryEndpoint.trim();
 		var recent = h('div', null, h('p', { class: 'cms-empty', text: '불러오는 중…' }));
@@ -687,7 +689,7 @@
 			h('div', { class: 'cms-stats' },
 				stat('활동 프로그램', P.activities.length, '영역 ' + P.areas.length + ' · 포스터 ' + P.posters.length, 'programs'),
 				stat('공지·소식', D.news.length, '고정 ' + D.news.filter(function (n) { return n.pinned; }).length + '개', 'news'),
-				stat('노출 중 팝업', live, '전체 ' + D.popups.length + '개', 'popups'),
+				stat('노출 중 팝업', live, '팝업 지정 글 ' + pops.length + '개', 'popups'),
 				stat('대회 사진', photoCount, '앨범 ' + Object.keys(D.photos).length + '개', 'photos')),
 			h('div', { class: 'cms-grid2' },
 				h('section', { class: 'cms-card' },
@@ -758,7 +760,7 @@
 		}).then(function () {
 			Object.keys(FILES).forEach(function (k) { D[k] = next[k]; });
 			removed = [];
-			ui.prog.open = -1; ui.news.edit = null; ui.popups.edit = null;
+			ui.prog.open = -1; ui.news.edit = null;
 			rerender();
 			toast('불러왔습니다. 확인한 뒤 「저장하고 사이트에 반영」을 누르세요.');
 		}).catch(function (e) { toast('불러오기 실패 — ' + e.message, true); });
@@ -858,10 +860,9 @@
 			if (!n.title.trim()) out.push('공지·소식: 제목이 비어 있는 글이 있습니다.');
 			if (!n.date) out.push('공지·소식 「' + n.title + '」 날짜가 비어 있습니다.');
 		});
-		D.popups.forEach(function (p) {
-			if (!p.title.trim()) out.push('팝업: 제목이 비어 있는 팝업이 있습니다.');
-			if (p.start && p.end && p.start > p.end) out.push('팝업 「' + p.title + '」 종료일이 시작일보다 빠릅니다.');
-			if (!p.image && !p.body.trim()) out.push('팝업 「' + p.title + '」 이미지나 내용 중 하나는 있어야 합니다.');
+		D.news.forEach(function (n) {
+			var p = n.popup;
+			if (p && p.on && p.start && p.end && p.start > p.end) out.push('「' + n.title + '」 팝업 종료일이 시작일보다 빠릅니다.');
 		});
 		var ep = D.site.inquiryEndpoint.trim();
 		var GAS = /^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/;
@@ -1058,7 +1059,7 @@
 		Object.keys(FILES).forEach(function (k) { D[k] = JSON.parse(orig[k]); });
 		newBlobs = {};
 		removed = [];
-		ui.prog.open = -1; ui.news.edit = null; ui.popups.edit = null;
+		ui.prog.open = -1; ui.news.edit = null;
 		rerender();
 		toast('되돌렸습니다.');
 	});
