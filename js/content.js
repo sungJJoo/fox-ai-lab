@@ -55,13 +55,37 @@
 
 	/* ── 프로그램 페이지 조각 ───────────────────── */
 
+	// 메인 「Direction」 카드 아이콘: 영역 순서대로 돌려 쓴다
+	var DIR_ICONS = [
+		'<svg viewBox="0 0 24 24"><path fill="currentColor" opacity=".28" d="M12 2a7 7 0 0 0-4.2 12.6c.5.4.8.9.9 1.4h6.6c.1-.5.4-1 .9-1.4A7 7 0 0 0 12 2z"/><path fill="currentColor" d="M9 18.3h6l-.5 1.4a1.6 1.6 0 0 1-1.5 1h-1a1.6 1.6 0 0 1-1.5-1z"/></svg>',
+		'<svg viewBox="0 0 24 24"><path fill="currentColor" opacity=".28" d="M5 4h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-7l-4.4 3.3A.6.6 0 0 1 6 18V15a2 2 0 0 1-2-2V6a2 2 0 0 1 1-2z"/><circle fill="currentColor" cx="9" cy="9.5" r="1.4"/><circle fill="currentColor" cx="13" cy="9.5" r="1.4"/><circle fill="currentColor" cx="17" cy="9.5" r="1.4"/></svg>',
+		'<svg viewBox="0 0 24 24"><path fill="currentColor" d="M13 1.8L3.9 13.4a.6.6 0 0 0 .5 1H10l-1.1 7.5a.45.45 0 0 0 .8.35L20.1 10.6a.6.6 0 0 0-.5-1H14l1.1-7.5a.45.45 0 0 0-.8-.35z"/></svg>',
+		'<svg viewBox="0 0 24 24"><path fill="currentColor" d="M11 2.2l2.1 5.6 5.7 2.1-5.7 2.1L11 17.7l-2.1-5.7L3.2 9.9l5.7-2.1z"/><path fill="currentColor" opacity=".4" d="M18.4 13.2l.9 2.4 2.4.9-2.4.9-.9 2.4-.9-2.4-2.4-.9 2.4-.9z"/></svg>'
+	];
+
 	var render = {
+		// 메인 Direction 카드 (영역 데이터의 짧은 이름 · 메인 한 줄 설명)
+		direction: function (list) {
+			return list.map(function (a, i) {
+				return '<li class="c-' + esc(a.color) + '">' +
+					'<span class="dir-no">' + String(i + 1).padStart(2, '0') + '</span>' +
+					'<i class="dir-ico" aria-hidden="true">' + DIR_ICONS[i % DIR_ICONS.length] + '</i>' +
+					'<h3>' + text(a.short || a.title) + '</h3>' +
+					'<p>' + text(a.summary || a.desc) + '</p></li>';
+			}).join('');
+		},
+		// Direction 모바일 캐러셀 점
+		directionDots: function (list) {
+			return list.map(function (a, i) {
+				return '<button type="button"' + (i ? '' : ' class="is-active"') + ' aria-label="' + esc(a.short || a.title) + ' 보기"></button>';
+			}).join('');
+		},
 		areas: function (list, base) {
 			var i5 = indent(5), i6 = indent(6), i7 = indent(7), i8 = indent(8);
 			return list.map(function (a) {
 				return [
 					i5 + '<article class="area-card c-' + esc(a.color) + '">',
-					i6 + '<figure>' + picture(a.image, base) + '</figure>',
+					a.image && a.image.src ? i6 + '<figure>' + picture(a.image, base) + '</figure>' : '',
 					i6 + '<div class="area-cont">',
 					i7 + '<h3>' + text(a.title) + '<span class="en">' + text(a.en) + '</span></h3>',
 					i7 + '<p>' + text(a.desc) + '</p>',
@@ -107,6 +131,9 @@
 		return t.innerHTML.replace(/<!--[\s\S]*?-->/g, '').replace(/>\s+</g, '><').trim();
 	}
 
+	// 영역 카드 한 줄 칸 수: 5개까지는 한 줄, 그보다 많으면 3·4칸으로 나눠 줄 맞춤 (태블릿 이하는 style.css 기준)
+	function cols(n) { return n <= 5 ? Math.max(n, 1) : (n % 3 === 0 ? 3 : 4); }
+
 	// 새 조각을 넣고, 기존 리빌 모션 규칙(data-stagger)을 다시 적용
 	var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
 		es.forEach(function (e) {
@@ -132,17 +159,32 @@
 	Array.prototype.forEach.call(boxes, function (box) { snap.push(squash(box.innerHTML)); });
 
 	var counts = document.querySelectorAll('[data-activity-count]');
+	var areaCounts = document.querySelectorAll('[data-area-count]');
 
-	if (boxes.length || counts.length) {
+	if (boxes.length || counts.length || areaCounts.length) {
 		load('programs').then(function (d) {
 			Array.prototype.forEach.call(boxes, function (box, i) {
 				var key = box.getAttribute('data-programs');
-				if (!render[key] || !d[key]) return;
-				if (squash(render[key](d[key], '')) === snap[i]) return; // HTML 에 든 내용과 같으면 그대로 둔다
-				swap(box, render[key](d[key], BASE));
+				var list = d[/^direction/.test(key) ? 'areas' : key];   // 메인 Direction 은 영역 데이터로 그린다
+				if (!render[key] || !list) return;
+				if (key === 'areas' || key === 'direction') box.style.setProperty('--cols', cols(list.length));
+				if (squash(render[key](list, '')) === snap[i]) return; // HTML 에 든 내용과 같으면 그대로 둔다
+				swap(box, render[key](list, BASE));
 			});
 			Array.prototype.forEach.call(counts, function (el) { el.textContent = d.activities.length; });
+			Array.prototype.forEach.call(areaCounts, function (el) { el.textContent = d.areas.length; });
 		}).catch(function () { /* 데이터를 못 받으면 HTML 에 들어 있는 내용 그대로 */ });
+	}
+
+	// 사이트 문구 (data/site.json): data-site="키" 요소를 설정값으로 교체 (비어 있으면 HTML 그대로)
+	var siteTexts = document.querySelectorAll('[data-site]');
+	if (siteTexts.length) {
+		load('site').then(function (st) {
+			Array.prototype.forEach.call(siteTexts, function (el) {
+				var v = st[el.getAttribute('data-site')];
+				if (v && squash(text(v)).replace(/\s+/g, '') !== squash(el.innerHTML).replace(/\s+/g, '')) el.innerHTML = text(v);   // 공백만 다르면 그대로
+			});
+		}).catch(function () { /* HTML 에 든 문구 그대로 */ });
 	}
 
 	window.FoxContent = { load: load, url: url, esc: esc, text: text, BASE: BASE, render: render, squash: squash };

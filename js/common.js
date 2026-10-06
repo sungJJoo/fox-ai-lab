@@ -42,9 +42,10 @@
 	var dirList = document.querySelector('.direction-list');
 	var dirDots = document.getElementById('dirDots');
 	if (dirList && dirDots) {
-		var dirDotBtns = Array.prototype.slice.call(dirDots.children);
-		var dirItems = Array.prototype.slice.call(dirList.children);
+		// 카드·점이 영역 데이터로 다시 그려질 수 있어 매번 현재 자식을 읽는다
 		function dirUpdateDots() {
+			var dirItems = Array.prototype.slice.call(dirList.children);
+			var dirDotBtns = Array.prototype.slice.call(dirDots.children);
 			var listRect = dirList.getBoundingClientRect();
 			var centerX = listRect.left + listRect.width / 2;
 			var closest = 0, minDist = Infinity;
@@ -60,12 +61,13 @@
 			clearTimeout(dirScrollTimer);
 			dirScrollTimer = setTimeout(dirUpdateDots, 60);
 		}, { passive: true });
-		dirDotBtns.forEach(function (btn, i) {
-			btn.addEventListener('click', function () {
-				var r = dirItems[i].getBoundingClientRect();
-				var listR = dirList.getBoundingClientRect();
-				dirList.scrollTo({ left: dirList.scrollLeft + (r.left - listR.left), behavior: 'smooth' });
-			});
+		dirDots.addEventListener('click', function (e) {
+			var i = Array.prototype.indexOf.call(dirDots.children, e.target);
+			var item = dirList.children[i];
+			if (i < 0 || !item) return;
+			var r = item.getBoundingClientRect();
+			var listR = dirList.getBoundingClientRect();
+			dirList.scrollTo({ left: dirList.scrollLeft + (r.left - listR.left), behavior: 'smooth' });
 		});
 	}
 

@@ -1,5 +1,6 @@
 {
 	"inquiryEndpoint": "https://script.google.com/macros/s/AKfycbzezyz0eTSi3VlUfj8xUmsgri0a5ABnL6SF1wQeVHFrFOd-jEvS5wfW5DkSKnWjsf-V9Q/exec",
 	"inquirySheetUrl": "https://docs.google.com/spreadsheets/d/1BnuqTRihu7cBYtNFNc_CLHbeq_dLiRPDr2hrKrQn3jk/edit?gid=0#gid=0",
-	"cmsEndpoint": "https://script.google.com/macros/s/AKfycbxKWQ5YYiWJLRqNBQlwaf7KocgWe9IGiv6pvukMoVjC5aA9zWCJrvhxR820sZU3BpXkxQ/exec"
+	"cmsEndpoint": "https://script.google.com/macros/s/AKfycbxKWQ5YYiWJLRqNBQlwaf7KocgWe9IGiv6pvukMoVjC5aA9zWCJrvhxR820sZU3BpXkxQ/exec",
+	"heroText": "AI를 이해하고, 소통하고, 활용하고, 창작하는 네 가지 힘을\n프로젝트 수업으로 키우는 폭스러닝센터 AI 연구소입니다."
 }

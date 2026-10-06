@@ -60,7 +60,7 @@
 	<link rel="apple-touch-icon" href="images/favicon.png" />
 	<link rel="preload" href="fonts/GmarketSansBold.woff2" as="font" type="font/woff2" crossorigin />
 	<link rel="preload" href="fonts/GmarketSansMedium.woff2" as="font" type="font/woff2" crossorigin />
-	<link rel="stylesheet" href="css/style.css?v=20261002" />
+	<link rel="stylesheet" href="css/style.css?v=20261006" />
 	<link rel="stylesheet" href="css/foxsite.css" />
 	<link rel="stylesheet" href="css/content.css?v=20261006" />
 </head>
@@ -132,7 +132,7 @@
 						<h1 class="hero-tit hero-rise" style="--d:.25s">
 							<span class="grad-txt">AI</span>에게 문제를<br />내는 아이
 						</h1>
-						<p class="hero-desc hero-rise" style="--d:.38s">
+						<p class="hero-desc hero-rise" style="--d:.38s" data-site="heroText">
 							AI를 이해하고, 소통하고, 활용하고, 창작하는 네 가지 힘을<br />
 							프로젝트 수업으로 키우는 폭스러닝센터 AI 연구소입니다.
 						</p>
@@ -150,7 +150,7 @@
 			</div>
 		</section>
 
-		<!-- 활동 방향 4가지 -->
+		<!-- 활동 방향 (data/programs.json 의 영역) -->
 		<section class="mn-section">
 			<div class="wrap">
 				<header class="sec-head center reveal">
@@ -161,7 +161,7 @@
 						질문하는 힘, 창의적 사고, 디지털 윤리까지 함께 성장할 수 있습니다.
 					</p>
 				</header>
-				<ul class="direction-list" data-stagger>
+				<ul class="direction-list" data-stagger data-programs="direction">
 					<li class="c-teal">
 						<span class="dir-no">01</span>
 						<i class="dir-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" opacity=".28" d="M12 2a7 7 0 0 0-4.2 12.6c.5.4.8.9.9 1.4h6.6c.1-.5.4-1 .9-1.4A7 7 0 0 0 12 2z"/><path fill="currentColor" d="M9 18.3h6l-.5 1.4a1.6 1.6 0 0 1-1.5 1h-1a1.6 1.6 0 0 1-1.5-1z"/></svg></i>
@@ -187,7 +187,7 @@
 						<p>나만의 아이디어를 결과물로 완성하고 공유하기</p>
 					</li>
 				</ul>
-				<div class="dir-dots" id="dirDots" aria-hidden="true">
+				<div class="dir-dots" id="dirDots" aria-hidden="true" data-programs="directionDots">
 					<button type="button" class="is-active" aria-label="이해 보기"></button>
 					<button type="button" aria-label="소통 보기"></button>
 					<button type="button" aria-label="활용 보기"></button>
@@ -269,7 +269,7 @@
 						<picture><source type="image/webp" srcset="images/explore-programs-480.webp 480w, images/explore-programs-960.webp 960w, images/explore-programs.webp 1200w" sizes="(max-width: 1279px) 92vw, 640px" /><img src="images/explore-programs.jpg" width="1200" height="900" alt="" loading="lazy" /></picture>
 						<div class="explore-cont">
 							<h3>프로그램</h3>
-							<p>4가지 영역, <span data-activity-count>14</span>가지 맞춤형 활동 프로그램</p>
+							<p><span data-area-count>4</span>가지 영역, <span data-activity-count>14</span>가지 맞춤형 활동 프로그램</p>
 							<span class="explore-more">VIEW MORE <span class="arr">→</span></span>
 						</div>
 					</a>
@@ -412,10 +412,10 @@
 		</div>
 	</footer>
 
-	<script src="js/content.js?v=20261001"></script>
+	<script src="js/content.js?v=20261006"></script>
 	<script src="js/popup.js?v=20261006"></script>
 	<script src="js/news.js?v=20261002"></script>
-	<script src="js/common.js?v=20261001"></script>
+	<script src="js/common.js?v=20261006"></script>
 	<script src="js/foxsite.js"></script>
 </body>
 </html>

@@ -355,7 +355,7 @@ main { padding-top: var(--header-h); }
 /* ── 활동 방향 4 (형광 하이라이트 + 인덱스) ───── */
 .direction-list {
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
+	grid-template-columns: repeat(var(--cols, 4), 1fr);   /* --cols: 영역 수에 맞춰 content.js 가 지정 */
 	gap: 22px;
 }
 .direction-list li {
@@ -687,7 +687,7 @@ details[open] .faq-mark::after { opacity: 0; transform: translate(-50%, -50%) ro
 .sec-area { background: var(--bg-soft); }
 .area-grid {
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
+	grid-template-columns: repeat(var(--cols, 4), 1fr);
 	gap: 22px;
 }
 .area-card {

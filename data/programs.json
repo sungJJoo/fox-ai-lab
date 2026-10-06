@@ -4,7 +4,9 @@
 			"color": "teal",
 			"title": "새로운 영역",
 			"en": "UNDERSTAND",
+			"short": "이해",
 			"desc": "AI와 친해지고 컴퓨팅 사고력을 기르는 과정",
+			"summary": "AI와 디지털 도구의 원리를 이해하고 올바르게 판단하기",
 			"items": [
 				"키보드와 친해지기",
 				"비버챌린지",
@@ -25,7 +27,9 @@
 			"color": "blue",
 			"title": "AI 소통",
 			"en": "COMMUNICATE",
+			"short": "소통",
 			"desc": "코딩 언어와 디지털 표현을 배우는 과정",
+			"summary": "AI에게 원하는 결과물을 정확하게 전달하며 효과적으로 소통하기",
 			"items": [
 				"파이썬 기초",
 				"어린이 스크래치",
@@ -45,7 +49,9 @@
 			"color": "purple",
 			"title": "AI 활용",
 			"en": "UTILIZE",
+			"short": "활용",
 			"desc": "AI와 다양한 도구로 문제를 해결하는 과정",
+			"summary": "문제를 해결하기 위해 AI 기술과 디지털 도구 활용하기",
 			"items": [
 				"LEGO Education",
 				"레고 STEM 실험실",
@@ -67,7 +73,9 @@
 			"color": "yellow",
 			"title": "AI 창작",
 			"en": "CREATE",
+			"short": "창작",
 			"desc": "AI를 활용해 나만의 결과물을 만드는 과정",
+			"summary": "나만의 아이디어를 결과물로 완성하고 공유하기",
 			"items": [
 				"AI 포스터 제작",
 				"AI 애니메이션 제작",

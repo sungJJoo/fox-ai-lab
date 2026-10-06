@@ -16,7 +16,7 @@
 		programs: { path: 'data/programs.json', label: '프로그램', empty: { areas: [], activities: [], posters: [] } },
 		news: { path: 'data/news.json', label: '공지·소식', empty: [] },
 		photos: { path: 'data/slideshows.json', label: '대회 사진', empty: {} },
-		site: { path: 'data/site.json', label: '설정', empty: { inquiryEndpoint: '', inquirySheetUrl: '', cmsEndpoint: '' } }
+		site: { path: 'data/site.json', label: '설정', empty: { heroText: '', inquiryEndpoint: '', inquirySheetUrl: '', cmsEndpoint: '' } }
 	};
 
 	var PAGES = 'https://sungjjoo.github.io/fox-ai-lab/';   // 사이트 데이터가 실제로 배포되는 곳 (본사 서버도 여기서 읽음)
@@ -24,7 +24,7 @@
 	var VIEWS = {
 		dashboard: ['대시보드', '사이트 콘텐츠 현황과 최근 변경 내역입니다.', '홈'],
 		history: ['변경 이력', '콘텐츠가 언제 어떻게 바뀌었는지 보고, 원하는 시점의 내용으로 되돌릴 수 있습니다.', '시스템'],
-		programs: ['프로그램', '프로그램 페이지의 활동 표 · 4가지 영역 · 포스터를 관리합니다.'],
+		programs: ['프로그램', '프로그램 페이지의 활동 표 · 영역 · 포스터를 관리합니다.'],
 		news: ['공지·소식', '공지·소식 페이지에 올라갈 글을 관리합니다.'],
 		popups: ['팝업', '메인 화면 팝업은 공지·소식 글에서 「메인 팝업으로 띄우기」를 켜서 만듭니다. 팝업을 누르면 그 글로 이동합니다.'],
 		photos: ['대회 사진', '대회 활동 페이지 「사진으로 보기」 슬라이드쇼의 사진과 설명입니다.'],
@@ -297,7 +297,7 @@
 
 	function viewPrograms() {
 		var P = D.programs, s = ui.prog;
-		var tabs = h('div', { class: 'cms-tabs' }, [['activities', '활동 프로그램 표'], ['areas', '4가지 영역'], ['posters', '포스터']].map(function (t) {
+		var tabs = h('div', { class: 'cms-tabs' }, [['activities', '활동 프로그램 표'], ['areas', '영역'], ['posters', '포스터']].map(function (t) {
 			return h('button', { type: 'button', class: 'cms-tab' + (s.tab === t[0] ? ' is-on' : ''), text: t[1],
 				onclick: function () { s.tab = t[0]; s.open = -1; rerender(); } });
 		}));
@@ -348,25 +348,49 @@
 			})));
 	}
 
+	var AREA_COLORS = [['teal', '청록'], ['blue', '파랑'], ['purple', '보라'], ['yellow', '노랑']];
+
 	function progAreas(list) {
-		return list.map(function (a) {
+		var head = h('section', { class: 'cms-card' },
+			h('div', { class: 'cms-card-head' },
+				h('h2', { text: '영역 ' + list.length + '개' }),
+				btn('+ 영역 추가', function () {
+					list.push({ color: AREA_COLORS[list.length % AREA_COLORS.length][0], title: '', en: '', short: '', desc: '', summary: '', items: [], image: null });
+					changed(); rerender();
+				}, 'cms-btn-fill cms-btn-sm')),
+			h('p', { class: 'cms-desc', text: '영역 수가 바뀌면 사이트의 「N가지 영역」 문구와 메인 화면 Direction 카드 수도 함께 바뀝니다. 메인 카드 아이콘은 순서대로 돌려 씁니다.' }));
+		return [head].concat(list.map(function (a, i) {
 			var items = h('textarea', {
 				rows: 6, value: a.items.join('\n'),
 				oninput: function () { a.items = items.value.split('\n').map(function (x) { return x.trim(); }).filter(Boolean); changed(); }
 			});
+			var color = h('select', { onchange: function () { a.color = color.value; changed(); } },
+				AREA_COLORS.map(function (c) { return h('option', { value: c[0], text: c[1] }); }));
+			color.value = a.color;
 			return h('section', { class: 'cms-card' },
-				h('h2', { text: a.title + ' (' + a.en + ')' }),
+				h('div', { class: 'cms-card-head' },
+					h('h2', { text: (i + 1) + '. ' + (a.title || '(이름 없음)') + (a.en ? ' (' + a.en + ')' : '') }),
+					h('div', { class: 'cms-item-acts' }, moveBtns(list, i),
+						iconBtn('✕', '영역 삭제', false, function () {
+							if (!confirm('「' + (a.title || '이름 없음') + '」 영역을 삭제할까요?')) return;
+							if (a.image) dropImage(a.image.src);
+							list.splice(i, 1); changed(); rerender();
+						}, true))),
+				h('div', { class: 'cms-grid3' },
+					field('영역 이름', input(a, 'title'), '예: AI 이해'),
+					field('영문 표기', input(a, 'en'), '예: UNDERSTAND'),
+					field('색', color)),
+				field('한 줄 설명 (프로그램 페이지)', input(a, 'desc')),
 				h('div', { class: 'cms-grid2' },
-					field('영역 이름', input(a, 'title')),
-					field('영문 표기', input(a, 'en'))),
-				field('한 줄 설명', input(a, 'desc')),
+					field('짧은 이름 (메인 화면)', input(a, 'short'), '메인 Direction 카드 제목. 예: 이해'),
+					field('메인 한 줄 설명', input(a, 'summary'), '메인 Direction 카드 설명')),
 				field('포함 프로그램', items, '한 줄에 하나씩 적습니다.'),
 				field('대표 사진', imageBox(a.image, {
 					maxW: 1400, dir: 'programs',
 					set: function (n) { a.image = progImage(n, a.image && a.image.alt); }
 				})),
-				field('사진 설명', input(a.image, 'alt')));
-		});
+				a.image ? field('사진 설명', input(a.image, 'alt')) : null);
+		}));
 	}
 
 	function progPosters(list) {
@@ -606,6 +630,10 @@
 	function viewSettings() {
 		var S = D.site;
 		return [
+			h('section', { class: 'cms-card' },
+				h('h2', { text: '메인 화면' }),
+				field('메인 소개 문구', input(S, 'heroText', { rows: 3 }),
+					'메인 첫 화면 큰 제목 아래 문장입니다. 줄을 바꾸면 화면에서도 줄이 바뀝니다. 비우면 원래 문구가 나옵니다.')),
 			h('section', { class: 'cms-card' },
 				h('h2', { text: '온라인 상담 신청' }),
 				h('p', { class: 'cms-desc', text: '상담 문의 페이지의 신청 폼은 아래 「접수 주소」가 있을 때만 보입니다. 접수된 문의는 구글 시트에 쌓이고, 알림 메일이 갑니다.' }),
@@ -856,6 +884,8 @@
 	function problems() {
 		var out = [];
 		D.programs.activities.forEach(function (a, i) { if (!a.name.trim()) out.push('프로그램 ' + (i + 1) + '번 활동명이 비어 있습니다.'); });
+		D.programs.areas.forEach(function (a, i) { if (!a.title.trim()) out.push('영역 ' + (i + 1) + '번 이름이 비어 있습니다.'); });
+		if (!D.programs.areas.length) out.push('영역이 하나도 없습니다. 최소 1개는 있어야 합니다.');
 		D.news.forEach(function (n) {
 			if (!n.title.trim()) out.push('공지·소식: 제목이 비어 있는 글이 있습니다.');
 			if (!n.date) out.push('공지·소식 「' + n.title + '」 날짜가 비어 있습니다.');
